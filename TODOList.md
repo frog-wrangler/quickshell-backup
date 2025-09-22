@@ -1,5 +1,6 @@
 
 ## General
+* Use something like this: <https://doc.qt.io/qt-6/qml-qtquick-canvas.html>
 * Fix the workspace visualizer icons / maybe add more features
 * Add system tray for apps running in the background
 * Change the method of dropdown / maybe remove or move the title / music name display
