@@ -26,15 +26,18 @@ Variants {
 
         Wallpaper { screen: backWin.screen }
 
-        DesktopClock {
-            id: clock
-            property string pos: DesktopBackground.clockPosition
+        Loader {
+            active: Style.choice.showClockOnWallpaper
+            DesktopClock {
+                id: clock
+                property string pos: DesktopBackground.clockPosition
 
-            anchors {
-                top: pos == "topLeft" || pos == "topRight" ? parent.top : undefined
-                bottom: pos == "bottomLeft" || pos == "bottomRight" ? parent.bottom : undefined
-                left: pos == "topLeft" || pos == "bottomLeft" ? parent.left : undefined
-                right: pos == "topRight" || pos == "bottomRight" ? parent.right : undefined
+                anchors {
+                    top: pos == "topLeft" || pos == "topRight" ? parent.top : undefined
+                    bottom: pos == "bottomLeft" || pos == "bottomRight" ? parent.bottom : undefined
+                    left: pos == "topLeft" || pos == "bottomLeft" ? parent.left : undefined
+                    right: pos == "topRight" || pos == "bottomRight" ? parent.right : undefined
+                }
             }
         }
     }

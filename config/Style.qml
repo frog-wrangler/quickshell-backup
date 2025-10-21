@@ -6,12 +6,20 @@ import Quickshell
 Singleton {
     id: root
 
+    readonly property Choice choice: Choice {}
     readonly property Color color: Color {}
     readonly property Rounding rounding: Rounding {}
     readonly property Spacing spacing: Spacing {}
     readonly property Size size: Size {}
     readonly property Font font: Font {}
     readonly property Anim anim: Anim {}
+
+    component Choice: QtObject {
+        readonly property bool showBluetoothOff: false
+        readonly property bool lockedOnBoot: false
+        readonly property bool showClockOnWallpaper: false
+        readonly property bool showClockOnLockscreen: true
+    }
 
     component Color: QtObject {
         readonly property ColorBase base: ColorBase {}

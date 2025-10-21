@@ -34,8 +34,15 @@ MouseArea {
         fillMode: Image.PreserveAspectCrop
         source: "root:/data/wallpapers/deer_pillars.jpg"
     }
-
-    DesktopClock {}
+    Loader {
+        active: Style.choice.showClockOnLockscreen
+        DesktopClock {
+            anchors {
+                top: parent.top
+                left: parent.left
+            }
+        }
+    }
 
     Connections {
         target: context

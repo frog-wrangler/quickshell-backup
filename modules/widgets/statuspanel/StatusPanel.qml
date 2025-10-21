@@ -7,13 +7,26 @@ import Quickshell.Services.UPower
 import qs.config
 import qs.services
 import qs.utils
+import qs.modules.widgets
 import qs.modules.widgets.statuspanel.toggles
 
 Scope {
     id: root
 
     HyprlandFocusGrab {
-        id: grab
+        windows: [ menu ]
+        active: GlobalStates.powerPanelOpen
+        onCleared: () => {
+            if (!active) GlobalStates.powerPanelOpen = false;
+        }
+    }
+
+    PowerPanel {
+        id: menu
+        visible: GlobalStates.powerPanelOpen
+    }
+
+    HyprlandFocusGrab {
         windows: [ panel ]
         active: GlobalStates.statusPanelOpen
         onCleared: () => {
@@ -105,6 +118,17 @@ Scope {
                                     Quickshell.execDetached(["qs", "-p", Quickshell.shellPath("settings.qml")]);
                                 }
                             }
+
+                            QuickButton {
+                                id: powerButton
+                                iconName: "power_settings_new"
+                                hoverColor: Style.color.base.surface1
+                                onClicked: {
+                                    GlobalStates.statusPanelOpen = false;
+                                    GlobalStates.powerPanelOpen = !GlobalStates.powerPanelOpen;
+                                }
+                            }
+
                         }
                     }
 

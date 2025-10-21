@@ -47,15 +47,14 @@ PanelWindow {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
-    RowLayout {
-        id: rightTray
-        spacing: 12
-        anchors.right: parent.right
+    Clock {
+        id: clockDisplay
+        anchors.right: statusTray.left
+        anchors.rightMargin: 10
+    }
 
-        Clock {}
-        StatusTray {}
-        Power {
-            Layout.rightMargin: 12
-        }
+    StatusTray {
+        id: statusTray
+        anchors.right: parent.right
     }
 }

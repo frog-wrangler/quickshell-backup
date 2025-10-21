@@ -29,7 +29,7 @@ Item {
         StyledText {
             visible: root.showDate
             font.pointSize: Style.font.size.normal
-            text: Time.format("ddd, MM/dd")
+            text: Time.format("ddd, MMM dd")
         }
     }
 }

@@ -20,14 +20,15 @@ Item {
         anchors.fill: parent
         anchors.topMargin: verticalMargin
         anchors.bottomMargin: verticalMargin
+        anchors.rightMargin: 5
         radius: Style.size.barSize - (2 * verticalMargin)
-        implicitWidth: icons.implicitWidth + 10
+        implicitWidth: icons.implicitWidth + 18
 
         Row {
             id: icons
             anchors.fill: parent
             anchors.margins: 5
-            spacing: 4
+            spacing: 6
 
             MaterialIcon {
                 id: batteryIcon
@@ -61,11 +62,21 @@ Item {
 
             MaterialIcon {
                 id: bluetooth
+                visible: Style.choice.showBluetoothOff ? true : Bluetooth.defaultAdapter?.enabled
                 anchors.verticalCenter: parent.verticalCenter
                 color: Style.color.base.text
                 size: Style.font.size.normal
 
                 text: Bluetooth.defaultAdapter?.enabled ? "bluetooth" : "bluetooth_disabled"
+            }
+
+            MaterialIcon {
+                id: powerIcon
+                anchors.verticalCenter: parent.verticalCenter
+                color: Style.color.base.text
+                size: Style.font.size.normal
+
+                text: "power_settings_new"
             }
         }
     }
