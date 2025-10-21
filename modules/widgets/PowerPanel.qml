@@ -2,9 +2,9 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
-import "root:/config"
-import "root:/services"
-import "root:/utils"
+import qs.config
+import qs.services
+import qs.utils
 
 PanelWindow {
     id: root

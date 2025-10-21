@@ -1,10 +1,10 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import "root:/config"
-import "root:/utils"
-import "root:/services"
-import "root:/modules/widgets/dropdownpanel/dash"
+import qs.config
+import qs.utils
+import qs.services
+import qs.modules.widgets.dropdownpanel.dash
 
 GridLayout {
     id: root

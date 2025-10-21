@@ -1,10 +1,10 @@
 import QtQuick
 import Quickshell.Services.UPower
 import Quickshell.Bluetooth
-import "root:/config"
-import "root:/services"
-import "root:/modules/widgets/statuspanel"
-import "root:/utils"
+import qs.config
+import qs.services
+import qs.modules.widgets.statuspanel
+import qs.utils
 
 Item {
     id: root

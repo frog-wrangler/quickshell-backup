@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
-import "root:/config"
-import "root:/services"
-import "root:/utils"
+import qs.config
+import qs.services
+import qs.utils
 
 Item {
     id: root

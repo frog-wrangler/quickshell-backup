@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell.Widgets
-import "root:/services"
-import "tabs"
+import qs.services
+import qs.modules.widgets.dropdownpanel.tabs
 
 Item {
     id: root

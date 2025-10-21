@@ -1,9 +1,9 @@
 import QtQuick
 import Quickshell.Io
 import Quickshell.Bluetooth
-import "root:/services"
-import "root:/config"
-import "root:/utils"
+import qs.services
+import qs.config
+import qs.utils
 
 ToggleButton {
     id: root

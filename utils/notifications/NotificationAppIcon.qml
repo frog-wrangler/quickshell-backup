@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Widgets
-import "root:/config"
+import qs.config
 
 Rectangle {
     id: root

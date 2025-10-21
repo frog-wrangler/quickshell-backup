@@ -1,6 +1,6 @@
 import QtQuick
-import "root:/services"
-import "root:/modules/widgets/dropdownpanel"
+import qs.services
+import qs.modules.widgets.dropdownpanel
 
 Item {
     id: root

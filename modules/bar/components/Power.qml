@@ -1,9 +1,9 @@
 import QtQuick
 import Quickshell.Hyprland
-import "root:/config"
-import "root:/services"
-import "root:/utils"
-import "root:/modules/widgets"
+import qs.config
+import qs.services
+import qs.utils
+import qs.modules.widgets
 
 Item {
     id: root

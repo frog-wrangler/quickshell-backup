@@ -1,9 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.Notifications
-import "root:/utils"
-import "root:/config"
-import "root:/services"
+import qs.utils
+import qs.config
+import qs.services
 
 Item {
     id: root

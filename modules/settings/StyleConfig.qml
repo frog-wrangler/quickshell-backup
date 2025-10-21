@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "root:/utils"
+import qs.utils
 
 ContentPage {
     id: root

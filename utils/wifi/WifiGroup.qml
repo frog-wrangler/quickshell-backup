@@ -1,9 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell.Io
-import "root:/config"
-import "root:/services"
-import "root:/utils"
+import qs.config
+import qs.services
+import qs.utils
 
 Item {
     id: root

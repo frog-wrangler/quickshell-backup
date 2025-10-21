@@ -1,9 +1,9 @@
 import QtQuick
 import Quickshell
-import "root:/utils/notifications"
-import "root:/utils"
-import "root:/services"
-import "root:/config"
+import qs.utils.notifications
+import qs.utils
+import qs.services
+import qs.config
 
 ListView {
     id: root

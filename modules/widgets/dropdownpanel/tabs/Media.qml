@@ -3,9 +3,9 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
 import Quickshell.Widgets
-import "root:/config"
-import "root:/services"
-import "root:/utils"
+import qs.config
+import qs.services
+import qs.utils
 
 Item {
     id: root

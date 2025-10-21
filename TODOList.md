@@ -1,5 +1,8 @@
 
 ## General
+* Change date on top bar to word month vs num month
+* Make ui work on external monitors
+* Fix weather widget
 * Use something like this: <https://doc.qt.io/qt-6/qml-qtquick-canvas.html>
 * Fix the workspace visualizer icons / maybe add more features
 * Add system tray for apps running in the background

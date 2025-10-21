@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import "root:/config"
-import "root:/utils"
+import qs.config
+import qs.utils
 
 TabButton {
     id: root

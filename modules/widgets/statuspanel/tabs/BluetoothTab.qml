@@ -1,10 +1,10 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell.Bluetooth
-import "root:/utils/bluetooth"
-import "root:/utils"
-import "root:/services"
-import "root:/config"
+import qs.utils.bluetooth
+import qs.utils
+import qs.services
+import qs.config
 
 Item {
     id: root

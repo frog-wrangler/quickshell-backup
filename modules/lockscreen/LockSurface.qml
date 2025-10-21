@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Effects
-import "root:/config"
-import "root:/utils"
-import "root:/modules/background"
+import qs.config
+import qs.utils
+import qs.modules.background
 
 MouseArea {
     id: root

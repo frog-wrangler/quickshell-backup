@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell.Widgets
-import "root:/config"
+import qs.config
 
 Item {
     id: root

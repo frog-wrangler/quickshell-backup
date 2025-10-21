@@ -1,7 +1,7 @@
 import Quickshell
-import "modules/bar"
-import "modules/background"
-import "modules/lockscreen"
+import qs.modules.bar
+import qs.modules.background
+import qs.modules.lockscreen
 
 ShellRoot {
     Bar {}

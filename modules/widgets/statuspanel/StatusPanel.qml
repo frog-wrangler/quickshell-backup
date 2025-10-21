@@ -4,10 +4,10 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import Quickshell.Services.UPower
-import "root:/config"
-import "root:/services"
-import "root:/utils"
-import "toggles"
+import qs.config
+import qs.services
+import qs.utils
+import qs.modules.widgets.statuspanel.toggles
 
 Scope {
     id: root

@@ -1,9 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Bluetooth
-import "root:/config"
-import "root:/utils"
-import "root:/services"
+import qs.config
+import qs.utils
+import qs.services
 
 Item {
     id: root

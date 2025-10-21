@@ -1,5 +1,5 @@
 import QtQuick
-import "root:/utils"
+import qs.utils
 
 ContentPage {
     id: root

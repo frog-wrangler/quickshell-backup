@@ -1,6 +1,6 @@
 import QtQuick
-import "root:/config"
-import "root:/utils"
+import qs.config
+import qs.utils
 
 Item {
     id: root

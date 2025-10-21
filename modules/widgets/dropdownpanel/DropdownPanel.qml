@@ -3,8 +3,8 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
-import "root:/services"
-import "root:/config"
+import qs.services
+import qs.config
 
 Scope {
     HyprlandFocusGrab {

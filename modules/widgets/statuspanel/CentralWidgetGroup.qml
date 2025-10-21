@@ -1,9 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import "root:/utils"
-import "root:/config"
-import "tabs"
+import qs.utils
+import qs.config
+import qs.modules.widgets.statuspanel.tabs
 
 Rectangle {
     id: root

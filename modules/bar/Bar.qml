@@ -1,9 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import "root:/config"
-import "components"
-import "components/workspaces"
+import qs.config
+import qs.modules.bar.components
+import qs.modules.bar.components.workspaces
 
 PanelWindow {
     id: topPanel

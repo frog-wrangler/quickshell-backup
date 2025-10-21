@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import "root:/config"
-import "root:/utils"
+import qs.config
+import qs.utils
 
 ApplicationWindow {
     id: root

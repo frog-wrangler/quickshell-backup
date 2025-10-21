@@ -1,10 +1,10 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import "root:/utils/wifi"
-import "root:/utils"
-import "root:/services"
-import "root:/config"
+import qs.utils.wifi
+import qs.utils
+import qs.services
+import qs.config
 
 Item {
     id: root

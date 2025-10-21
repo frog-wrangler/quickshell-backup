@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import "root:/config"
+import qs.config
 
 Rectangle {
     id: root
