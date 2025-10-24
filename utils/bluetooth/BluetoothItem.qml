@@ -15,7 +15,8 @@ Item {
         id: background
         anchors.left: parent.left
         anchors.right: parent.right
-        implicitHeight: Math.max(40, textColumn.implicitHeight + 20)
+        implicitHeight: Math.max(Style.size.bluetoothItemMinSize,
+                textColumn.implicitHeight + Style.spacing.extraLarge)
 
         color: (mouseArea.containsMouse && !mouseArea.pressed) ? Style.color.base.surface1 : Style.color.base.surface0
         radius: Style.rounding.small
@@ -25,7 +26,7 @@ Item {
         id: bluetoothIcon
         anchors.top: background.top
         anchors.left: background.left
-        height: 40
+        height: Style.size.bluetoothItemMinSize
         width: height
 
         text: Icons.getBluetoothIcon(root.device?.icon)

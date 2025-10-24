@@ -20,6 +20,12 @@ Singleton {
         return images[0];
     }
 
+    readonly property string lockscreenWallpaperPath: "root:/data/wallpapers/deer_pillars.jpg"
+
     readonly property color clockColor: Style.color.base.text
     readonly property string clockPosition: "bottomRight"
+    readonly property string lockscreenClockPosition: "topLeft"
+    readonly property int clockMargins: 100
+    readonly property bool showClockOnWallpaper: false
+    readonly property bool showClockOnLockscreen: true
 }

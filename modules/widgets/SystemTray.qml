@@ -105,7 +105,7 @@ Scope {
 
         Item {
             id: root
-            implicitWidth: 40
+            implicitWidth: Style.size.systemTrayItem
             implicitHeight: implicitWidth
 
             required property var data
@@ -122,7 +122,7 @@ Scope {
                     id: icon
                     anchors.centerIn: bg
 
-                    readonly property int margins: 4
+                    readonly property int margins: Style.spacing.extraSmall
                     width: root.implicitWidth - 2 * margins
                     height: root.implicitHeight - 2 * margins
                     source: root.data.icon

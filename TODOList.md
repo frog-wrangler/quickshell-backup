@@ -1,18 +1,18 @@
 
-## General
-* Make ui work on external monitors
-* Rework workspaces
-* Look at dropdown and make click needed
-* Make lock on sleep
-    + <https://stackoverflow.com/questions/23373507/qt-detect-when-computer-goes-into-sleep>
-* Finish settings application
-* Add reload button to Wi-Fi list
+# TODO
+
+## Short Term
 * Add an open app feature to notifications
-* Notification pop-ups and indicator
-* Make more modular / global settings
 * Improve UX for wi-fi list
 
-### Finishing Touches
+## Long Term
+* Look at dropdown and make click needed
+* Make ui work on external monitors
+* Finish settings application
+* Notification pop-ups and indicator
+* Rework workspaces
+
+## Finishing Touches
     -> Improve Animations
     -> Look over all code
     -> Change lockscreen to open on starts

@@ -10,7 +10,7 @@ Item {
     MouseArea {
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.margins: 4
+        anchors.margins: Style.spacing.small - 3
 
         implicitHeight: 20
         implicitWidth: 20

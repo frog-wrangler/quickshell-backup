@@ -3,7 +3,6 @@ import qs.config
 import qs.utils
 
 Item {
-    id: root
     implicitHeight: Style.size.barSize
     implicitWidth: osIcon.width
     

@@ -17,9 +17,16 @@ Singleton {
     component Choice: QtObject {
         readonly property bool showBluetoothOff: false
         readonly property bool lockedOnBoot: false
-        readonly property bool showClockOnWallpaper: false
-        readonly property bool showClockOnLockscreen: true
         readonly property bool hideNoSsid: true
+        readonly property bool topBarShowDate: true
+
+        readonly property int wifiListRefreshInterval: 10000
+        readonly property int wifiIconRefreshInterval: 2000
+        readonly property int systemUsageRefreshInterval: 2000
+
+        readonly property string unlockStartMessage: "Unlock Attempt Started"
+        readonly property string fingerprintFailure: "Fingerprint Failed"
+        readonly property string noNotificationText: "No Notifications"
     }
 
     component Color: QtObject {
@@ -59,6 +66,7 @@ Singleton {
     }
 
     component Spacing: QtObject {
+        readonly property int extraSmall: 4 // TODO
         readonly property int small: 7
         readonly property int normal: 12
         readonly property int large: 15
@@ -67,7 +75,17 @@ Singleton {
 
     component Size: QtObject {
         readonly property int barSize: 40
+        readonly property int topBarMargin: 6
         readonly property int statusSize: 450
+        readonly property int lockscreenButtonSize: 50
+        readonly property int passwordBoxWidth: 180
+        readonly property int passwordBoxHeight: 44
+        readonly property int statusPanelTabFooter: 40
+        readonly property int noNotificationHeight: 80
+        readonly property int statusPanelTabBarHeight: 50
+        readonly property int systemTrayItem: 40
+        readonly property int bluetoothItemMinSize: 40
+        readonly property int notificationAppIcon: 50
     }
 
     component Font: QtObject {

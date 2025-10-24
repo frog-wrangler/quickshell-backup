@@ -81,14 +81,14 @@ Scope {
 
                 ColumnLayout {
                     anchors.fill: parent
-                    anchors.margins: 20
-                    spacing: 20
+                    anchors.margins: Style.spacing.extraLarge
+                    spacing: Style.spacing.extraLarge
 
                     RowLayout {
                         Layout.fillHeight: false
-                        spacing: 10
-                        Layout.margins: 10
-                        Layout.topMargin: 5
+                        spacing: Style.spacing.extraLarge / 2
+                        Layout.margins: Style.spacing.extraLarge / 2
+                        Layout.topMargin: Style.spacing.small
                         Layout.bottomMargin: 0
 
                         StyledText {

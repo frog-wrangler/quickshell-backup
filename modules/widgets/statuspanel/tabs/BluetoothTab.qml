@@ -16,7 +16,7 @@ Item {
         id: bluetoothList
         anchors.fill: parent
 
-        spacing: 6
+        spacing: Style.spacing.small
 
         model: root.bAdapter.devices
         delegate: BluetoothItem {
@@ -31,7 +31,7 @@ Item {
         footer: Item {
             anchors.right: parent.right
             anchors.left: parent.left
-            implicitHeight: 40
+            implicitHeight: Style.size.statusPanelTabFooter
 
             z: 3
 
@@ -45,7 +45,7 @@ Item {
             StyledText {
                 anchors.left: parent.left
                 anchors.verticalCenter: scanToggle.verticalCenter
-                anchors.leftMargin: 12
+                anchors.leftMargin: Style.spacing.normal
 
                 text: `${root.bAdapter.devices.values.length} devices`
             }
@@ -53,8 +53,9 @@ Item {
             ToggleButton {
                 id: scanToggle
                 anchors.right: parent.right
+                anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                anchors.margins: 5
+                anchors.margins: Style.spacing.extraSmall
                 
                 active: root.bAdapter?.discovering ?? false
                 function swap(): void {

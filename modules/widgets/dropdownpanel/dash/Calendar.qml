@@ -15,7 +15,7 @@ RowLayout {
         Rectangle {
             anchors.fill: parent
             color: Style.color.base.mantle
-            radius: 5
+            radius: Style.rounding.small - 3
         }
 
         StyledText {
@@ -56,7 +56,6 @@ RowLayout {
             locale: Qt.locale("en_US")
 
             delegate: Rectangle {
-                id: root
                 required property var model
                 readonly property bool isToday: grid.today === model.day && grid.month === model.month
                 readonly property bool isThisMonth: grid.month === model.month

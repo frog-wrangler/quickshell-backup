@@ -28,7 +28,7 @@ PanelWindow {
     OsIcon {
         id: osIcon
         anchors.left: parent.left
-        anchors.leftMargin: 12
+        anchors.leftMargin: Style.spacing.normal
     }
 
     Workspaces {

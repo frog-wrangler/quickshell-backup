@@ -1,10 +1,11 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.config
 
 Rectangle {
     id: root
     default property alias data: rowLayout.data
-    property real spacing: 5
+    property real spacing: Style.spacing.extraSmall
     property real padding: 0
 
     property real contentWidth: {

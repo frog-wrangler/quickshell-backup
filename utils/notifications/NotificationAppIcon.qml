@@ -10,7 +10,7 @@ Rectangle {
     property string image: ""
     property string appIcon: ""
 
-    readonly property int size: 50
+    readonly property int size: Style.size.notificationAppIcon
     width: size
     height: size
     radius: size / 2
@@ -21,7 +21,7 @@ Rectangle {
         active: root.appIcon != ""
         anchors.centerIn: parent
         sourceComponent: IconImage {
-            implicitSize: 36
+            implicitSize: root.size - Style.spacing.small * 2
             asynchronous: true
             source: Quickshell.iconPath(root.appIcon)
         }

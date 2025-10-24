@@ -3,7 +3,7 @@ import qs.config
 import qs.services
 
 Item {
-    anchors.margins: 100
+    anchors.margins: DesktopBackground.clockMargins
     implicitWidth: timeText.implicitWidth
     implicitHeight: timeText.implicitHeight
 

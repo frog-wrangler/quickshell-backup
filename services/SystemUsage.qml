@@ -3,6 +3,7 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.config
 
 Singleton {
     id: root
@@ -55,7 +56,7 @@ Singleton {
 
     Timer {
         running: root.inUse
-        interval: 2000
+        interval: Style.choice.systemUsageRefreshInterval
         repeat: true
         triggeredOnStart: true
         onTriggered: {

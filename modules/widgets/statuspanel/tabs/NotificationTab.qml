@@ -8,7 +8,7 @@ import qs.config
 ListView {
     id: root
 
-    spacing: 3
+    spacing: Style.spacing.extraSmall
     clip: true
 
     model: ScriptModel {
@@ -30,7 +30,7 @@ ListView {
         visible: NotificationHandler.appNameList.length == 0
         anchors.left: parent?.left
         anchors.right: parent?.right
-        implicitHeight: visible ? 80 : 0
+        implicitHeight: visible ? Style.size.noNotificationHeight : 0
         
         color: Style.color.base.surface0
         radius: Style.rounding.small
@@ -39,9 +39,9 @@ ListView {
             anchors.centerIn: parent
             horizontalAlignment: Text.AlignHCenter
 
-            text: "No new notifications"
+            text: Style.choice.noNotificationText
             color: Style.color.base.subtext
-            font.pointSize: Style.font.size.large
+            font.pointSize: Style.font.size.normal
         }
     }
 

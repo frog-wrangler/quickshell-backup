@@ -6,7 +6,6 @@ import qs.utils
 
 Item {
     id: root
-    property bool showDate: true
     implicitWidth: rowLayout.implicitWidth
     implicitHeight: Style.size.barSize
 
@@ -21,13 +20,13 @@ Item {
         }
 
         StyledText {
-            visible: root.showDate
+            visible: Style.choice.topBarShowDate
             font.pointSize: Style.font.size.large
             text: "•"
         }
 
         StyledText {
-            visible: root.showDate
+            visible: Style.choice.topBarShowDate
             font.pointSize: Style.font.size.normal
             text: Time.format("ddd, MMM dd")
         }

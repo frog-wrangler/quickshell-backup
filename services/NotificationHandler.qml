@@ -45,18 +45,6 @@ Singleton {
     signal discardAll()
     signal timeout(id: int)
 
-    /*
-    component NotificationTimer: Timer {
-        required property int notificationId
-        interval: 5000
-        running: true
-        onTriggered: () => {
-            NotificationHandler.timeoutNotification(notificationId);
-            destroy();
-        }
-    }
-    */
-
     onListChanged: {
         // Update latest time per app
         root.list.forEach((notif) => {

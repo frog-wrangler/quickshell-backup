@@ -15,7 +15,7 @@ Item {
         id: wifiList
         anchors.fill: parent
 
-        spacing: 6
+        spacing: Style.spacing.extraSmall
 
         model: Network.ssidList
         delegate: WifiGroup {
@@ -31,7 +31,7 @@ Item {
             id: wifiFooter
             anchors.right: parent.right
             anchors.left: parent.left
-            implicitHeight: 40
+            implicitHeight: Style.size.statusPanelTabFooter
 
             z: 3
 
@@ -41,8 +41,24 @@ Item {
 
                 color: Style.color.base.mantle
                 radius: Style.rounding.normal
-                bottomLeftRadius: 0
-                bottomRightRadius: 0
+            }
+
+            QuickButton {
+                anchors.left: parent.left
+                anchors.leftMargin: Style.spacing.normal / 2
+                anchors.verticalCenter: parent.verticalCenter
+                height: Style.size.statusPanelTabFooter - Style.spacing.normal
+                width: height
+
+                iconName: "refresh"
+                backgroundColor: "transparent"
+                hoverColor: Style.color.base.surface0
+                size: Style.font.size.normal
+                radius: Style.rounding.small / 2
+
+                onClicked: {
+                    Network.refresh();
+                }
             }
 
             StyledText {
@@ -63,7 +79,7 @@ Item {
     Timer {
         running: root.isActive && Network.pinnedSsid == ""
         repeat: true
-        interval: 10000
+        interval: Style.choice.wifiListRefreshInterval
 
         onTriggered: {
             Network.refresh();

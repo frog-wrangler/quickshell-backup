@@ -7,7 +7,7 @@ Rectangle {
     height: 20
     width: number.width + icon.width + Style.spacing.small
     color: Style.color.base.surface1
-    radius: 15
+    radius: height
 
     required property bool open
     required property int numNotifications
@@ -24,7 +24,7 @@ Rectangle {
         id: icon
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-        width: 20
+        width: Style.spacing.extraLarge
 
         text: root.open ? "arrow_drop_down" : "arrow_drop_up"
         color: Style.color.base.text

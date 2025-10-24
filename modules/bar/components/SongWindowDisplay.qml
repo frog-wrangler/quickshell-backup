@@ -17,7 +17,7 @@ Item {
     RowLayout {
         id: rowLayout
         anchors.centerIn: parent
-        spacing: 12
+        spacing: Style.spacing.normal
 
         MaterialIcon {
             visible: showSong

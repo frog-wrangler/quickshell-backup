@@ -9,26 +9,25 @@ import qs.utils
 Item {
     id: root
     implicitHeight: Style.size.barSize
-    implicitWidth: background.implicitWidth
+    implicitWidth: background.implicitWidth + 2 * Style.size.topBarMargin
 
     Rectangle {
         id: background
 
-        readonly property int verticalMargin: 6
-
-        color: mouseArea.pressed ? Style.color.base.surface1 : Style.color.base.surface0
         anchors.fill: parent
-        anchors.topMargin: verticalMargin
-        anchors.bottomMargin: verticalMargin
-        anchors.rightMargin: 5
-        radius: Style.size.barSize - (2 * verticalMargin)
-        implicitWidth: icons.implicitWidth + 18
+        anchors.margins: Style.size.topBarMargin
+
+        implicitWidth: icons.implicitWidth + 16
+
+        radius: Style.size.barSize
+        color: mouseArea.pressed ? Style.color.base.surface1 : Style.color.base.surface0
 
         Row {
             id: icons
-            anchors.fill: parent
-            anchors.margins: 5
-            spacing: 6
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: Style.spacing.small
+            spacing: Style.spacing.small
 
             MaterialIcon {
                 id: batteryIcon

@@ -27,7 +27,7 @@ Variants {
         Wallpaper { screen: backWin.screen }
 
         Loader {
-            active: Style.choice.showClockOnWallpaper
+            active: DesktopBackground.showClockOnWallpaper
             DesktopClock {
                 id: clock
                 property string pos: DesktopBackground.clockPosition

@@ -16,7 +16,7 @@ Rectangle {
         TabBar {
             id: tabBar
             Layout.fillWidth: true
-            Layout.preferredHeight: 50
+            Layout.preferredHeight: Style.size.statusPanelTabBarHeight
 
             currentIndex: swipeView.currentIndex
 
@@ -62,7 +62,7 @@ Rectangle {
             id: swipeView
             Layout.fillHeight: true
             Layout.fillWidth: true
-            spacing: 10
+            spacing: Style.spacing.normal
             currentIndex: tabBar.currentIndex
 
             clip: true

@@ -32,15 +32,23 @@ MouseArea {
         id: background
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
-        source: "root:/data/wallpapers/deer_pillars.jpg"
+        source: DesktopBackground.lockscreenWallpaperPath
     }
+
     Loader {
-        active: Style.choice.showClockOnLockscreen
+        active: DesktopBackground.showClockOnLockscreen
         DesktopClock {
+            parent: root
+
+            readonly property string pos: DesktopBackground.lockscreenClockPosition
+
             anchors {
-                top: parent.top
-                left: parent.left
+                top: pos == "topLeft" || pos == "topRight" ? parent.top : undefined
+                bottom: pos == "bottomLeft" || pos == "bottomRight" ? parent.bottom : undefined
+                left: pos == "topLeft" || pos == "bottomLeft" ? parent.left : undefined
+                right: pos == "topRight" || pos == "bottomRight" ? parent.right : undefined
             }
+
         }
     }
 
@@ -65,8 +73,8 @@ MouseArea {
         iconName: "lock"
         backgroundColor: Style.color.base.surface1
         hoverColor: Style.color.accent.current
-        size: 50
-        radius: 25
+        size: Style.size.lockscreenButtonSize
+        radius: size / 2
 
         onClicked: {
             root.context.startAttempt();
@@ -78,7 +86,7 @@ MouseArea {
         visible: root.context.unlockInProgress
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: startPamButton.bottom
-        anchors.topMargin: 30
+        anchors.topMargin: Style.spacing.large * 2
 
         implicitHeight: text.implicitHeight + 5
         implicitWidth: text.implicitWidth + 20
@@ -90,7 +98,7 @@ MouseArea {
             id: text
             anchors.centerIn: parent
             horizontalAlignment: Text.AlignHCenter
-            text: root.tryPassword ? "Fingerprint failed" : "Unlock attempt started"
+            text: root.tryPassword ? Style.choice.fingerprintFailure : Style.choice.unlockStartMessage
             font.pointSize: Style.font.size.normal
         }
     }
@@ -99,14 +107,14 @@ MouseArea {
         id: passwordBoxContainer
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 20
+        anchors.bottomMargin: Style.spacing.extraLarge
 
         visible: root.tryPassword
 
         radius: height / 2
         color: Style.color.base.surface0
-        implicitHeight: 44
-        implicitWidth: 160
+        implicitHeight: Style.size.passwordBoxHeight
+        implicitWidth: Style.size.passwordBoxWidth
 
         TextInput {
             id: passwordBox
