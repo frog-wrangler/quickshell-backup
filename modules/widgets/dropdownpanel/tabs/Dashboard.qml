@@ -104,7 +104,7 @@ GridLayout {
 
         Image {
             anchors.fill: parent
-            source: "root:/data/sillyguys/sillyguy2.png"
+            source: "root:/data/sillyguy.png"
             fillMode: Image.PreserveAspectFit
             asynchronous: true
         }

@@ -9,7 +9,6 @@ Item {
 
     MouseArea {
         anchors.fill: parent
-        cursorShape: Qt.UpArrowCursor
         hoverEnabled: true
 
         onEntered: {

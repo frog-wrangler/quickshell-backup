@@ -49,8 +49,12 @@ PanelWindow {
 
     Clock {
         id: clockDisplay
+        anchors.right: systemTray.left
+    }
+
+    SystemTrayButton {
+        id: systemTray
         anchors.right: statusTray.left
-        anchors.rightMargin: 10
     }
 
     StatusTray {

@@ -3,6 +3,7 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.config
 
 Singleton {
     id: root
@@ -102,6 +103,9 @@ Singleton {
                         ssid: net[3] || "nossid",
                         bssid: net[4]?.replace(rep2, ":") ?? ""
                     };
+                }).filter(n => {
+                    if (Style.choice.hideNoSsid && n.ssid == "nossid") return false;
+                    return true;
                 });
                 const rNetworks = root.networks;
                 

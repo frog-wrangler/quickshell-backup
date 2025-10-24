@@ -16,7 +16,7 @@ Item {
 
         readonly property int verticalMargin: 6
 
-        color: Style.color.base.surface0
+        color: mouseArea.pressed ? Style.color.base.surface1 : Style.color.base.surface0
         anchors.fill: parent
         anchors.topMargin: verticalMargin
         anchors.bottomMargin: verticalMargin
@@ -85,7 +85,6 @@ Item {
         id: mouseArea
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
-        hoverEnabled: true
 
         onClicked: {
             GlobalStates.statusPanelOpen = !GlobalStates.statusPanelOpen;

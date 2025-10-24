@@ -1,9 +1,7 @@
 
 ## General
 * Make ui work on external monitors
-* Fix weather widget
 * Rework workspaces
-* Add system tray
 * Look at dropdown and make click needed
 * Make lock on sleep
     + <https://stackoverflow.com/questions/23373507/qt-detect-when-computer-goes-into-sleep>
@@ -12,6 +10,7 @@
 * Add an open app feature to notifications
 * Notification pop-ups and indicator
 * Make more modular / global settings
+* Improve UX for wi-fi list
 
 ### Finishing Touches
     -> Improve Animations

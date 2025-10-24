@@ -19,6 +19,7 @@ Singleton {
         readonly property bool lockedOnBoot: false
         readonly property bool showClockOnWallpaper: false
         readonly property bool showClockOnLockscreen: true
+        readonly property bool hideNoSsid: true
     }
 
     component Color: QtObject {

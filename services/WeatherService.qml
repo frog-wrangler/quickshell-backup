@@ -39,54 +39,49 @@ Singleton {
         return `${(temp - 32) / 1.8}°C`;
     }
 
+    function reloadLoc() {
+        Requests.get("https://ipinfo.io/json", text => {
+            loc = JSON.parse(text).loc ?? "";
+        });
+    }
+
     function reload() {
-        if (!loc || timer.elapsed() > 900) {
-            Requests.get("https://ipinfo.io/json", text => {
-                loc = JSON.parse(text).loc ?? "";
-                timer.restart();
-            });
-        }
+        Requests.get(`https://wttr.in/${loc}?format=j1`, text => {
+            const json = JSON.parse(text);
+            const current = json.current_condition[0];
+            const today = json.weather[0];
+            const tomorrow = json.weather[1];
+
+            icon = Icons.getWeatherIcon(current.weatherCode);
+            description = current.weatherDesc[0].value;
+
+            temp[0] = convert(parseInt(current.temp_F));
+            temp[1] = convert(parseInt(today.maxtempF));
+            temp[2] = convert(parseInt(today.mintempF));
+            tempTomorrow[0] = convert(parseInt(tomorrow.maxtempF));
+            tempTomorrow[1] = convert(parseInt(tomorrow.mintempF));
+
+            rawLowF = parseInt(today.mintempF);
+            rawHighF = parseInt(today.maxtempF);
+            rawLowTomorrowF = parseInt(tomorrow.mintempF);
+            rawHighTomorrowF = parseInt(tomorrow.maxtempF);
+
+            precipPercent = today.hourly[0].chanceofrain + "%";
+            humidity = current.humidity + "%";
+            dewPoint = convert(parseInt(today.hourly[0].dewPointF));
+
+            uvIndex = parseInt(current.uvIndex);
+            cloudCover = current.cloudCover + "%";
+
+            sunTimes[0] = today.astronomy[0].sunrise;
+            sunTimes[1] = today.astronomy[0].sunset;
+            moonTimes[0] = today.astronomy[0].moonrise;
+            moonTimes[1] = today.astronomy[0].moonset;
+            moonPhase = today.astronomy[0].moon_phase;
+
+            visibilityMiles = parseInt(current.visibilityMiles);
+        })
     }
 
-    onLocChanged: Requests.get(`https://wttr.in/${loc}?format=j1`, text => {
-        const json = JSON.parse(text);
-        const current = json.current_condition[0];
-        const today = json.weather[0];
-        const tomorrow = json.weather[1];
-
-        icon = Icons.getWeatherIcon(current.weatherCode);
-        description = current.weatherDesc[0].value;
-
-        temp[0] = convert(parseInt(current.temp_F));
-        temp[1] = convert(parseInt(today.maxtempF));
-        temp[2] = convert(parseInt(today.mintempF));
-        tempTomorrow[0] = convert(parseInt(tomorrow.maxtempF));
-        tempTomorrow[1] = convert(parseInt(tomorrow.mintempF));
-
-        rawLowF = parseInt(today.mintempF);
-        rawHighF = parseInt(today.maxtempF);
-        rawLowTomorrowF = parseInt(tomorrow.mintempF);
-        rawHighTomorrowF = parseInt(tomorrow.maxtempF);
-
-        precipPercent = today.hourly[0].chanceofrain + "%";
-        humidity = current.humidity + "%";
-        dewPoint = convert(parseInt(today.hourly[0].dewPointF));
-
-        uvIndex = parseInt(today.uvIndex);
-        cloudCover = current.cloudCover + "%";
-
-        sunTimes[0] = today.astronomy[0].sunrise;
-        sunTimes[1] = today.astronomy[0].sunset;
-        moonTimes[0] = today.astronomy[0].moonrise;
-        moonTimes[1] = today.astronomy[0].moonset;
-        moonPhase = today.astronomy[0].moon_phase;
-
-        visibilityMiles = parseInt(current.visibilityMiles);
-    })
-
-    Component.onCompleted: reload();
-
-    ElapsedTimer {
-        id: timer
-    }
+    Component.onCompleted: reloadLoc();
 }

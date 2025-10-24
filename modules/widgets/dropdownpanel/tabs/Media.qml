@@ -63,7 +63,7 @@ Item {
             
             fillMode: Image.PreserveAspectFit
 
-            source: "root:/data/sillyguys/sillyguy2.png"
+            source: "root:/data/sillyguy.png"
             asynchronous: true
 
             Behavior on rotation {

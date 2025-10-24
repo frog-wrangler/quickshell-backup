@@ -11,6 +11,7 @@ Singleton {
      
     property bool powerPanelOpen: false
     property bool statusPanelOpen: false
+    property bool systemTrayOpen: false
     property bool dropdownOpen: false
 
     property bool screenLocked: Style.choice.lockedOnBoot
