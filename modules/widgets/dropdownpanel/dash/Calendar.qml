@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -68,8 +70,8 @@ RowLayout {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
 
-                    text: model.day
-                    color: isThisMonth ? (isToday ? Style.color.base.base : Style.color.base.text) : Style.color.base.surface1
+                    text: parent.model.day
+                    color: parent.isThisMonth ? (parent.isToday ? Style.color.base.base : Style.color.base.text) : Style.color.base.surface1
                 }
             }
         }

@@ -134,7 +134,7 @@ Singleton {
             root.notify(newNotifObject);
             console.log("Recieved notification! Total: " + root.list.length);
 
-            notifFileView.setText(stringifyList(root.list));
+            notifFileView.setText(root.stringifyList(root.list));
         }
     }
 
@@ -227,7 +227,7 @@ Singleton {
             if (error == FileViewError.FileNotFound) {
                 console.log("Notifications file not found, creating new file.");
                 root.list = [];
-                notifFileView.setText(stringifyList(root.list));
+                notifFileView.setText(root.stringifyList(root.list));
             } else {
                 console.log("Error loading notifications file: " + error);
             }

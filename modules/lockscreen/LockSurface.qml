@@ -51,7 +51,7 @@ MouseArea {
     }
 
     Connections {
-        target: context
+        target: root.context
 
         function onFailedFingerprint() {
             root.tryPassword = true;
@@ -60,7 +60,7 @@ MouseArea {
             root.tryPassword = false;
         }
         function onShouldReFocus() {
-            forceFieldFocus();
+            root.forceFieldFocus();
         }
     }
 

@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
@@ -72,7 +74,7 @@ Item {
             ColumnLayout {
                 id: column
                 Layout.fillWidth: true
-                spacing: (root.expanded && notificationGroup?.notifications[root.notificationCount - 1].image != "") ? 40 : 10
+                spacing: (root.expanded && root.notificationGroup?.notifications[root.notificationCount - 1].image != "") ? 40 : 10
 
                 // App name
                 Item {

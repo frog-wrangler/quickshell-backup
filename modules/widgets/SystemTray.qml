@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -50,7 +52,7 @@ Scope {
             focus: GlobalStates.systemTrayOpen
             Keys.onPressed: event => {
                 if (event.key === Qt.Key_Escape) {
-                    panel.hide();
+                    tray.hide();
                 }
             }
 
@@ -104,7 +106,7 @@ Scope {
         id: iconComp
 
         Item {
-            id: root
+            id: iconRoot
             implicitWidth: Style.size.systemTrayItem
             implicitHeight: implicitWidth
 
@@ -122,9 +124,9 @@ Scope {
                     anchors.centerIn: bg
 
                     readonly property int margins: Style.spacing.extraSmall
-                    width: root.implicitWidth - 2 * margins
-                    height: root.implicitHeight - 2 * margins
-                    source: root.data.icon
+                    width: iconRoot.implicitWidth - 2 * margins
+                    height: iconRoot.implicitHeight - 2 * margins
+                    source: iconRoot.data.icon
                 },
                 MouseArea {
                     id: termArea
@@ -133,7 +135,7 @@ Scope {
 
                     Process {
                         id: sendTerm
-                        command: ["sh", "-c", ["for pid in $(pidof ", root.data.tooltipTitle.toLowerCase().trim() || root.data.id, "); do kill -9 $pid; done"].join("")]
+                        command: ["sh", "-c", ["for pid in $(pidof ", iconRoot.data.tooltipTitle.toLowerCase().trim() || iconRoot.data.id, "); do kill -9 $pid; done"].join("")]
                         stdout: StdioCollector {
                             onStreamFinished: {
                                 tray.hide();
@@ -142,7 +144,7 @@ Scope {
                     }
 
                     onClicked: {
-                        if (root.data.id) {
+                        if (iconRoot.data.id) {
                             sendTerm.running = true;
                         } else {
                             console.error("did not sent terminate action due to no id");
@@ -153,7 +155,7 @@ Scope {
                     anchors.fill: parent
                     acceptedButtons: Qt.RightButton
                     onClicked: {
-                        root.data.secondaryActivate();
+                        iconRoot.data.secondaryActivate();
                     }
                 },
                 MouseArea {
@@ -165,10 +167,10 @@ Scope {
                     hoverEnabled: true
 
                     onClicked: {
-                        if (root.data.id == "steam") {
+                        if (iconRoot.data.id == "steam") {
                             Quickshell.execDetached(["steam"]);
                         } else {
-                            root.data.activate();
+                            iconRoot.data.activate();
                         }
 
                         tray.hide();

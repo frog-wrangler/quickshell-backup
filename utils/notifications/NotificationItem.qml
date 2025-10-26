@@ -55,7 +55,7 @@ Item {
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
 
-                    text: notificationObject.summary
+                    text: root.notificationObject.summary
                     color: contentColumn.textColor
                     elide: Text.ElideRight
                     font.bold: true

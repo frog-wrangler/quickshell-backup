@@ -20,7 +20,7 @@ Item {
 
     Rectangle {
         id: active
-        visible: isActive
+        visible: root.isActive
         anchors.centerIn: parent
         width: 24
         height: 24

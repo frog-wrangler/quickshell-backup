@@ -20,7 +20,7 @@ Item {
             right: parent.right
         }
 
-        height: screen.height - Style.size.barSize
+        height: root.screen.height - Style.size.barSize
 
         Image {
             id: current

@@ -24,7 +24,7 @@ Button {
         id: background
         color: mouseArea.containsMouse ? root.hoverColor : root.backgroundColor
 
-        implicitWidth: size ? size : buttonIcon.implicitWidth + 40
+        implicitWidth: root.size ? root.size : buttonIcon.implicitWidth + 40
         implicitHeight: implicitWidth
         radius: root.radius ? root.radius : 3
 

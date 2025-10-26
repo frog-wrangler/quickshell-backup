@@ -17,7 +17,7 @@ Flickable {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.margins: 10
 
-        width: root.forceWidth ? root.baseWidth : Math.max(root.basewidth, implicitWidth)
+        width: root.forceWidth ? root.baseWidth : Math.max(root.baseWidth, implicitWidth)
 
         spacing: 20
     }
