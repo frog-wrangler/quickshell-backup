@@ -37,7 +37,7 @@ Slider {
 
         MaterialIcon {
             anchors.centerIn: parent
-            text: iconName
+            text: root.iconName
             color: Style.color.base.surface0
             size: Style.font.size.large
         }

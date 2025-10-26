@@ -93,7 +93,7 @@ Item {
                             id: appName
                             elide: Text.ElideRight
                             Layout.fillWidth: true
-                            text: notificationGroup?.appName ?? ""
+                            text: root.notificationGroup?.appName ?? ""
                             font.pointSize: Style.font.size.small
                             color: Style.color.accent.current
                         }
@@ -107,7 +107,7 @@ Item {
                             color: Style.color.base.subtext
 
                             function getTime() {
-                                return new Date(notificationGroup?.time ?? 0).toLocaleTimeString("en-US");
+                                return new Date(root.notificationGroup?.time ?? 0).toLocaleTimeString("en-US");
                             }
                         }
                     }

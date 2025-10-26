@@ -63,8 +63,8 @@ Item {
 
                 MaterialIcon {
                     Layout.rightMargin: 8
-                    height: parent.height
-                    width: height
+                    implicitHeight: parent.height
+                    implicitWidth: implicitHeight
 
                     text: "close"
                     size: Style.font.size.large

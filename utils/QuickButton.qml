@@ -13,7 +13,7 @@ Button {
 
     contentItem: MaterialIcon {
         id: buttonIcon
-        text: iconName
+        text: root.iconName
         color: Style.color.base.text
         size: Style.font.size.extraLarge
 

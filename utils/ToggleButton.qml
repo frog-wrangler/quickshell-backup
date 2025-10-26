@@ -17,7 +17,7 @@ Button {
     contentItem: MaterialIcon {
         id: buttonIcon
         text: root.active ? root.iconNameActive : root.iconNameInactive
-        color: active ? root.iconActiveColor : root.iconInactiveColor
+        color: root.active ? root.iconActiveColor : root.iconInactiveColor
         size: Style.font.size.large
 
         width: 40

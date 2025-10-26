@@ -33,10 +33,10 @@ Item {
         anchors.centerIn: parent
 
         size: Style.font.size.normal
-        color: isActive ? Style.color.base.crust : Style.color.base.subtext
+        color: root.isActive ? Style.color.base.crust : Style.color.base.subtext
         text: {
             if (root.isOccupied) {
-                return Icons.getAppCategoryIcon(Hyprland.workspaces.values[wsNum - 1]?.toplevels?.values[0]?.lastIpcObject?.class, "computer");
+                return Icons.getAppCategoryIcon(Hyprland.workspaces.values[root.wsNum - 1]?.toplevels?.values[0]?.lastIpcObject?.class, "computer");
             } else {
                 return "close_small";
             }

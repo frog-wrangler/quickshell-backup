@@ -19,16 +19,16 @@ Item {
         spacing: Style.spacing.normal
 
         MaterialIcon {
-            visible: showSong
+            visible: root.showSong
             size: Style.font.size.large
             color: Style.color.base.text
             text: "music_note"
         }
 
         StyledText {
-            visible: showSong
+            visible: root.showSong
             font.pointSize: Style.font.size.normal
-            text: activeAudio.length > 25 ? activeAudio.slice(0, 25).trim() + "..." : activeAudio
+            text: root.activeAudio.length > 25 ? root.activeAudio.slice(0, 25).trim() + "..." : root.activeAudio
         }
 
         StyledText {
@@ -45,7 +45,7 @@ Item {
 
         StyledText {
             font.pointSize: Style.font.size.normal
-            text: activeWindow.length > 25 ? activeWindow.slice(0, 25).trim() + "..." : activeWindow
+            text: root.activeWindow.length > 25 ? root.activeWindow.slice(0, 25).trim() + "..." : root.activeWindow
         }
     }
 }
