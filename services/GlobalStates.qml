@@ -1,14 +1,13 @@
 pragma Singleton
 
-import QtQuick
+import QtQuick // THIS IS NOT UNUSED IT IS NECESSARY
 import Quickshell
 import Quickshell.Io
-import Quickshell.Services.UPower
 import qs.config
 
 Singleton {
     id: root
-     
+
     property bool powerPanelOpen: false
     property bool statusPanelOpen: false
     property bool systemTrayOpen: false
@@ -31,7 +30,8 @@ Singleton {
         command: ["powerprofilesctl", "get"]
         stdout: SplitParser {
             onRead: data => {
-                if (data.includes("save")) root.batterySaverOn = true;
+                if (data.includes("save"))
+                    root.batterySaverOn = true;
             }
         }
     }

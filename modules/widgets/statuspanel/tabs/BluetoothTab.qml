@@ -3,7 +3,6 @@ import QtQuick.Controls
 import Quickshell.Bluetooth
 import qs.utils.bluetooth
 import qs.utils
-import qs.services
 import qs.config
 
 Item {
@@ -56,24 +55,26 @@ Item {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.margins: Style.spacing.extraSmall
-                
+
                 active: root.bAdapter?.discovering ?? false
                 function swap(): void {
-                    if (root.bAdapter?.enabled) root.bAdapter.discovering = !root.bAdapter.discovering;
+                    if (root.bAdapter?.enabled)
+                        root.bAdapter.discovering = !root.bAdapter.discovering;
                 }
-                
+
                 inactiveColor: root.bAdapter?.enabled ? Style.color.base.surface0 : Style.color.base.crust
                 activeColor: Style.color.accent.current
                 iconInactiveColor: Style.color.base.text
                 iconActiveColor: Style.color.base.base
-                
+
                 iconNameInactive: root.bAdapter?.enabled ? "bluetooth_searching" : "bluetooth_disabled"
                 iconNameActive: "bluetooth_searching"
             }
         }
     }
-    
+
     Component.onDestruction: {
-        if (bAdapter.enabled) bAdapter.discovering = false;
+        if (bAdapter.enabled)
+            bAdapter.discovering = false;
     }
 }

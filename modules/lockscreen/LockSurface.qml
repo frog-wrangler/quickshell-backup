@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Effects
 import qs.config
 import qs.utils
 import qs.modules.background
@@ -13,10 +12,10 @@ MouseArea {
 
     hoverEnabled: true
     acceptedButtons: Qt.LeftButton
-    onPressed: (mouse) => {
+    onPressed: mouse => {
         forceFieldFocus();
     }
-    onPositionChanged: (mouse) => {
+    onPositionChanged: mouse => {
         forceFieldFocus();
     }
 
@@ -48,7 +47,6 @@ MouseArea {
                 left: pos == "topLeft" || pos == "bottomLeft" ? parent.left : undefined
                 right: pos == "topRight" || pos == "bottomRight" ? parent.right : undefined
             }
-
         }
     }
 
@@ -124,7 +122,7 @@ MouseArea {
             renderType: Text.NativeRendering
             clip: true
             focus: true
-            onFocusChanged: root.forceFieldFocus();
+            onFocusChanged: root.forceFieldFocus()
             horizontalAlignment: TextInput.AlignHCenter
             verticalAlignment: TextInput.AlignVCenter
             font {
@@ -141,8 +139,8 @@ MouseArea {
             echoMode: TextInput.Password
             inputMethodHints: Qt.ImhSensitiveData
 
-            onTextChanged: root.context.currentText = this.text;
-            onAccepted: root.context.tryPassword();
+            onTextChanged: root.context.currentText = this.text
+            onAccepted: root.context.tryPassword()
             Connections {
                 target: root.context
                 function onCurrentTextChanged() {

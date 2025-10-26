@@ -16,7 +16,7 @@ ApplicationWindow {
 
     property int currentPage: 0
     title: "Settings"
-    onClosing: Qt.quit();
+    onClosing: Qt.quit()
 
     property var pages: [
         {
@@ -87,7 +87,7 @@ ApplicationWindow {
                 size: 40
                 radius: Style.rounding.small
 
-                onClicked: navRail.expanded = !navRail.expanded;
+                onClicked: navRail.expanded = !navRail.expanded
             }
 
             Repeater {
@@ -97,7 +97,7 @@ ApplicationWindow {
                     required property var index
                     required property var modelData
                     toggled: root.currentPage === index
-                    onClicked: root.currentPage = index;
+                    onClicked: root.currentPage = index
                     expanded: navRail.expanded
                     iconName: modelData.icon
                     buttonText: modelData.name

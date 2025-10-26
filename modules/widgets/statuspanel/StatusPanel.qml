@@ -14,10 +14,11 @@ Scope {
     id: root
 
     HyprlandFocusGrab {
-        windows: [ menu ]
+        windows: [menu]
         active: GlobalStates.powerPanelOpen
         onCleared: () => {
-            if (!active) GlobalStates.powerPanelOpen = false;
+            if (!active)
+                GlobalStates.powerPanelOpen = false;
         }
     }
 
@@ -27,10 +28,11 @@ Scope {
     }
 
     HyprlandFocusGrab {
-        windows: [ panel ]
+        windows: [panel]
         active: GlobalStates.statusPanelOpen
         onCleared: () => {
-            if (!active) panel.hide();
+            if (!active)
+                panel.hide();
         }
     }
 
@@ -55,19 +57,19 @@ Scope {
         WlrLayershell.layer: WlrLayer.Top
 
         implicitWidth: statusContentLoader.implicitWidth
-        
+
         Loader {
             id: statusContentLoader
             anchors.fill: parent
 
             active: GlobalStates.statusPanelOpen
             focus: GlobalStates.statusPanelOpen
-            Keys.onPressed: (event) => {
+            Keys.onPressed: event => {
                 if (event.key === Qt.Key_Escape) {
                     panel.hide();
                 }
             }
-               
+
             sourceComponent: Rectangle {
                 id: background
                 anchors.fill: parent
@@ -128,7 +130,6 @@ Scope {
                                     GlobalStates.powerPanelOpen = !GlobalStates.powerPanelOpen;
                                 }
                             }
-
                         }
                     }
 

@@ -10,7 +10,7 @@ Item {
     MouseArea {
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.margins: Style.spacing.small - 3
+        anchors.margins: Style.spacing.extraSmall
 
         implicitHeight: 20
         implicitWidth: 20
@@ -125,7 +125,7 @@ Item {
                 }
             }
         }
-           
+
         StyledText {
             visible: text != ""
             Layout.fillWidth: true
@@ -145,7 +145,7 @@ Item {
 
                 if (WeatherService.uvIndex > 4)
                     return "UV INDEX: " + WeatherService.uvIndex;
-                
+
                 if (WeatherService.visibilityMiles < 3)
                     return "VISIBILITY: " + WeatherService.visibilityMiles + " MILES";
 

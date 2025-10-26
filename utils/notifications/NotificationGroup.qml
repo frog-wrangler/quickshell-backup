@@ -21,7 +21,7 @@ Item {
     }
 
     function remove() {
-        root.notifications.forEach((notif) => {
+        root.notifications.forEach(notif => {
             Qt.callLater(() => {
                 NotificationHandler.discardNotification(notif.notificationId);
             });
@@ -33,7 +33,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
         acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
 
-        onClicked: (click) => {
+        onClicked: click => {
             if (click.button === Qt.MiddleButton) {
                 root.remove();
             } else {
@@ -86,7 +86,7 @@ Item {
                         anchors.right: expandButton.left
                         anchors.verticalCenter: parent.verticalCenter
                         spacing: 5
-                        
+
                         StyledText {
                             id: appName
                             elide: Text.ElideRight
@@ -95,7 +95,7 @@ Item {
                             font.pointSize: Style.font.size.small
                             color: Style.color.accent.current
                         }
-                        
+
                         StyledText {
                             id: timestamp
                             Layout.rightMargin: 10
@@ -129,9 +129,8 @@ Item {
                     interactive: false
 
                     model: ScriptModel {
-                        values: root.expanded ? root.notifications.slice().reverse() : 
-                            root.notifications.slice().reverse().slice(0, 2)
-                    } 
+                        values: root.expanded ? root.notifications.slice().reverse() : root.notifications.slice().reverse().slice(0, 2)
+                    }
                     delegate: NotificationItem {
                         required property int index
                         required property var modelData

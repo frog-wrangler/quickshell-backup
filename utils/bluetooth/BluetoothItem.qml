@@ -15,8 +15,7 @@ Item {
         id: background
         anchors.left: parent.left
         anchors.right: parent.right
-        implicitHeight: Math.max(Style.size.bluetoothItemMinSize,
-                textColumn.implicitHeight + Style.spacing.extraLarge)
+        implicitHeight: Math.max(Style.size.bluetoothItemMinSize, textColumn.implicitHeight + Style.spacing.extraLarge)
 
         color: (mouseArea.containsMouse && !mouseArea.pressed) ? Style.color.base.surface1 : Style.color.base.surface0
         radius: Style.rounding.small
@@ -49,22 +48,26 @@ Item {
             visible: text != ""
             color: Style.color.base.subtext
             text: {
-                if (root.device == null) return "";
+                if (root.device == null)
+                    return "";
 
                 switch (root.device.state) {
-                    case BluetoothDeviceState.Connected:
-                        return "Connected";
-                    case BluetoothDeviceState.Connecting:
-                        return "Connecting...";
-                    case BluetoothDeviceState.Disconnecting:
-                        return "Disconnecting...";
-                    default:
-                        break;
+                case BluetoothDeviceState.Connected:
+                    return "Connected";
+                case BluetoothDeviceState.Connecting:
+                    return "Connecting...";
+                case BluetoothDeviceState.Disconnecting:
+                    return "Disconnecting...";
+                default:
+                    break;
                 }
 
-                if (root.device.bonded) return "Bonded";
-                if (root.device.paired) return "Paired";
-                if (root.device.pairing) return "Pairing";
+                if (root.device.bonded)
+                    return "Bonded";
+                if (root.device.paired)
+                    return "Paired";
+                if (root.device.pairing)
+                    return "Pairing";
 
                 return "";
             }
@@ -79,9 +82,11 @@ Item {
         cursorShape: Qt.PointingHandCursor
 
         onClicked: {
-            if (root.device == null || root.device.connected) return;
+            if (root.device == null || root.device.connected)
+                return;
 
-            if (root.device.connected) root.device.disconnect();
+            if (root.device.connected)
+                root.device.disconnect();
 
             if (!root.device.paired) {
                 root.device.pair();

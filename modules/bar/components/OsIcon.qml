@@ -5,7 +5,7 @@ import qs.utils
 Item {
     implicitHeight: Style.size.barSize
     implicitWidth: osIcon.width
-    
+
     StyledText {
         id: osIcon
         anchors.centerIn: parent

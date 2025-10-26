@@ -34,11 +34,7 @@ Item {
         readonly property var storUsed: SystemUsage.formatKib(SystemUsage.storageUsed)
         readonly property var storTotal: SystemUsage.formatKib(SystemUsage.storageTotal)
 
-        text: "Stats: " + "\n" + 
-            "\nFan speed: " + SystemUsage.fanSpeed + "\n" +
-            "\nStorage used: " + (Math.round(storUsed.value * 10) / 10) + " " + storUsed.unit +
-            "\nStorage total: " + (Math.round(storTotal.value * 10) / 10) + " " + storTotal.unit +
-            "\nStorage percent: " + SystemUsage.storagePercent
+        text: "Stats: " + "\n" + "\nFan speed: " + SystemUsage.fanSpeed + "\n" + "\nStorage used: " + (Math.round(storUsed.value * 10) / 10) + " " + storUsed.unit + "\nStorage total: " + (Math.round(storTotal.value * 10) / 10) + " " + storTotal.unit + "\nStorage percent: " + SystemUsage.storagePercent
     }
 
     BarGraph {
@@ -92,5 +88,5 @@ Item {
         }
     }
 
-    Component.onDestruction: SystemUsage.inUse = false;
+    Component.onDestruction: SystemUsage.inUse = false
 }

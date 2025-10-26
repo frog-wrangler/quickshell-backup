@@ -1,4 +1,3 @@
-
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -13,10 +12,11 @@ Scope {
     id: root
 
     HyprlandFocusGrab {
-        windows: [ tray ]
+        windows: [tray]
         active: GlobalStates.systemTrayOpen
         onCleared: () => {
-            if (!active) GlobalStates.systemTrayOpen = false;
+            if (!active)
+                GlobalStates.systemTrayOpen = false;
         }
     }
 
@@ -41,19 +41,19 @@ Scope {
 
         implicitWidth: systemContentLoader.implicitWidth
         implicitHeight: systemContentLoader.implicitHeight
-        
+
         Loader {
             id: systemContentLoader
             anchors.fill: parent
 
             active: GlobalStates.systemTrayOpen
             focus: GlobalStates.systemTrayOpen
-            Keys.onPressed: (event) => {
+            Keys.onPressed: event => {
                 if (event.key === Qt.Key_Escape) {
                     panel.hide();
                 }
             }
-               
+
             sourceComponent: Rectangle {
                 id: background
                 anchors.fill: parent
@@ -92,7 +92,7 @@ Scope {
                         for (const item of SystemTray.items.values) {
                             iconComp.createObject(row, {
                                 data: item
-                            })
+                            });
                         }
                     }
                 }
@@ -117,7 +117,6 @@ Scope {
                     radius: Style.rounding.small
                     color: mouseArea.containsMouse ? Style.color.base.surface0 : "transparent"
                 },
-
                 Image {
                     id: icon
                     anchors.centerIn: bg
@@ -127,7 +126,6 @@ Scope {
                     height: root.implicitHeight - 2 * margins
                     source: root.data.icon
                 },
-
                 MouseArea {
                     id: termArea
                     anchors.fill: parent
@@ -137,7 +135,9 @@ Scope {
                         id: sendTerm
                         command: ["sh", "-c", ["for pid in $(pidof ", root.data.tooltipTitle.toLowerCase().trim() || root.data.id, "); do kill -9 $pid; done"].join("")]
                         stdout: StdioCollector {
-                            onStreamFinished: { tray.hide(); }
+                            onStreamFinished: {
+                                tray.hide();
+                            }
                         }
                     }
 
@@ -149,7 +149,6 @@ Scope {
                         }
                     }
                 },
-
                 MouseArea {
                     anchors.fill: parent
                     acceptedButtons: Qt.RightButton
@@ -157,7 +156,6 @@ Scope {
                         root.data.secondaryActivate();
                     }
                 },
-
                 MouseArea {
                     id: mouseArea
                     anchors.fill: parent

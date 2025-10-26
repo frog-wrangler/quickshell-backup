@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Layouts
 import qs.utils.wifi
 import qs.utils
 import qs.services

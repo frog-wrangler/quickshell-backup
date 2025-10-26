@@ -21,7 +21,7 @@ TabButton {
 
             MaterialIcon {
                 Layout.alignment: Qt.AlignHCenter
-                height: 20
+                implicitHeight: 20
 
                 text: root.iconName
                 color: root.active ? Style.color.accent.current : Style.color.base.subtext

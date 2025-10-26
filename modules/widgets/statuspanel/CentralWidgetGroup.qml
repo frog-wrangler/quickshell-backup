@@ -25,7 +25,7 @@ Rectangle {
                 iconName: "notifications_active"
                 active: tabBar.currentIndex === 0
             }
-            
+
             TabTitle {
                 title: "Wifi"
                 iconName: "network_manage"
@@ -56,7 +56,6 @@ Rectangle {
 
             color: Style.color.base.surface1
         }
-
 
         SwipeView {
             id: swipeView

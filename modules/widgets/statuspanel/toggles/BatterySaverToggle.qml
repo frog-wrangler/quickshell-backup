@@ -1,4 +1,3 @@
-import QtQuick
 import Quickshell.Services.UPower
 import qs.services
 import qs.config
@@ -20,7 +19,7 @@ ToggleButton {
     iconNameActive: "battery_saver"
 
     onClicked: {
-        if (PowerProfiles.profile == PowerProfile.PowerSaver) { 
+        if (PowerProfiles.profile == PowerProfile.PowerSaver) {
             PowerProfiles.profile = PowerProfile.Balanced;
         } else {
             PowerProfiles.profile = PowerProfile.PowerSaver;

@@ -12,7 +12,8 @@ Rectangle {
         let total = 0;
         for (let i = 0; i < rowLayout.children.length; i++) {
             const child = rowLayout.children[i];
-            if (!child.visible) continue;
+            if (!child.visible)
+                continue;
             total += child.implicitWidth ?? child.width;
         }
         return total + rowLayout.spacing * (rowLayout.children.length - 1);
@@ -23,10 +24,12 @@ Rectangle {
     implicitWidth: contentWidth + padding * 2
     implicitHeight: rowLayout.implicitHeight
 
-    children: [RowLayout {
-        id: rowLayout
-        anchors.fill: parent
-        anchors.margins: root.padding
-        spacing: root.spacing
-    }]
+    children: [
+        RowLayout {
+            id: rowLayout
+            anchors.fill: parent
+            anchors.margins: root.padding
+            spacing: root.spacing
+        }
+    ]
 }

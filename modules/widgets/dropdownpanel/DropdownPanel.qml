@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
@@ -9,10 +8,11 @@ import qs.config
 Scope {
     HyprlandFocusGrab {
         id: grab
-        windows: [ panel ]
+        windows: [panel]
         active: GlobalStates.dropdownOpen
         onCleared: () => {
-            if (!active) panel.hide();
+            if (!active)
+                panel.hide();
         }
     }
 
@@ -38,16 +38,16 @@ Scope {
             anchors.fill: parent
             active: GlobalStates.dropdownOpen
             focus: GlobalStates.dropdownOpen
-            Keys.onPressed: (event) => {
+            Keys.onPressed: event => {
                 if (event.key === Qt.Key_Escape) {
                     panel.hide();
                 }
             }
-               
+
             sourceComponent: Rectangle {
                 id: background
                 anchors.fill: parent
-                
+
                 color: Style.color.base.base
                 border.width: 2
                 border.color: Style.color.base.surface1

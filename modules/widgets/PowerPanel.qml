@@ -32,7 +32,7 @@ PanelWindow {
         border.color: Style.color.base.surface1
 
         focus: GlobalStates.powerPanelOpen
-        Keys.onPressed: (event) => {
+        Keys.onPressed: event => {
             if (event.key === Qt.Key_Escape) {
                 GlobalStates.powerPanelOpen = false;
             }

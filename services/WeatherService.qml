@@ -9,11 +9,11 @@ Singleton {
 
     property string loc
     property string icon
-    property string description 
+    property string description
 
     // Current, High, Low ==> bad pwactice uwu
-    property var temp: [ "0°F", "0°F", "0°F" ]
-    property var tempTomorrow: [ "0°F", "0°F" ]
+    property var temp: ["0°F", "0°F", "0°F"]
+    property var tempTomorrow: ["0°F", "0°F"]
     property int rawLowF: 50
     property int rawHighF: 50
     property int rawLowTomorrowF: 50
@@ -27,14 +27,15 @@ Singleton {
     property string cloudCover: "0%"
 
     // Rise, Set
-    property var sunTimes: [ "0:00", "0:00" ]
-    property var moonTimes: [ "0:00", "0:00" ]
+    property var sunTimes: ["0:00", "0:00"]
+    property var moonTimes: ["0:00", "0:00"]
     property string moonPhase: ""
-    
+
     property int visibilityMiles: 100
 
     function convert(temp: int): string {
-        if (!isCelsius) return `${temp}°F`;
+        if (!isCelsius)
+            return `${temp}°F`;
 
         return `${(temp - 32) / 1.8}°C`;
     }
@@ -80,8 +81,8 @@ Singleton {
             moonPhase = today.astronomy[0].moon_phase;
 
             visibilityMiles = parseInt(current.visibilityMiles);
-        })
+        });
     }
 
-    Component.onCompleted: reloadLoc();
+    Component.onCompleted: reloadLoc()
 }

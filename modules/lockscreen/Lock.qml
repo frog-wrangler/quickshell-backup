@@ -17,7 +17,7 @@ Scope {
 
     WlSessionLock {
         id: lock
-        locked: GlobalStates.screenLocked;
+        locked: GlobalStates.screenLocked
 
         WlSessionLockSurface {
             color: "transparent"

@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import qs.utils
 import qs.config
-import qs.services
 
 Item {
     id: root
@@ -20,7 +19,7 @@ Item {
             iconName: "dashboard"
             active: tabBar.currentIndex === 0
         }
-        
+
         TabTitle {
             title: "Media"
             iconName: "library_music"
@@ -50,7 +49,7 @@ Item {
 
         implicitWidth: parent.width / (tabBar.count * 3)
         implicitHeight: 4
-        
+
         x: {
             const tab = tabBar.currentItem;
             const width = root.width / tabBar.count;

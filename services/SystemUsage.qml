@@ -51,7 +51,7 @@ Singleton {
         return {
             value: kib,
             unit: "KiB"
-        }
+        };
     }
 
     Timer {
@@ -135,9 +135,9 @@ Singleton {
 
         command: ["sensors"]
         environment: ({
-            LANG: "C",
-            LC_ALL: "C"
-        })
+                LANG: "C",
+                LC_ALL: "C"
+            })
         stdout: StdioCollector {
             onStreamFinished: {
                 let cpuTemp = text.match(/(?:Package id [0-9]+|Tdie):\s+((\+|-)[0-9.]+)(°| )C/);

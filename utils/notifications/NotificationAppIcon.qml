@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Effects
 import Quickshell
 import Quickshell.Widgets
 import qs.config
@@ -33,13 +32,13 @@ Rectangle {
         anchors.fill: parent
         sourceComponent: Image {
             anchors.fill: parent
-            
+
             source: root.image
             fillMode: Image.PreserveAspectCrop
             cache: false
             antialiasing: true
             asynchronous: true
-            
+
             width: root.size
             height: root.size
             sourceSize.width: root.size

@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import Quickshell
 import Quickshell.Widgets
 import qs.config
 import qs.services
@@ -60,7 +59,7 @@ Item {
             id: sillyguy
             anchors.fill: parent
             rotation: 500 * root.progress
-            
+
             fillMode: Image.PreserveAspectFit
 
             source: "root:/data/sillyguy.png"
@@ -152,7 +151,7 @@ Item {
                 if (!pressed && Players.active?.canSeek) {
                     const active = Players.active;
                     active.position = slider.value * active.length;
-                } 
+                }
             }
         }
 
@@ -189,7 +188,7 @@ Item {
                     Players.previous();
                 }
             }
-            
+
             Button {
                 contentItem: MaterialIcon {
                     id: buttonIcon
@@ -257,7 +256,7 @@ Item {
                     if (Players.active?.canQuit) {
                         Players.active?.quit();
                         GlobalStates.dropdownOpen = false;
-                    }  
+                    }
                 }
             }
         }
@@ -276,11 +275,12 @@ Item {
         interval: 1000
         triggeredOnStart: true
         repeat: true
-        onTriggered: Players.active?.positionChanged();
+        onTriggered: Players.active?.positionChanged()
     }
 
     function lengthString(length: int): string {
-        if (length < 0) return "-1:-1";
+        if (length < 0)
+            return "-1:-1";
 
         const hours = Math.floor(length / 3600);
         const minutes = Math.floor((length % 3600) / 60);

@@ -13,7 +13,6 @@ Item {
     property string activeWindow: Hyprland.activeToplevel?.title ?? "Desktop"
     property string activeAudio: Players.active?.trackTitle || "Unknown Title"
 
-
     RowLayout {
         id: rowLayout
         anchors.centerIn: parent

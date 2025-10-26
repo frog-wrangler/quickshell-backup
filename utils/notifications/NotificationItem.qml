@@ -13,7 +13,7 @@ Item {
     required property var notificationObject
     required property bool expanded
     required property bool onlyNotification
-    
+
     property var urgency: notificationObject?.urgency
     readonly property int padding: expanded ? 8 : 0
 
@@ -44,7 +44,7 @@ Item {
             spacing: 3
 
             property color textColor: (root.urgency == NotificationUrgency.Critical && root.expanded) ? Style.color.base.surface0 : Style.color.base.text
-            
+
             RowLayout {
                 id: summaryRow
                 Layout.fillWidth: true

@@ -7,15 +7,7 @@ Singleton {
     id: root
 
     readonly property string wallpaperPath: {
-        const images = [
-            "root:/data/wallpapers/fish.png",
-            "root:/data/wallpapers/cute_kitten.png",
-            "root:/data/wallpapers/astronaut_jellyfish.jpg",
-            "root:/data/wallpapers/deer_pillars.jpg",
-            "root:/data/wallpapers/firewatch_green.jpg",
-            "root:/data/wallpapers/neon_moon_ocean.jpg",
-            "root:/data/wallpapers/totoro.jpg",
-        ];
+        const images = ["root:/data/wallpapers/fish.png", "root:/data/wallpapers/cute_kitten.png", "root:/data/wallpapers/astronaut_jellyfish.jpg", "root:/data/wallpapers/deer_pillars.jpg", "root:/data/wallpapers/firewatch_green.jpg", "root:/data/wallpapers/neon_moon_ocean.jpg", "root:/data/wallpapers/totoro.jpg",];
 
         return images[0];
     }

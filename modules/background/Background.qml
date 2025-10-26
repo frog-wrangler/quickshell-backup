@@ -24,7 +24,9 @@ Variants {
             right: true
         }
 
-        Wallpaper { screen: backWin.screen }
+        Wallpaper {
+            screen: backWin.screen
+        }
 
         Loader {
             active: DesktopBackground.showClockOnWallpaper

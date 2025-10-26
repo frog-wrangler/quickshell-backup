@@ -11,7 +11,7 @@ Rectangle {
 
     required property bool open
     required property int numNotifications
-    
+
     StyledText {
         id: number
         anchors.right: icon.left

@@ -22,10 +22,10 @@ Item {
         font.family: Style.font.family.icons
         font.pointSize: root.size
         font.variableAxes: ({
-            FILL: fill.toFixed(1),
-            GRAD: grade,
-            opsz: fontInfo.pixelSize,
-            wght: fontInfo.weight
-        })
+                FILL: fill.toFixed(1),
+                GRAD: grade,
+                opsz: fontInfo.pixelSize,
+                wght: fontInfo.weight
+            })
     }
 }

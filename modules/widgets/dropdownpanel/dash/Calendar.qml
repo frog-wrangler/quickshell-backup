@@ -11,7 +11,7 @@ RowLayout {
     Item {
         Layout.fillHeight: true
         implicitWidth: text.implicitHeight + Style.spacing.large
-        
+
         Rectangle {
             anchors.fill: parent
             color: Style.color.base.mantle

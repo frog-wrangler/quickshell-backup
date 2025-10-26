@@ -1,5 +1,3 @@
-import QtQuick
-import Quickshell.Io
 import Quickshell.Bluetooth
 import qs.services
 import qs.config

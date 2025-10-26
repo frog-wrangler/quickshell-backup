@@ -13,10 +13,10 @@ Singleton {
         required property string notificationId
 
         property Notification notification
-        property list<var> actions: notification?.actions.map((action) => ({
-            "identifier" : action.identifier,
-            "text" : action.text,
-        })) ?? []
+        property list<var> actions: notification?.actions.map(action => ({
+                    "identifier": action.identifier,
+                    "text": action.text
+                })) ?? []
         property string appIcon: notification?.appIcon ?? ""
         property string appName: notification?.appName ?? ""
         property string body: notification?.body ?? ""
@@ -27,7 +27,8 @@ Singleton {
         property Timer timer
 
         onNotificationChanged: {
-            if (notification === null) NotificationHandler.discardNotification(notificationId);
+            if (notification === null)
+                NotificationHandler.discardNotification(notificationId);
         }
     }
 
@@ -39,15 +40,15 @@ Singleton {
     property var appNameList: root.getAppNameList(groupsByAppName)
 
     property int idOffset
-    signal initDone()
+    signal initDone
     signal notify(notification: var)
     signal discard(id: int)
-    signal discardAll()
+    signal discardAll
     signal timeout(id: int)
 
     onListChanged: {
         // Update latest time per app
-        root.list.forEach((notif) => {
+        root.list.forEach(notif => {
             const prevTime = root.latestTimeForApp[notif.appName];
             if (!prevTime || notif.time > prevTime) {
                 root.latestTimeForApp[notif.appName] = Math.max(prevTime || 0, notif.time);
@@ -55,8 +56,8 @@ Singleton {
         });
 
         // Remove apps without any notifications
-        Object.keys(root.latestTimeForApp).forEach((appName) => {
-            if (!root.list.some((notif) => notif.appName === appName)) {
+        Object.keys(root.latestTimeForApp).forEach(appName => {
+            if (!root.list.some(notif => notif.appName === appName)) {
                 delete root.latestTimeForApp[appName];
             }
         });
@@ -64,14 +65,14 @@ Singleton {
 
     function getGroupsByAppName(list) {
         const groups = {};
-        list.forEach((notif) => {
+        list.forEach(notif => {
             if (!groups[notif.appName]) {
                 groups[notif.appName] = {
                     appName: notif.appName,
                     appIcon: notif.appIcon,
                     notifications: [],
                     time: 0
-                }
+                };
             }
             groups[notif.appName].notifications.push(notif);
             groups[notif.appName].time = latestTimeForApp[notif.appName] || notif.time;
@@ -86,7 +87,7 @@ Singleton {
     }
 
     function stringifyList(list) {
-        return JSON.stringify(list.map((notif) => notifToJSON(notif)), null, 2);
+        return JSON.stringify(list.map(notif => notifToJSON(notif)), null, 2);
     }
 
     function notifToString(notif) {
@@ -103,8 +104,8 @@ Singleton {
             "image": notif.image,
             "summary": notif.summary,
             "time": notif.time,
-            "urgency": notif.urgency,
-        }
+            "urgency": notif.urgency
+        };
     }
 
     property Component notifComp: NotificationWrapper {}
@@ -121,7 +122,7 @@ Singleton {
         keepOnReload: false
         persistenceSupported: true
 
-        onNotification: (notification) => {
+        onNotification: notification => {
             notification.tracked = true;
             const newNotifObject = root.notifComp.createObject(root, {
                 "notificationId": notification.id + root.idOffset,
@@ -139,8 +140,8 @@ Singleton {
 
     function discardNotification(id) {
         console.log("Discarding notification #" + id);
-        const index = root.list.findIndex((notif) => notif.notificationId === id);
-        const notifServerIndex = notifServer.trackedNotifications.values.findIndex((notif) => notif.id + root.idOffset === id);
+        const index = root.list.findIndex(notif => notif.notificationId === id);
+        const notifServerIndex = notifServer.trackedNotifications.values.findIndex(notif => notif.id + root.idOffset === id);
         if (index !== -1) {
             root.list.splice(index, 1);
             notifFileView.setText(stringifyList(root.list));
@@ -153,12 +154,12 @@ Singleton {
     }
 
     function discardAllNotifications() {
-        root.list = []
-        triggerListChange()
+        root.list = [];
+        triggerListChange();
         notifFileView.setText(stringifyList(root.list));
-        notifServer.trackedNotifications.values.forEach((notif) => {
-            notif.dismiss()
-        })
+        notifServer.trackedNotifications.values.forEach(notif => {
+            notif.dismiss();
+        });
         root.discardAll();
     }
 
@@ -168,11 +169,11 @@ Singleton {
 
     function attemptInvokeAction(id, notifIdentifier) {
         console.log("Attempting to invoke action w/ identifier: " + notifIdentifier + " and id #" + id);
-        const notifServerIndex = notifServer.trackedNotifications.values.findIndex((notif) => notif.id + root.idOffset === id);
+        const notifServerIndex = notifServer.trackedNotifications.values.findIndex(notif => notif.id + root.idOffset === id);
         console.log("Notification server id: " + notifServerIndex);
         if (notifServerIndex !== -1) {
             const serverNotif = notifServer.trackedNotifications.values[notifServerIndex];
-            const action = serverNotif.actions.find((action) => action.identifier === notifIdentifier);
+            const action = serverNotif.actions.find(action => action.identifier === notifIdentifier);
             console.log("Found action: " + JSON.stringify(action));
             action.invoke();
         } else {
@@ -199,22 +200,22 @@ Singleton {
 
         onLoaded: {
             const fileContents = notifFileView.text();
-            root.list = JSON.parse(fileContents).map((notif) => {
+            root.list = JSON.parse(fileContents).map(notif => {
                 return root.notifComp.createObject(root, {
                     "notificationId": notif.notificationId,
-                    "actions": [], // Notification actions are meaningless if they're not tracked by the server or the sender is dead
+                    "actions": [],
                     "appIcon": notif.appIcon,
                     "appName": notif.appName,
                     "body": notif.body,
                     "image": notif.image,
                     "summary": notif.summary,
                     "time": notif.time,
-                    "urgency": notif.urgency,
+                    "urgency": notif.urgency
                 });
             });
 
             let maxId = 0;
-            root.list.forEach((notif) => {
+            root.list.forEach(notif => {
                 maxId = Math.max(maxId, notif.notificationId);
             });
 
@@ -222,13 +223,13 @@ Singleton {
             root.initDone();
         }
 
-        onLoadFailed: (error) => {
-            if(error == FileViewError.FileNotFound) {
+        onLoadFailed: error => {
+            if (error == FileViewError.FileNotFound) {
                 console.log("Notifications file not found, creating new file.");
                 root.list = [];
                 notifFileView.setText(stringifyList(root.list));
             } else {
-                console.log("Error loading notifications file: " + error)
+                console.log("Error loading notifications file: " + error);
             }
         }
     }

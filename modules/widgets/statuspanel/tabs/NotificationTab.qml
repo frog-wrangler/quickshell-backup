@@ -31,7 +31,7 @@ ListView {
         anchors.left: parent?.left
         anchors.right: parent?.right
         implicitHeight: visible ? Style.size.noNotificationHeight : 0
-        
+
         color: Style.color.base.surface0
         radius: Style.rounding.small
 
@@ -72,4 +72,3 @@ ListView {
         }
     }
 }
-

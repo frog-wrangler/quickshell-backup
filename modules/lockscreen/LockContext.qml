@@ -1,20 +1,19 @@
-import QtQuick
 import Quickshell
 import Quickshell.Services.Pam
-import qs.services
 
 Scope {
     id: root
-    signal shouldReFocus()
-    signal unlocked()
-    signal failedFingerprint()
-    signal failedPassword()
+    signal shouldReFocus
+    signal unlocked
+    signal failedFingerprint
+    signal failedPassword
 
     property string currentText: ""
     property bool unlockInProgress: false
 
     function tryPassword(): void {
-        if (currentText == "") return;
+        if (currentText == "")
+            return;
 
         pam.respond(currentText);
     }

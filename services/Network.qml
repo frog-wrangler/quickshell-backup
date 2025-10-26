@@ -35,16 +35,16 @@ Singleton {
             return groupBySsid[b].strength - groupBySsid[a].strength;
         });
     }
-    
+
     function refreshGroups(): void {
-        const groups = {}
-        networks.forEach((network) => {
+        const groups = {};
+        networks.forEach(network => {
             if (!groups[network.ssid]) {
                 groups[network.ssid] = {
                     ssid: network.ssid,
                     accessPoints: [],
                     strength: network.strength
-                }
+                };
             }
             groups[network.ssid].accessPoints.push(network);
             groups[network.ssid].strength = Math.max(groups[network.ssid].strength, network.strength);
@@ -57,7 +57,7 @@ Singleton {
         running: true
         command: ["nmcli", "m"]
         stdout: SplitParser {
-            onRead: root.refresh();
+            onRead: root.refresh()
         }
     }
 
@@ -80,9 +80,9 @@ Singleton {
         running: true
         command: ["nmcli", "-g", "ACTIVE,SIGNAL,FREQ,SSID,BSSID", "d", "w"]
         environment: ({
-            LANG: "C",
-            LC_ALL: "C"
-        })
+                LANG: "C",
+                LC_ALL: "C"
+            })
         stdout: StdioCollector {
             onStreamFinished: {
                 const PLACEHOLDER = "STRINGWHICHHOPEFULLYNOTBEUSEDPLS";
@@ -104,11 +104,12 @@ Singleton {
                         bssid: net[4]?.replace(rep2, ":") ?? ""
                     };
                 }).filter(n => {
-                    if (Style.choice.hideNoSsid && n.ssid == "nossid") return false;
+                    if (Style.choice.hideNoSsid && n.ssid == "nossid")
+                        return false;
                     return true;
                 });
                 const rNetworks = root.networks;
-                
+
                 const destroyed = rNetworks.filter(rn => !networks.find(n => n.frequency === rn.frequency && n.ssid === rn.ssid && n.bssid === rn.bssid));
                 for (const network of destroyed)
                     rNetworks.splice(rNetworks.indexOf(network), 1).forEach(n => n.destroy());

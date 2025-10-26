@@ -30,9 +30,7 @@ Button {
 
         MouseArea {
             id: mouseArea
-            anchors.centerIn: parent
-            height: size ? size : buttonIcon.implicitWidth + 40
-            width: height
+            anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
         }

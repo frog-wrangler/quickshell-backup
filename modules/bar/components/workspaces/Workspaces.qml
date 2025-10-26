@@ -23,7 +23,7 @@ Item {
 
         color: Style.color.base.surface0
     }
-    
+
     RowLayout {
         id: layout
         anchors.centerIn: parent
@@ -44,7 +44,7 @@ Item {
     MouseArea {
         anchors.fill: background
         cursorShape: Qt.PointingHandCursor
-        
+
         onPressed: event => {
             const ws = layout.childAt(event.x, event.y)?.wsNum ?? -1;
             if (ws === -1)

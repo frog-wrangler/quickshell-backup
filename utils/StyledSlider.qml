@@ -20,7 +20,7 @@ Slider {
             anchors.verticalCenter: parent.verticalCenter
             x: 0
             color: Style.color.base.text
-            
+
             width: height + root.visualPosition * root.width
             height: parent.height
             radius: height / 2

@@ -15,23 +15,28 @@ Singleton {
     }
 
     function play(): void {
-        if (active?.canPlay) active.play();
+        if (active?.canPlay)
+            active.play();
     }
 
     function pause(): void {
-        if (active?.canPause) active.pause();
+        if (active?.canPause)
+            active.pause();
     }
 
     function togglePlay(): void {
-        if (active?.canTogglePlaying) active.togglePlaying();
+        if (active?.canTogglePlaying)
+            active.togglePlaying();
     }
 
     function previous(): void {
-        if (active?.canGoPrevious) active.previous();
+        if (active?.canGoPrevious)
+            active.previous();
     }
 
     function next(): void {
-        if (active?.canGoNext) active.next();
+        if (active?.canGoNext)
+            active.next();
     }
 
     function stop(): void {

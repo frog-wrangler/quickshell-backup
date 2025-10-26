@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell.Widgets
-import qs.services
 import qs.modules.widgets.dropdownpanel.tabs
 
 Item {

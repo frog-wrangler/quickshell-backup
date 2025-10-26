@@ -4,7 +4,7 @@ import qs.config
 Item {
     id: root
     property bool active: false
-    signal clicked()
+    signal clicked
 
     implicitHeight: Math.max(toggleIcon.implicitHeight, label.implicitHeight) + 10
 

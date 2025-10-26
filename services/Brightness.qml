@@ -1,6 +1,5 @@
 pragma Singleton
 
-import QtQuick
 import Quickshell
 import Quickshell.Io
 
@@ -23,7 +22,6 @@ Singleton {
                 root.brightness = nums[0] / nums[1];
             }
         }
-
     }
 
     function setBrightness(brightness: real): void {

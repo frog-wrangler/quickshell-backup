@@ -1,4 +1,3 @@
-import QtQuick
 import qs.utils
 
 ContentPage {

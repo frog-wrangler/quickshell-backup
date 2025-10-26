@@ -1,6 +1,4 @@
 import QtQuick
-import QtQuick.Controls
-import Quickshell.Io
 import qs.config
 import qs.services
 import qs.utils
@@ -19,7 +17,7 @@ Item {
         id: background
         anchors.left: parent.left
         anchors.right: parent.right
-        implicitHeight: root.expanded ? 60 + expandedContent.implicitHeight : 60
+        implicitHeight: Math.max(Style.size.wifiGroupHeight, contentColumn.implicitHeight)
 
         color: (mouseArea.containsMouse && !root.expanded) ? Style.color.base.surface1 : Style.color.base.surface0
         radius: Style.rounding.small
@@ -33,184 +31,83 @@ Item {
 
             implicitWidth: 3
             implicitHeight: parent.implicitHeight * 2 / 3
-            radius: implicitWidth / 2
+            radius: implicitWidth
 
             color: Style.color.accent.current
         }
-    }
 
-    MaterialIcon {
-        id: icon
-        anchors.left: parent.left
-        anchors.top: parent.top
-
-        text: Icons.getWifiIcon(root.group?.strength ?? 0)
-        color: Style.color.base.text
-        size: Style.font.size.large
-
-        height: 60
-        width: 60
-    }
-
-    Column {
-        id: title
-        anchors.left: icon.right
-        anchors.verticalCenter: icon.verticalCenter
-        anchors.right: parent.right
-
-        spacing: 3
-
-        StyledText {
-            id: name
+        MaterialIcon {
+            id: icon
             anchors.left: parent.left
-            text: root.ssid
+            anchors.top: parent.top
+
+            text: Icons.getWifiIcon(root.group?.strength ?? 0) // TODO
+            color: Style.color.base.text
+            size: Style.font.size.large
+
+            height: Style.size.wifiGroupHeight
+            width: height
         }
-        
-        StyledText {
-            id: connectText
-            anchors.left: parent.left
 
-            text: root.connected ? "Connected" : ""
-            color: Style.color.base.subtext
-        }
-    }
+        Column {
+            id: contentColumn
+            anchors.left: icon.right
+            anchors.right: background.right
+            anchors.top: background.top
+            anchors.rightMargin: Style.spacing.large
 
-    MouseArea {
-        id: mouseArea
-        anchors.fill: background
+            topPadding: (Style.size.wifiGroupHeight - title.implicitHeight) / 2
+            bottomPadding: Style.spacing.large
 
-        hoverEnabled: true
-        cursorShape: root.expanded ? Qt.ArrowCursor : Qt.PointingHandCursor
+            spacing: Style.spacing.extraLarge
 
-        onClicked: {
-            Network.pin(root.ssid);
-        }
-    }
-    
-    Item {
-        id: expandedContent
-        visible: root.expanded
-        anchors.left: icon.right
-        anchors.top: icon.bottom
-        anchors.right: parent.right
-        implicitHeight: visible ? 60 : 0
+            Column {
+                id: title
+                anchors.left: parent.left
+                anchors.right: parent.right
 
-        Button {
-            id: connectionButton
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            anchors.margins: 20
-            
-            background: Item {
-                implicitHeight: root.expanded ? 30 : 0
-                implicitWidth: connectButtonText.implicitWidth + 30
+                spacing: 3
 
-                Rectangle {
-                    anchors.fill: parent
-                    color: Style.color.base.surface1
-                    radius: Style.rounding.small
+                StyledText {
+                    anchors.left: parent.left
+                    text: root.ssid
                 }
 
                 StyledText {
-                    id: connectButtonText
-                    anchors.centerIn: parent
-                    horizontalAlignment: Text.AlignHCenter
-                    text: root.connected ? "Disconnect" : "Connect"
+                    anchors.left: parent.left
+
+                    text: {
+                        if (root.connected) {
+                            return "Connected";
+                        } else if (Network.autoSsidList.includes(root.ssid)) {
+                            return "Saved";
+                        }
+                        return "";
+                    }
+                    color: Style.color.base.subtext
                 }
             }
+
+            WifiGroupContent {
+                anchors.left: parent.left
+                anchors.right: parent.right
+
+                ssid: root.ssid
+                expanded: root.expanded
+                connected: root.connected
+            }
+        }
+
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            enabled: !root.expanded
+
+            hoverEnabled: true
+            cursorShape: root.expanded ? Qt.ArrowCursor : Qt.PointingHandCursor
 
             onClicked: {
-                if (root.connected) {
-                    attemptDisconnect.running = true;
-                    return;
-                }
-
-                if (Network.autoSsidList.includes(root.ssid)) {
-                    attemptAutoConnect.running = true;
-                } else {
-                    attemptPasswordConnect.running = true;
-                }
-            }
-        }
-
-        Rectangle {
-            id: passwordBackground
-            visible: root.expanded && !Network.autoSsidList.includes(root.ssid)
-            anchors.verticalCenter: connectionButton.verticalCenter
-            anchors.left: parent.left
-            anchors.right: connectionButton.left
-            anchors.rightMargin: 20
-
-            implicitHeight: connectionButton.background.implicitHeight
-            implicitWidth: 90
-
-            color: Style.color.base.base
-            radius: height / 2
-
-            TextInput {
-                id: passwordBox
-                anchors.fill: parent
-                anchors.leftMargin: 10
-                anchors.rightMargin: 10
-                
-                renderType: Text.NativeRendering
-                clip: true
-                focus: root.expanded
-                verticalAlignment: TextInput.AlignVCenter
-                font {
-                    family: Style.font.family.mono
-                    pointSize: Style.font.size.small
-                    hintingPreference: Font.PreferFullHinting
-                }
-                
-                selectedTextColor: Style.color.base.surface1
-                selectionColor: Style.color.accent.current
-                color: Style.color.base.text
-                
-                echoMode: TextInput.Password
-                inputMethodHints: Qt.ImhSensitiveData
-                
-                onAccepted: {
-                    if (text != "") attemptPasswordConnect.running = true;
-                }
-            }
-        }
-    }
-
-    Process {
-        id: attemptDisconnect
-        command: ["nmcli", "c", "down", `${root.ssid}`]
-        stderr: StdioCollector {
-            onStreamFinished: {
-                if (text.toLowerCase().includes("error")) {
-                    console.warn("Failed to disconnect from " + root.ssid);
-                }
-            }
-        }
-    }
-
-    Process {
-        id: attemptAutoConnect
-        command: ["nmcli", "device", "wifi", "connect", `${root.ssid}`]
-        stderr: StdioCollector {
-            onStreamFinished: {
-                if (text.toLowerCase().includes("error")) {
-                    console.warn("Failed to connect to " + root.ssid);
-                }
-            }
-        }
-    }
-
-    Process {
-        id: attemptPasswordConnect
-        command: ["nmcli", "device", "wifi", "connect", `${root.ssid}`, "password", `${passwordBox.text}`]
-        stderr: StdioCollector {
-            onStreamFinished: {
-                if (text.toLowerCase().includes("error")) {
-                    console.warn("Failed to connect to " + root.ssid);
-                } else {
-                    Network.addAuto(root.ssid);
-                }
+                Network.pin(root.ssid);
             }
         }
     }

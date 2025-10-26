@@ -1,7 +1,7 @@
 pragma Singleton
 
-import Quickshell
 import QtQuick
+import Quickshell
 
 Singleton {
     property alias enabled: clock.enabled

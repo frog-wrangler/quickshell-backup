@@ -32,15 +32,19 @@ GridLayout {
             stepSize: 0.05
 
             iconName: {
-                if (Audio.muted) return "no_sound";
+                if (Audio.muted)
+                    return "no_sound";
 
-                if (visualPosition == 0) return "no_sound";
-                if (visualPosition < 0.5) return "volume_down_alt";
+                if (visualPosition == 0)
+                    return "no_sound";
+                if (visualPosition < 0.5)
+                    return "volume_down_alt";
                 return "volume_up";
             }
 
             onPressedChanged: {
-                if (!pressed) Audio.setVolume(value);
+                if (!pressed)
+                    Audio.setVolume(value);
             }
 
             Connections {
@@ -69,17 +73,24 @@ GridLayout {
             anchors.rightMargin: 30
 
             iconName: {
-                if (visualPosition == 0) return "brightness_1";
-                if (visualPosition < 0.2) return "brightness_2";
-                if (visualPosition < 0.4) return "brightness_3";
-                if (visualPosition < 0.6) return "brightness_4";
-                if (visualPosition < 0.8) return "brightness_5";
-                if (visualPosition < 1) return "brightness_6";
+                if (visualPosition == 0)
+                    return "brightness_1";
+                if (visualPosition < 0.2)
+                    return "brightness_2";
+                if (visualPosition < 0.4)
+                    return "brightness_3";
+                if (visualPosition < 0.6)
+                    return "brightness_4";
+                if (visualPosition < 0.8)
+                    return "brightness_5";
+                if (visualPosition < 1)
+                    return "brightness_6";
                 return "brightness_7";
             }
-            
+
             onPressedChanged: {
-                if (!pressed) Brightness.setBrightness(value);
+                if (!pressed)
+                    Brightness.setBrightness(value);
             }
 
             Connections {
@@ -159,7 +170,6 @@ GridLayout {
             anchors.margins: 10
         }
     }
-
 
     component Rect: Rectangle {
         radius: 7
