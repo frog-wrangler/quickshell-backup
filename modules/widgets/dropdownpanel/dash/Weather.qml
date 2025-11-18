@@ -139,9 +139,9 @@ Item {
                     return WeatherService.temp[2] + " LOW TODAY";
 
                 if (WeatherService.rawHighTomorrowF > 89)
-                    return WeatherService.tempTomorrow[1] + " HIGH TOMORROW";
+                    return WeatherService.tempTomorrow[0] + " HIGH TOMORROW";
                 if (WeatherService.rawLowTomorrowF < 33)
-                    return WeatherService.tempTomorrow[2] + " LOW TOMORROW";
+                    return WeatherService.tempTomorrow[1] + " LOW TOMORROW";
 
                 if (WeatherService.uvIndex > 4)
                     return "UV INDEX: " + WeatherService.uvIndex;

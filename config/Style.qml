@@ -66,7 +66,7 @@ Singleton {
     }
 
     component Spacing: QtObject {
-        readonly property int extraSmall: 4 // TODO
+        readonly property int extraSmall: 4
         readonly property int small: 7
         readonly property int normal: 12
         readonly property int large: 15
