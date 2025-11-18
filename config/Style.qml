@@ -15,7 +15,7 @@ Singleton {
     readonly property Anim anim: Anim {}
 
     component Choice: QtObject {
-        readonly property bool showBluetoothOff: false
+        readonly property bool showBluetoothInTray: false
         readonly property bool lockedOnBoot: false
         readonly property bool hideNoSsid: true
         readonly property bool topBarShowDate: true

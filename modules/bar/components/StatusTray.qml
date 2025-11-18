@@ -59,7 +59,7 @@ Item {
 
             MaterialIcon {
                 id: bluetooth
-                visible: Style.choice.showBluetoothOff ? true : Bluetooth.defaultAdapter?.enabled
+                visible: Style.choice.showBluetoothInTray
                 anchors.verticalCenter: parent.verticalCenter
                 color: Style.color.base.text
                 size: Style.font.size.normal
