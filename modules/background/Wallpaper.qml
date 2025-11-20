@@ -9,13 +9,14 @@ Item {
     required property ShellScreen screen
 
     anchors.fill: parent
+    anchors.topMargin: Style.size.barSize
 
     ClippingWrapperRectangle {
         topLeftRadius: Style.rounding.large
         topRightRadius: Style.rounding.large
 
         anchors {
-            bottom: parent.bottom
+            top: parent.top
             left: parent.left
             right: parent.right
         }

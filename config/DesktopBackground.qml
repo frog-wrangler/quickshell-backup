@@ -2,17 +2,21 @@ pragma Singleton
 
 import QtQuick
 import Quickshell
+import Quickshell.Io
 
 Singleton {
     id: root
 
-    readonly property string wallpaperPath: {
-        const images = ["root:/data/wallpapers/fish.png", "root:/data/wallpapers/cute_kitten.png", "root:/data/wallpapers/astronaut_jellyfish.jpg", "root:/data/wallpapers/deer_pillars.jpg", "root:/data/wallpapers/firewatch_green.jpg", "root:/data/wallpapers/neon_moon_ocean.jpg", "root:/data/wallpapers/totoro.jpg",];
+    property string wallpaperPath: "root:/data/wallpapers/ching_yeh1.jpg"
 
-        return images[0];
+    IpcHandler {
+        target: "wallpaper"
+        function set(url: string): void {
+            root.wallpaperPath = url;
+        }
     }
 
-    readonly property string lockscreenWallpaperPath: "root:/data/wallpapers/deer_pillars.jpg"
+    readonly property string lockscreenWallpaperPath: "root:/data/wallpapers/pink_skull.jpg"
 
     readonly property color clockColor: Style.color.base.text
     readonly property string clockPosition: "bottomRight"

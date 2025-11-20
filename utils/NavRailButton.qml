@@ -12,7 +12,7 @@ TabButton {
 
     padding: 0
 
-    implicitWidth: expanded ? itemText.implicitWidth + 70 : 50
+    implicitWidth: expanded ? 200 : 50
     implicitHeight: 50
 
     background: Rectangle {

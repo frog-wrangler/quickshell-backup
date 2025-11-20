@@ -118,7 +118,6 @@ Singleton {
 
     function getAppCategoryIcon(name: string, fallback: string): string {
         const categories = getDesktopEntry(name)?.categories;
-        // console.log(categories);
 
         if (categories)
             for (const [key, value] of Object.entries(categoryIcons))
