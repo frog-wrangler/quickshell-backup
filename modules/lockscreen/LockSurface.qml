@@ -36,7 +36,7 @@ MouseArea {
 
     Loader {
         active: DesktopBackground.showClockOnLockscreen
-        DesktopClock {
+        sourceComponent: DesktopClock {
             parent: root
 
             readonly property string pos: DesktopBackground.lockscreenClockPosition

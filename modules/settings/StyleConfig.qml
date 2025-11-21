@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import Qt.labs.folderlistmodel
 import Quickshell
 import qs.config
+import qs.services
 import qs.utils
 
 ContentPage {
@@ -13,7 +14,7 @@ ContentPage {
     forceWidth: true
 
     ContentSection {
-        title: "Colors & Wallpaper"
+        title: "Background"
 
         ListView {
             Layout.fillWidth: true
@@ -27,7 +28,7 @@ ContentPage {
 
             delegate: Item {
                 id: fileDelegate
-                implicitHeight: 100 // label.implicitHeight + image.implicitHeight
+                implicitHeight: 100
 
                 required property var modelData
 
@@ -56,10 +57,30 @@ ContentPage {
                         cursorShape: Qt.PointingHandCursor
 
                         onClicked: {
-                            Quickshell.execDetached(["qs", "ipc", "call", "wallpaper", "set", modelData.filePath]);
+                            Quickshell.execDetached(["qs", "ipc", "call", "background", "setWallpaper", modelData.filePath]);
                         }
                     }
                 }
+            }
+        }
+
+        ToggleItem {
+            Layout.fillWidth: true
+            text: "Clock on Wallpaper"
+            active: Settings.getValue("clockOnWallpaper")
+
+            onClicked: {
+                Quickshell.execDetached(["qs", "ipc", "call", "background", "setClockOnWallpaper", !active]);
+            }
+        }
+
+        ToggleItem {
+            Layout.fillWidth: true
+            text: "Clock on Lockscreen"
+            active: Settings.getValue("clockOnLockscreen")
+
+            onClicked: {
+                Quickshell.execDetached(["qs", "ipc", "call", "background", "setClockOnLockscreen", !active]);
             }
         }
     }
@@ -69,6 +90,7 @@ ContentPage {
 
         ToggleItem {
             Layout.fillWidth: true
+            text: "Testing"
 
             onClicked: {
                 console.log("Clicked!");

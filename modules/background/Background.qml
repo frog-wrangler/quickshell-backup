@@ -25,13 +25,16 @@ Variants {
         }
 
         Wallpaper {
+            id: wallpaper
             screen: backWin.screen
         }
 
         Loader {
             active: DesktopBackground.showClockOnWallpaper
-            DesktopClock {
+            sourceComponent: DesktopClock {
                 id: clock
+                parent: wallpaper
+
                 property string pos: DesktopBackground.clockPosition
 
                 anchors {

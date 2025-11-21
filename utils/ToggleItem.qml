@@ -3,6 +3,7 @@ import qs.config
 
 Item {
     id: root
+    required property string text
     property bool active: false
     signal clicked
 
@@ -13,7 +14,7 @@ Item {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
 
-        text: "Testing"
+        text: root.text
     }
 
     MaterialIcon {
