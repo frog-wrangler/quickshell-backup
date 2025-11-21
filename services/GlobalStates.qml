@@ -12,6 +12,7 @@ Singleton {
     property bool statusPanelOpen: false
     property bool systemTrayOpen: false
     property bool dropdownOpen: false
+    property bool dashboardOpen: false
 
     property bool screenLocked: Style.choice.lockedOnBoot
 

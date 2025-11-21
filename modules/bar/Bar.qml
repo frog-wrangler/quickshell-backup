@@ -27,13 +27,12 @@ PanelWindow {
     OsIcon {
         id: osIcon
         anchors.left: parent.left
-        anchors.leftMargin: Style.spacing.normal
     }
 
     Workspaces {
         id: leftTray
         anchors.left: osIcon.left
-        anchors.leftMargin: 20
+        anchors.leftMargin: 33
     }
 
     SongWindowDisplay {
