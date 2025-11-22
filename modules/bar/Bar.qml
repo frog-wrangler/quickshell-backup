@@ -40,11 +40,6 @@ PanelWindow {
         anchors.centerIn: parent
     }
 
-    DropdownArea {
-        id: dropdownArea
-        anchors.horizontalCenter: parent.horizontalCenter
-    }
-
     Clock {
         id: clockDisplay
         anchors.right: systemTray.left

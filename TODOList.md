@@ -12,6 +12,7 @@
 * Make ui work on external monitors
 * Finish settings application
 * Notification pop-ups and indicator
+    + Battery
 * Rework workspaces
 * Make Network use something other than ssid
 * Custom login page
@@ -23,6 +24,7 @@
     + Notifications
     + Clock positions
     + All choices
+    + Battery levels for notifs and colors
 * Idle monitor?
     + <https://quickshell.org/docs/master/types/Quickshell.Wayland/IdleMonitor/>
 

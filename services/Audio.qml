@@ -1,10 +1,13 @@
 pragma Singleton
 
+import QtQuick
 import Quickshell
 import Quickshell.Services.Pipewire
 
 Singleton {
     id: root
+
+    property var sinks: Pipewire.nodes.values.filter((node) => node.isSink)
 
     readonly property PwNode sink: Pipewire.defaultAudioSink
     readonly property PwNode source: Pipewire.defaultAudioSource
@@ -22,6 +25,24 @@ Singleton {
     signal changed(newVolume: real)
     onVolumeChanged: {
         changed(volume);
+    }
+
+    function setDefaultSink(pNode) {
+        Pipewire.preferredDefaultAudioSink = pNode;
+    }
+
+    function updateSinks(): void {
+        root.sinks = Pipewire.nodes.values.filter((node) => node.isSink);
+    }
+
+    Connections {
+        target: Pipewire.nodes
+        function onObjectInsertedPost() {
+            root.updateSinks();
+        }
+        function onObjectRemovedPost() {
+            root.updateSinks();
+        }
     }
 
     PwObjectTracker {

@@ -6,6 +6,7 @@ import Quickshell.Wayland
 import qs.config
 import qs.services
 import qs.utils
+import qs.modules.widgets.dashboard.sections
 
 Scope {
     id: root
@@ -26,7 +27,7 @@ Scope {
         anchors.bottom: true
         margins.top: Style.size.barSize + Style.spacing.small
         margins.bottom: Style.spacing.small
-        margins.right: Style.spacing.small
+        margins.left: Style.spacing.small
 
         function hide() {
             GlobalStates.dashboardOpen = false;
@@ -65,9 +66,31 @@ Scope {
                 radius: Style.rounding.normal
 
                 ColumnLayout {
-                    anchors.fill: parent
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
                     anchors.margins: Style.spacing.extraLarge
-                    spacing: Style.spacing.extraLarge
+                    spacing: Style.spacing.normal
+
+                    DashBrightness {
+                        Layout.fillWidth: true
+                    }
+
+                    DashAudio {
+                        Layout.fillWidth: true
+                    }
+
+                    DashMedia {
+                        Layout.fillWidth: true
+                    }
+
+                    DashCalendar {
+                        Layout.fillWidth: true
+                    }
+
+                    DashPerformance {
+                        Layout.fillWidth: true
+                    }
                 }
             }
         }
