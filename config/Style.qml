@@ -87,6 +87,7 @@ Singleton {
         readonly property int bluetoothItemMinSize: 40
         readonly property int notificationAppIcon: 50
         readonly property int wifiGroupHeight: 60
+        readonly property int dockIcon: 48
     }
 
     component Font: QtObject {
@@ -119,6 +120,7 @@ Singleton {
     }
 
     component AnimDurations: QtObject {
+        readonly property int tiny: 40
         readonly property int small: 200
         readonly property int normal: 400
         readonly property int large: 600
