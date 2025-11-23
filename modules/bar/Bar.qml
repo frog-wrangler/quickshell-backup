@@ -35,7 +35,7 @@ PanelWindow {
         anchors.leftMargin: 33
     }
 
-    SongWindowDisplay {
+    WindowDisplay {
         id: centerTray
         anchors.centerIn: parent
     }
@@ -43,9 +43,10 @@ PanelWindow {
     Clock {
         id: clockDisplay
         anchors.right: systemTray.left
+        anchors.rightMargin: 8
     }
 
-    SystemTrayButton {
+    SystemTray {
         id: systemTray
         anchors.right: statusTray.left
     }

@@ -19,6 +19,7 @@ Singleton {
         readonly property bool lockedOnBoot: false
         readonly property bool hideNoSsid: true
         readonly property bool topBarShowDate: true
+        readonly property bool wallpaperUnderTopBar: true
 
         readonly property int wifiListRefreshInterval: 10000
         readonly property int wifiIconRefreshInterval: 2000
@@ -83,7 +84,7 @@ Singleton {
         readonly property int statusPanelTabFooter: 40
         readonly property int noNotificationHeight: 80
         readonly property int statusPanelTabBarHeight: 50
-        readonly property int systemTrayItem: 40
+        readonly property int systemTrayItem: 30
         readonly property int bluetoothItemMinSize: 40
         readonly property int notificationAppIcon: 50
         readonly property int wifiGroupHeight: 60
@@ -100,11 +101,11 @@ Singleton {
         readonly property int normal: 12
         readonly property int large: 16
         readonly property int extraLarge: 20
-        readonly property int huge: 65
+        readonly property int huge: 55
     }
 
     component FontFamily: QtObject {
-        readonly property string sans: "Rubik"
+        readonly property string clock: "Outfit ExtraBold"
         readonly property string mono: "JetBrains Mono NF"
         readonly property string serif: "Liberation Serif"
         readonly property string icons: "Material Symbols Rounded"

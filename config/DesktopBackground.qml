@@ -9,11 +9,10 @@ Singleton {
     id: root
 
     property string wallpaperPath: "root:/data/wallpapers/ching_yeh1.jpg"
-    property string lockscreenWallpaperPath: "root:/data/wallpapers/pink_skull.jpg"
 
     property color clockColor: Style.color.base.text
-    property string clockPosition: "topLeft"
-    property string lockscreenClockPosition: "topLeft"
+    property string clockPosition: "bottomLeft"
+    property string lockscreenClockPosition: "bottomLeft"
     property int clockMargins: 100
     property bool showClockOnWallpaper: false
     property bool showClockOnLockscreen: false

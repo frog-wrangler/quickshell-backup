@@ -31,7 +31,7 @@ MouseArea {
         id: background
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
-        source: DesktopBackground.lockscreenWallpaperPath
+        source: DesktopBackground.wallpaperPath
     }
 
     Loader {

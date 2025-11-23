@@ -9,33 +9,12 @@ Item {
     implicitWidth: rowLayout.implicitWidth
     implicitHeight: Style.size.barSize
 
-    property bool showSong: Players.active
     property string activeWindow: Hyprland.activeToplevel?.title ?? "Desktop"
-    property string activeAudio: Players.active?.trackTitle || "Unknown Title"
 
     RowLayout {
         id: rowLayout
         anchors.centerIn: parent
         spacing: Style.spacing.normal
-
-        MaterialIcon {
-            visible: root.showSong
-            size: Style.font.size.large
-            color: Style.color.base.text
-            text: "music_note"
-        }
-
-        StyledText {
-            visible: root.showSong
-            font.pointSize: Style.font.size.normal
-            text: root.activeAudio.length > 25 ? root.activeAudio.slice(0, 25).trim() + "..." : root.activeAudio
-        }
-
-        StyledText {
-            visible: root.showSong
-            font.pointSize: Style.font.size.large
-            text: "•"
-        }
 
         MaterialIcon {
             size: Style.font.size.large
@@ -46,6 +25,7 @@ Item {
         StyledText {
             font.pointSize: Style.font.size.normal
             text: root.activeWindow.length > 25 ? root.activeWindow.slice(0, 25).trim() + "..." : root.activeWindow
+            // TODO: make elide not whatever this is
         }
     }
 }

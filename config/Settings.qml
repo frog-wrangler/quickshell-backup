@@ -6,5 +6,5 @@ import Quickshell
 Singleton {
     id: root
 
-    readonly property list<string> dockedApps: ["kitty", "Firefox"]
+    readonly property list<string> dockedApps: ["kitty", "Firefox", "Vesktop"]
 }

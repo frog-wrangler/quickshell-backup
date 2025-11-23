@@ -16,7 +16,7 @@ Item {
         topRightRadius: Style.rounding.large
 
         anchors {
-            top: parent.top
+            bottom: parent.bottom
             left: parent.left
             right: parent.right
         }
@@ -28,6 +28,7 @@ Item {
             source: DesktopBackground.wallpaperPath
 
             anchors.fill: parent
+            anchors.topMargin: (Style.choice.wallpaperUnderTopBar ? -Style.size.barSize : 0)
             fillMode: Image.PreserveAspectCrop
         }
     }

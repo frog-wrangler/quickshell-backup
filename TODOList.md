@@ -1,11 +1,10 @@
 
 # TODO
 
-* Add system tray to top bar instead of extra panel
-    + Possibly with expansion arrow
 * Add UI sizing (per screen)
 * Improve wallpaper switcher
-    + Lockscreeen as well
+    + Big main display
+    + Grid of smaller options
 * Screen mirroring panel
 * Make ui work on external monitors
 * Finish settings application
@@ -15,10 +14,12 @@
 * Make Network use something other than ssid
 * Add animations to lockscreen instead of explicit words
 * Settings
+    + Add rectangles per section
     + <https://doc.qt.io/qt-6/qml-qtquick-controls-switchdelegate.html>
     + Fonts
     + Animations
     + Hide top bar
+    + Battery percent in top bar
     + Wallpaper transition
     + Displays
     + Notifications
