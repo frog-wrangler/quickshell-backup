@@ -26,11 +26,9 @@
     + All choices
     + Battery levels for notifs and colors
     + System info
+    + Dock items
 * Idle monitor?
     + <https://quickshell.org/docs/master/types/Quickshell.Wayland/IdleMonitor/>
-* Dock
-    + Toolbar-like functionality
-* Change all exclusion modes to not use WlrLayershell
 
 ## Finishing Touches
 

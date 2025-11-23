@@ -38,7 +38,7 @@ Scope {
         visible: GlobalStates.systemTrayOpen
 
         WlrLayershell.namespace: "system-tray"
-        WlrLayershell.exclusionMode: ExclusionMode.Ignore
+        exclusionMode: ExclusionMode.Ignore
         WlrLayershell.layer: WlrLayer.Top
 
         implicitWidth: systemContentLoader.implicitWidth

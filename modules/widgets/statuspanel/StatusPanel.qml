@@ -53,7 +53,7 @@ Scope {
         visible: GlobalStates.statusPanelOpen
 
         WlrLayershell.namespace: "status-panel"
-        WlrLayershell.exclusionMode: ExclusionMode.Ignore
+        exclusionMode: ExclusionMode.Ignore
         WlrLayershell.layer: WlrLayer.Top
 
         implicitWidth: statusContentLoader.implicitWidth

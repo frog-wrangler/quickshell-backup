@@ -45,7 +45,7 @@ Rectangle {
         }
 
         contentItem: StyledText {
-            text: "Audio Sink: " + selector.model[selector.currentIndex].description
+            text: "Audio Sink: " + selector.model[selector.currentIndex]?.description || "N/a"
             leftPadding: 10
             elide: Text.ElideRight
         }

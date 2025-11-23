@@ -12,7 +12,7 @@ PanelWindow {
     color: "transparent"
 
     WlrLayershell.namespace: "power-panel"
-    WlrLayershell.exclusionMode: ExclusionMode.Ignore
+    exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Top
 
     implicitWidth: background.implicitWidth

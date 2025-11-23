@@ -37,7 +37,7 @@ Scope {
         visible: GlobalStates.dashboardOpen
 
         WlrLayershell.namespace: "dashboard"
-        WlrLayershell.exclusionMode: ExclusionMode.Ignore
+        exclusionMode: ExclusionMode.Ignore
         WlrLayershell.layer: WlrLayer.Top
 
         implicitWidth: dashContentLoader.implicitWidth

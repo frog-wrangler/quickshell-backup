@@ -12,7 +12,7 @@ Variants {
         property var modelData
         screen: modelData
         WlrLayershell.namespace: "background"
-        WlrLayershell.exclusionMode: ExclusionMode.Ignore
+        exclusionMode: ExclusionMode.Ignore
         WlrLayershell.layer: WlrLayer.Background
 
         color: Style.color.base.base
