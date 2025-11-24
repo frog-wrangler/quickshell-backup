@@ -90,7 +90,6 @@ Singleton {
                 const rep2 = new RegExp(PLACEHOLDER, "g");
 
                 if (!text.trim()) {
-                    console.warn("Empty output from nmcli, skipping parse.");
                     return;
                 }
 

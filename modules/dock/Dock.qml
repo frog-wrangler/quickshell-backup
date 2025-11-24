@@ -27,7 +27,7 @@ Scope {
 
             anchors.bottom: true
 
-            readonly property var apps: DesktopEntries.applications.values.filter(app => app?.name && app?.icon && Settings.dockedApps.includes(app?.name || ""))
+            readonly property var apps: DesktopEntries.applications.values.filter(app => app?.name && app?.icon && SettingsConfig.dockedApps.includes(app?.name || ""))
 
             property int length: apps.length * (Style.spacing.small + Style.size.dockIcon)
             implicitWidth: length

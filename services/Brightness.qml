@@ -7,9 +7,17 @@ Singleton {
     id: root
 
     property real brightness: 0
+    signal changed(newBrightness: real)
 
     function update(): void {
         updateBrightness.running = true;
+    }
+
+    function setBrightness(br: real): void {
+        const rounded = Math.round(br * 100);
+        Quickshell.execDetached(["brightnessctl", "s", `${rounded}%`]);
+        root.brightness = br;
+        changed(br);
     }
 
     Process {
@@ -20,17 +28,8 @@ Singleton {
             onRead: data => {
                 const nums = data.trim().split(" ");
                 root.brightness = nums[0] / nums[1];
+                root.changed(root.brightness);
             }
         }
-    }
-
-    function setBrightness(brightness: real): void {
-        const rounded = Math.round(brightness * 100);
-        Quickshell.execDetached(["brightnessctl", "s", `${rounded}%`]);
-    }
-
-    signal changed(newBrightness: real)
-    onBrightnessChanged: {
-        changed(brightness);
     }
 }
