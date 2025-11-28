@@ -142,6 +142,7 @@ Scope {
                         WifiToggle {}
                         BluetoothToggle {}
                         BatterySaverToggle {}
+                        IdleToggle {}
                     }
 
                     CentralWidgetGroup {

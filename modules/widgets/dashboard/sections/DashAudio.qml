@@ -19,6 +19,7 @@ Rectangle {
         implicitHeight: 25
 
         model: Audio.sinks
+        currentIndex: Audio.sinks.indexOf(Audio.sink)
 
         onCurrentIndexChanged: {
             const sink = selector.model[selector.currentIndex];

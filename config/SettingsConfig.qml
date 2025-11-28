@@ -6,7 +6,7 @@ import Quickshell
 Singleton {
     id: root
 
-    readonly property list<string> dockedApps: ["kitty", "Firefox", "Vesktop"]
-    readonly property bool idleBrightness: true
-    readonly property int idleTime: 240
+    property list<string> dockedApps: ["kitty", "Firefox", "Vesktop", "IntelliJ IDEA Community EAP"]
+    property bool idleOn: true
+    property int idleTime: 240
 }

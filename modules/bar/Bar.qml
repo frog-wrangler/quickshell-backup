@@ -2,7 +2,6 @@ import QtQuick
 import Quickshell
 import qs.config
 import qs.modules.bar.components
-import qs.modules.bar.components.workspaces
 
 PanelWindow {
     id: topPanel

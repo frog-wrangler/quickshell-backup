@@ -10,7 +10,7 @@ Rectangle {
     id: root
     visible: Players.active != null
 
-    height: 130
+    height: 110
     radius: Style.rounding.small
     color: Style.color.base.surface0
 
@@ -48,12 +48,12 @@ Rectangle {
         id: trackArt
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.leftMargin: 8
 
-        readonly property int size: root.height - 30
+        readonly property int size: 90
         implicitHeight: size
         implicitWidth: size
-        radius: size
+        radius: Style.rounding.normal
 
         color: Style.color.base.surface0
         border.width: 2
@@ -78,167 +78,144 @@ Rectangle {
         size: Style.font.size.extraLarge
     }
 
-    ColumnLayout {
-        id: infoColumn
+    ElidedText {
+        id: title
         anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
+        anchors.left: trackArt.right
+        anchors.right: playButton.left
+        anchors.margins: 10
+
+        text: Players.active?.trackTitle || "Unknown Track"
+        color: Style.color.accent.current
+        font.pointSize: Style.font.size.small
+        font.bold: true
+    }
+
+    StyledText {
+        id: timeLabel
+        anchors.top: title.bottom
         anchors.left: trackArt.right
         anchors.margins: 10
-        anchors.leftMargin: 15
 
-        spacing: 10
+        text: root.lengthString(Players.active?.position ?? 0) + " / " + root.lengthString(Players.active?.length ?? 0)
+    }
 
-        ElidedText {
-            text: Players.active?.trackTitle || "Unknown Track"
-            color: Style.color.accent.current
-            font.pointSize: Style.font.size.small
-            font.bold: true
+    Button {
+        id: playButton
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.margins: 10
+
+        implicitWidth: 50
+        implicitHeight: implicitWidth
+
+        contentItem: MaterialIcon {
+            text: Players.active?.isPlaying ? "pause" : "play_arrow"
+            color: Style.color.base.base
+            size: Style.font.size.large
+
+            width: height
         }
 
-        RowLayout {
+        background: Rectangle {
+            id: background
+            color: Style.color.accent.current
+
+            implicitWidth: parent.implicitWidth
+            implicitHeight: implicitWidth
+            radius: implicitWidth / 2
+
+            MouseArea {
+                id: mouseArea
+                anchors.centerIn: parent
+                height: parent.height
+                width: height
+                cursorShape: Qt.PointingHandCursor
+            }
+        }
+
+        onClicked: {
+            Players.togglePlay();
+        }
+    }
+
+    RowLayout {
+        anchors.left: trackArt.right
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 10
+
+        QuickButton {
+            iconName: "skip_previous"
+            size: 30
+
+            onClicked: {
+                Players.previous();
+            }
+        }
+
+        Slider {
+            id: slider
             Layout.fillWidth: true
-            Layout.fillHeight: true
 
-            Column {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                spacing: 12
+            leftPadding: 10
+            rightPadding: 10
 
-                ElidedText {
+            value: root.progress
+            live: false
+
+            background: Item {
+                Rectangle {
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
-                    text: Players.active?.trackArtist || "Unknown Artist"
+
+                    implicitHeight: 5
+                    implicitWidth: slider.handle.x - 3
+
+                    color: Style.color.accent.current
+                    radius: implicitHeight
+                    topRightRadius: 1
+                    bottomRightRadius: 1
                 }
 
-                StyledText {
-                    id: timeLabel
-                    anchors.left: parent.left
-
-                    text: root.lengthString(Players.active?.position ?? 0) + " / " + root.lengthString(Players.active?.length ?? 0)
-                }
-
-                Slider {
-                    id: slider
-                    anchors.left: parent.left
+                Rectangle {
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
 
-                    leftPadding: 10
-                    rightPadding: 10
+                    implicitHeight: 5
+                    implicitWidth: parent.width - slider.handle.implicitWidth - slider.handle.x - 3
 
-                    value: root.progress
-                    live: false
-
-                    background: Item {
-                        Rectangle {
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-
-                            implicitHeight: 5
-                            implicitWidth: slider.handle.x - 3
-
-                            color: Style.color.accent.current
-                            radius: implicitHeight
-                            topRightRadius: 1
-                            bottomRightRadius: 1
-                        }
-
-                        Rectangle {
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.right: parent.right
-
-                            implicitHeight: 5
-                            implicitWidth: parent.width - slider.handle.implicitWidth - slider.handle.x - 3
-
-                            color: Style.color.base.overlay
-                            radius: implicitHeight
-                            topLeftRadius: 1
-                            bottomLeftRadius: 1
-                        }
-                    }
-
-                    handle: Rectangle {
-                        x: slider.visualPosition * slider.width
-
-                        implicitWidth: 5
-                        implicitHeight: 20
-
-                        color: Style.color.base.text
-                        radius: implicitWidth
-                    }
-
-                    onPressedChanged: {
-                        if (!pressed && Players.active?.canSeek) {
-                            const active = Players.active;
-                            active.position = slider.value * active.length;
-                        }
-                    }
+                    color: Style.color.base.overlay
+                    radius: implicitHeight
+                    topLeftRadius: 1
+                    bottomLeftRadius: 1
                 }
             }
 
-            Item {
-                Layout.fillHeight: true
-                Layout.preferredWidth: playButton.implicitWidth + Style.spacing.large
+            handle: Rectangle {
+                x: slider.visualPosition * slider.width
 
-                Button {
-                    id: playButton
-                    anchors.top: parent.top
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    implicitWidth: 50
-                    implicitHeight: implicitWidth
+                implicitWidth: 5
+                implicitHeight: 20
 
-                    contentItem: MaterialIcon {
-                        text: Players.active?.isPlaying ? "pause" : "play_arrow"
-                        color: Style.color.base.base
-                        size: Style.font.size.large
+                color: Style.color.base.text
+                radius: implicitWidth
+            }
 
-                        width: height
-                    }
-
-                    background: Rectangle {
-                        id: background
-                        color: Style.color.accent.current
-
-                        implicitWidth: parent.implicitWidth
-                        implicitHeight: implicitWidth
-                        radius: implicitWidth / 2
-
-                        MouseArea {
-                            id: mouseArea
-                            anchors.centerIn: parent
-                            height: parent.height
-                            width: height
-                            cursorShape: Qt.PointingHandCursor
-                        }
-                    }
-
-                    onClicked: {
-                        Players.togglePlay();
-                    }
+            onPressedChanged: {
+                if (!pressed && Players.active?.canSeek) {
+                    const active = Players.active;
+                    active.position = slider.value * active.length;
                 }
+            }
+        }
 
-                QuickButton {
-                    anchors.left: parent.left
-                    anchors.bottom: parent.bottom
+        QuickButton {
+            iconName: "skip_next"
+            size: 30
 
-                    iconName: "skip_previous"
-                    size: 30
-
-                    onClicked: {
-                        Players.previous();
-                    }
-                }
-
-                QuickButton {
-                    anchors.right: parent.right
-                    anchors.bottom: parent.bottom
-
-                    iconName: "skip_next"
-                    size: 30
-
-                    onClicked: {
-                        Players.next();
-                    }
-                }
+            onClicked: {
+                Players.next();
             }
         }
     }

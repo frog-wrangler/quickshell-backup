@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Hyprland
 import qs.config
 import qs.services
 import qs.utils
@@ -23,9 +24,11 @@ Item {
         }
 
         StyledText {
+            Layout.maximumWidth: 300
+
             font.pointSize: Style.font.size.normal
-            text: root.activeWindow.length > 25 ? root.activeWindow.slice(0, 25).trim() + "..." : root.activeWindow
-            // TODO: make elide not whatever this is
+            text: root.activeWindow
+            elide: Text.ElideRight
         }
     }
 }

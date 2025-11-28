@@ -36,10 +36,18 @@ Slider {
         height: 30
 
         MaterialIcon {
+            visible: !root.pressed
             anchors.centerIn: parent
             text: root.iconName
-            color: Style.color.base.surface0
+            color: Style.color.base.mantle
             size: Style.font.size.large
+        }
+       
+        StyledText {
+            visible: root.pressed
+            anchors.centerIn: parent
+            text: Math.round(root.position * 100)
+            color: Style.color.base.surface0
         }
     }
 }

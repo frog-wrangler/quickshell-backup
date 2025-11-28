@@ -3,11 +3,10 @@
 
 * Add UI sizing (per screen)
 * Make ui work on external monitors
-* Finish settings application
 * Notification pop-ups and indicator
-* Rework workspaces
-    + <https://github.com/Shanu-Kumawat/quickshell-overview/blob/main/README.md>
 * Add animations to lockscreen instead of explicit words
+* Improve workspaces accuracy
+* Add stay bright button to status tray
 
 ## Settings
 
@@ -34,7 +33,7 @@
 ## Finishing Touches
 
 - Improve Animations
-- Add detailing
+- Add detailing + Color
 - Look over all code
 - Change lockscreen to open on starts
 - Simplify Code!!!
