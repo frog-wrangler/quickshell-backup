@@ -1,12 +1,8 @@
 
 # TODO
 
-* Add UI sizing (per screen)
-* Make ui work on external monitors
-* Notification pop-ups and indicator
+* Make UI work on external monitors
 * Add animations to lockscreen instead of explicit words
-* Improve workspaces accuracy
-* Add stay bright button to status tray
 
 ## Settings
 

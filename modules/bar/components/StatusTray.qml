@@ -30,6 +30,16 @@ Item {
             spacing: Style.spacing.small
 
             MaterialIcon {
+                id: notifications
+                visible: NotificationHandler.list.length > 0
+                anchors.verticalCenter: parent.verticalCenter
+                color: Style.color.base.text
+                size: Style.font.size.normal
+
+                text: "notifications_unread"
+            }
+
+            MaterialIcon {
                 id: batteryIcon
                 anchors.verticalCenter: parent.verticalCenter
                 color: !UPower.onBattery || UPower.displayDevice.percentage > 0.25 ? (UPower.displayDevice.percentage > 0.5 ? Style.color.base.text : Style.color.accent.orange) : Style.color.accent.red

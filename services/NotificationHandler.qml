@@ -32,8 +32,6 @@ Singleton {
         }
     }
 
-    property bool silent: false
-
     property list<NotificationWrapper> list: []
     property var latestTimeForApp: ({})
     property var groupsByAppName: root.getGroupsByAppName(list)

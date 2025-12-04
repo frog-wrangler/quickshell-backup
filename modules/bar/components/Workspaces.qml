@@ -12,14 +12,34 @@ Item {
     implicitHeight: Style.size.barSize
     implicitWidth: background.implicitWidth
 
-    readonly property list<HyprlandWorkspace> workspaces: Hyprland.workspaces.values.filter(w => w.id >= 0)
+    readonly property list<HyprlandWorkspace> workspaces: Hyprland.workspaces.values.filter(w => w.id >= 0);
     readonly property HyprlandWorkspace secret: Hyprland.workspaces.values.find(w => w.id === -98) ?? null
+    readonly property int maxWsIndex: Math.max(...workspaces.map(w => w.id))
+
+    Rectangle {
+        id: secretWs
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.margins: 6
+        width: height
+        radius: Style.rounding.small
+        color: Style.color.base.surface0
+
+        Workspace {
+            anchors.centerIn: parent
+            index: -98
+            workspace: root.secret
+        }
+    }
 
     Rectangle {
         id: background
-        anchors.fill: parent
+        anchors.left: secretWs.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         anchors.margins: 6
-        implicitWidth: layout.implicitWidth + 16
+        implicitWidth: layout.implicitWidth + 10
         radius: height
 
         color: Style.color.base.surface0
@@ -27,38 +47,12 @@ Item {
 
     RowLayout {
         id: layout
-        anchors.centerIn: parent
+        anchors.centerIn: background
         spacing: 5
 
         Repeater {
-            model: root.workspaces
-
-            Item {
-                id: delegate
-                required property var modelData
-                readonly property int wsNum: modelData.id
-                readonly property bool focused: modelData.focused
-                readonly property bool occupied: true
-
-                Layout.preferredWidth: childrenRect.width
-                Layout.preferredHeight: childrenRect.height
-
-                Rectangle {
-                    visible: delegate.focused
-                    anchors.centerIn: parent
-                    width: 24
-                    height: 24
-                    radius: 12
-                    color: Style.color.accent.current
-                }
-
-                MaterialIcon {
-                    anchors.centerIn: parent
-                    size: Style.font.size.normal
-                    color: delegate.focused ? Style.color.base.crust : Style.color.base.subtext
-                    text: Icons.getAppCategoryIcon(delegate.modelData.toplevels?.values[0]?.lastIpcObject?.class, "close_small");
-                }
-            }
+            model: Math.max(root.maxWsIndex, 6)
+            delegate: Workspace {}
         }
     }
 
@@ -76,5 +70,34 @@ Item {
 
     Component.onCompleted: {
         HyprlandRefresh.start();
+    }
+
+    component Workspace: Item {
+        id: delegate
+        required property int index
+
+        property var workspace: root.workspaces.find(w => w.id === index + 1)
+
+        readonly property bool focused: workspace?.focused ?? false
+        readonly property bool occupied: workspace?.toplevels?.values?.length > 0 ?? false
+
+        Layout.preferredWidth: childrenRect.width
+        Layout.preferredHeight: childrenRect.height
+
+        Rectangle {
+            visible: delegate.focused
+            anchors.centerIn: parent
+            width: 24
+            height: 24
+            radius: 12
+            color: Style.color.accent.current
+        }
+
+        MaterialIcon {
+            anchors.centerIn: parent
+            size: Style.font.size.normal
+            color: delegate.focused ? Style.color.base.crust : Style.color.base.subtext
+            text: delegate.occupied ? Icons.getAppCategoryIcon(delegate.workspace?.toplevels?.values[0]?.lastIpcObject?.class, "computer") : "close_small"
+        }
     }
 }
