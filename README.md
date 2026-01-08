@@ -1,5 +1,10 @@
 A backup repo of my custom quickshell config files.
-Requires for `Material Symbols Rounded` to be installed as a font on the system and prefers `JetBrains Mono NF` installed.
+
+Requires fonts:
+
+* `Material Symbols Rounded`
+* `JetBrains Mono NF`
+* `Outfit`
 
 Heavily inspired / taken from:
 
