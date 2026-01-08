@@ -1,57 +1,68 @@
 import QtQuick
 import Quickshell
+import Quickshell.Wayland
 import qs.config
 import qs.modules.bar.components
 
-PanelWindow {
-    id: topPanel
-    color: "transparent"
+Variants {
+    model: Quickshell.screens
 
-    anchors {
-        top: true
-        left: true
-        right: true
-    }
+    PanelWindow {
+        id: topPanel
+        color: "transparent"
 
-    implicitHeight: Style.size.barSize
+        property var modelData
+        screen: modelData
+        WlrLayershell.namespace: "top-bar"
 
-    // Visual bar
-    Rectangle {
-        id: topBar
-        color: Style.color.base.base
-        anchors.fill: parent
-    }
+        anchors {
+            top: true
+            left: true
+            right: true
+        }
 
-    // Components
-    OsIcon {
-        id: osIcon
-        anchors.left: parent.left
-    }
+        implicitHeight: Style.size.barSize
 
-    Workspaces {
-        id: leftTray
-        anchors.left: osIcon.left
-        anchors.leftMargin: 33
-    }
+        // Visual bar
+        Rectangle {
+            id: topBar
+            color: Style.color.base.base
+            anchors.fill: parent
+        }
 
-    WindowDisplay {
-        id: centerTray
-        anchors.centerIn: parent
-    }
+        // Components
+        OsIcon {
+            id: osIcon
+            anchors.left: parent.left
+        }
 
-    Clock {
-        id: clockDisplay
-        anchors.right: systemTray.left
-        anchors.rightMargin: 8
-    }
+        Workspaces {
+            id: leftTray
+            anchors.left: osIcon.left
+            anchors.leftMargin: 33
 
-    SystemTray {
-        id: systemTray
-        anchors.right: statusTray.left
-    }
+            screen: topPanel.screen
+        }
 
-    StatusTray {
-        id: statusTray
-        anchors.right: parent.right
+        WindowDisplay {
+            id: centerTray
+            anchors.centerIn: parent
+        }
+
+        Clock {
+            id: clockDisplay
+            anchors.right: systemTray.left
+            anchors.rightMargin: 8
+        }
+
+        SystemTray {
+            id: systemTray
+            anchors.right: statusTray.left
+        }
+
+        StatusTray {
+            id: statusTray
+            anchors.right: parent.right
+        }
     }
 }

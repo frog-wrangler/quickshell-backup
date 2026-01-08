@@ -2,6 +2,7 @@
 # TODO
 
 * Make UI work on external monitors
+* Fix audio dropdown
 * Add animations to lockscreen instead of explicit words
 
 ## Settings

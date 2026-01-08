@@ -1,4 +1,6 @@
 import Quickshell
+import QtQuick
+import qs.config
 import qs.modules.background
 import qs.modules.bar
 import qs.modules.idler
@@ -8,5 +10,9 @@ ShellRoot {
     Bar {}
     Background {}
     Lock {}
-    Idle {}
+
+    Loader {
+        active: SettingsConfig.idleActive
+        sourceComponent: Idle {}
+    }
 }

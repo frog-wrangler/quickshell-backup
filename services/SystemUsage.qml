@@ -103,7 +103,7 @@ Singleton {
     Process {
         id: storage
 
-        command: ["sh", "-c", "df | grep '^/dev/nvme0n1p3'"]
+        command: ["sh", "-c", "df | grep '^/dev/nvme'"]
         stdout: StdioCollector {
             onStreamFinished: {
                 const parts = text.trim().split(/\s+/);
@@ -171,7 +171,7 @@ Singleton {
                 }
 
                 root.gpuTemp = count > 0 ? sum / count : 0;
-                root.fanSpeed = text.match(/fan\d+:\s+(\d+)\s+RPM/)[1] + " RPM";
+                // root.fanSpeed = text.match(/fan\d+:\s+(\d+)\s+RPM/)[1] + " RPM"; // TODO
             }
         }
     }

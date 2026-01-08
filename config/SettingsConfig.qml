@@ -8,4 +8,5 @@ Singleton {
 
     property bool idleOn: true
     property int idleTime: 240
+    property bool idleActive: false
 }

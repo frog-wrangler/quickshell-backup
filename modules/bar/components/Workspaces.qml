@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Hyprland
 import qs.config
 import qs.services
@@ -15,6 +16,8 @@ Item {
     readonly property list<HyprlandWorkspace> workspaces: Hyprland.workspaces.values.filter(w => w.id >= 0);
     readonly property HyprlandWorkspace secret: Hyprland.workspaces.values.find(w => w.id === -98) ?? null
     readonly property int maxWsIndex: Math.max(...workspaces.map(w => w.id))
+
+    required property ShellScreen screen
 
     Rectangle {
         id: secretWs
