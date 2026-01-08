@@ -97,6 +97,4 @@ Item {
             GlobalStates.statusPanelOpen = !GlobalStates.statusPanelOpen;
         }
     }
-
-    StatusPanel {}
 }

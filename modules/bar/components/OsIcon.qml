@@ -48,6 +48,4 @@ Item {
             GlobalStates.dashboardOpen = !GlobalStates.dashboardOpen;
         }
     }
-
-    Dashboard {}
 }
