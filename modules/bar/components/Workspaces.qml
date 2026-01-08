@@ -13,9 +13,9 @@ Item {
     implicitHeight: Style.size.barSize
     implicitWidth: background.implicitWidth
 
-    readonly property list<HyprlandWorkspace> workspaces: Hyprland.workspaces.values.filter(w => w.id >= 0);
+    readonly property HyprlandMonitor monitor: Hyprland.monitorFor(screen)
+    readonly property list<HyprlandWorkspace> workspaces: Hyprland.workspaces.values.filter(w => w.monitor == root.monitor && w.id >= 0);
     readonly property HyprlandWorkspace secret: Hyprland.workspaces.values.find(w => w.id === -98) ?? null
-    readonly property int maxWsIndex: Math.max(...workspaces.map(w => w.id))
 
     required property ShellScreen screen
 
@@ -31,10 +31,10 @@ Item {
         color: Style.color.base.surface0
 
         Workspace {
-            visible: parent.width != 0
+            visible: root.secret != null
             anchors.fill: parent
             index: -98
-            workspace: root.secret
+            modelData: root.secret
         }
     }
 
@@ -56,7 +56,7 @@ Item {
         spacing: 5
 
         Repeater {
-            model: Math.max(root.maxWsIndex, 6)
+            model: root.workspaces
             delegate: Workspace {}
         }
     }
@@ -67,10 +67,10 @@ Item {
 
     component Workspace: Item {
         id: delegate
-        required property int index // indexes start from 0, need to add 1 in all uses
+        required property HyprlandWorkspace modelData
+        required property int index
 
-        property var workspace: root.workspaces.find(w => w.id === index + 1)
-
+        readonly property HyprlandWorkspace workspace: modelData
         readonly property bool focused: workspace?.focused ?? false
         readonly property bool occupied: workspace?.toplevels?.values?.length > 0 ?? false
 
@@ -99,7 +99,7 @@ Item {
                 if (delegate.index == -98) {
                     Hyprland.dispatch("togglespecialworkspace magic");
                 } else if (!delegate.focused) {
-                    Hyprland.dispatch(`workspace ${delegate.index + 1}`);
+                    delegate.workspace.activate();
                 }
             }
         }
