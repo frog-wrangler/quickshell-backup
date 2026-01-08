@@ -56,7 +56,7 @@ PanelWindow {
                 id: sleep
 
                 icon: "bedtime"
-                command: ["systemctl", "suspend"]
+                command: ["systemctl", "sleep"]
             }
 
             SessionButton {
