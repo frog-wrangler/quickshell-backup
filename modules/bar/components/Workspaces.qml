@@ -25,12 +25,14 @@ Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.margins: 6
-        width: height
+        anchors.leftMargin: root.secret == null ? 0 : undefined
+        width: root.secret == null ? 0 : height
         radius: Style.rounding.small
         color: Style.color.base.surface0
 
         Workspace {
-            anchors.centerIn: parent
+            visible: parent.width != 0
+            anchors.fill: parent
             index: -98
             workspace: root.secret
         }
@@ -59,25 +61,13 @@ Item {
         }
     }
 
-    MouseArea {
-        anchors.fill: background
-
-        onPressed: event => {
-            const ws = layout.childAt(event.x, event.y)?.wsNum ?? -1;
-            if (ws === -1)
-                return;
-            if ((Hyprland.focusedWorkspace?.id ?? ws) !== ws)
-                Hyprland.dispatch(`workspace ${ws}`);
-        }
-    }
-
     Component.onCompleted: {
         HyprlandRefresh.start();
     }
 
     component Workspace: Item {
         id: delegate
-        required property int index
+        required property int index // indexes start from 0, need to add 1 in all uses
 
         property var workspace: root.workspaces.find(w => w.id === index + 1)
 
@@ -101,6 +91,17 @@ Item {
             size: Style.font.size.normal
             color: delegate.focused ? Style.color.base.crust : Style.color.base.subtext
             text: delegate.occupied ? Icons.getAppCategoryIcon(delegate.workspace?.toplevels?.values[0]?.lastIpcObject?.class, "computer") : "close_small"
+        }
+
+        MouseArea {
+            anchors.fill: delegate
+            onPressed: {
+                if (delegate.index == -98) {
+                    Hyprland.dispatch("togglespecialworkspace magic");
+                } else if (!delegate.focused) {
+                    Hyprland.dispatch(`workspace ${delegate.index + 1}`);
+                }
+            }
         }
     }
 }
