@@ -23,7 +23,7 @@ ContentPage {
 
             model: FolderListModel {
                 id: folderModel
-                folder: "file:///home/frog/.config/quickshell/data/wallpapers/"
+                folder: "file://" + Quickshell.shellDir + "/data/wallpapers/"
             }
 
             delegate: Item {

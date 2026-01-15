@@ -25,7 +25,7 @@ Item {
 
         Image {
             id: current
-            source: "root:/data/wallpapers/ching_yeh1.jpg" // DesktopBackground.wallpaperPath
+            source: DesktopBackground.wallpaperPath
 
             anchors.fill: parent
             anchors.topMargin: (Style.choice.wallpaperUnderTopBar ? -Style.size.barSize : 0)
