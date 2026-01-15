@@ -17,7 +17,7 @@ ShellRoot {
     StatusPanel {}
 
     Loader {
-        active: SettingsConfig.idleActive
+        active: SettingsConfig.idleOn
         sourceComponent: Idle {}
     }
 }

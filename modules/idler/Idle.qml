@@ -12,7 +12,7 @@ Scope {
 
     IdleMonitor {
         id: shortMonitor
-        enabled: SettingsConfig.idleOn
+        // enabled: SettingsConfig.idleOn
         timeout: SettingsConfig.idleTime //seconds
 
         onIsIdleChanged: {
