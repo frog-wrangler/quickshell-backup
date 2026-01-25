@@ -7,6 +7,7 @@ import Quickshell
 import qs.config
 import qs.services
 import qs.utils
+import qs.utils.settings
 
 ContentPage {
     id: root
@@ -16,7 +17,7 @@ ContentPage {
     ContentSection {
         title: "Background"
 
-        ListView {
+        GridView {
             Layout.fillWidth: true
             implicitHeight: 300
             clip: true
@@ -26,42 +27,7 @@ ContentPage {
                 folder: "file://" + Quickshell.shellDir + "/data/wallpapers/"
             }
 
-            delegate: Item {
-                id: fileDelegate
-                implicitHeight: 100
-
-                required property var modelData
-
-                StyledText {
-                    id: label
-                    anchors.top: fileDelegate.top
-                    anchors.left: fileDelegate.left
-
-                    text: modelData.fileName
-                }
-
-                Image {
-                    id: image
-                    anchors.top: label.bottom
-                    anchors.left: fileDelegate.left
-                    height: 70
-                    width: 120
-                    sourceSize.height: height * 2
-                    sourceSize.width: width * 2
-
-                    asynchronous: true
-                    source: modelData.filePath
-
-                    MouseArea {
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-
-                        onClicked: {
-                            Quickshell.execDetached(["qs", "ipc", "call", "background", "setWallpaper", modelData.filePath]);
-                        }
-                    }
-                }
-            }
+            delegate: WallpaperDelegate {}
         }
 
         ToggleItem {

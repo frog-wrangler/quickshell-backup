@@ -1,6 +1,7 @@
 
 # TODO
 
+* FIX SETTINGS
 * Make UI work on external monitors
 * Fix audio dropdown
 * Fix GPU status

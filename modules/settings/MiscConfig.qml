@@ -1,4 +1,4 @@
-import qs.utils
+import qs.utils.settings
 
 ContentPage {
     id: root

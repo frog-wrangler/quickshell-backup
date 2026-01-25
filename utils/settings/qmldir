@@ -1,0 +1,5 @@
+module qs.utils.settings
+
+ContentPage 1.0 ContentPage.qml
+ContentSection 1.0 ContentSection.qml
+WallpaperDelegate 1.0 WallpaperDelegate.qml

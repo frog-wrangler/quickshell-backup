@@ -10,7 +10,7 @@ Singleton {
 
     property string wallpaperPath: "root:/data/wallpapers/ching_yeh1.jpg"
 
-    property color clockColor: Style.color.base.text
+    property color clockColor: Style.color.base.crust
     property string clockPosition: "bottomLeft"
     property string lockscreenClockPosition: "bottomLeft"
     property int clockMargins: 100
