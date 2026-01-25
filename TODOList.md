@@ -3,6 +3,7 @@
 
 * Make UI work on external monitors
 * Fix audio dropdown
+* Fix GPU status
 * Add animations to lockscreen instead of explicit words
 
 ## Settings

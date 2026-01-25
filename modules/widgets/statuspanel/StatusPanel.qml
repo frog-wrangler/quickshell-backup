@@ -94,7 +94,12 @@ Scope {
                         Layout.bottomMargin: 0
 
                         StyledText {
-                            text: (UPower.onBattery ? "Discharging: " : "Recharging: ") + Math.round(UPower.displayDevice.percentage * 100) + "%"
+                            text: {
+                                if (!UPower.displayDevice.isLaptopBattery) {
+                                    return "On AC Power";
+                                }
+                                return (UPower.onBattery ? "Discharging: " : "Recharging: ") + Math.round(UPower.displayDevice.percentage * 100) + "%";
+                            }
                         }
 
                         Item {

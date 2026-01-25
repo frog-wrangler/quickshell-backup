@@ -41,6 +41,7 @@ Item {
 
             MaterialIcon {
                 id: batteryIcon
+                visible: UPower.displayDevice.isLaptopBattery
                 anchors.verticalCenter: parent.verticalCenter
                 color: !UPower.onBattery || UPower.displayDevice.percentage > 0.25 ? (UPower.displayDevice.percentage > 0.5 ? Style.color.base.text : Style.color.accent.orange) : Style.color.accent.red
                 size: Style.font.size.normal

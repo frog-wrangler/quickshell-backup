@@ -19,7 +19,7 @@ Item {
 
         spacing: Style.spacing.small
 
-        model: root.bAdapter.devices
+        model: root.bAdapter?.devices
         delegate: BluetoothItem {
             anchors.left: parent?.left
             anchors.right: parent?.right
@@ -48,7 +48,7 @@ Item {
                 anchors.verticalCenter: scanToggle.verticalCenter
                 anchors.leftMargin: Style.spacing.normal
 
-                text: `${root.bAdapter.devices.values.length} devices`
+                text: `${root.bAdapter?.devices.values.length ?? "N/a"} devices`
             }
 
             ToggleButton {
@@ -76,7 +76,7 @@ Item {
     }
 
     Component.onDestruction: {
-        if (bAdapter.enabled)
+        if (bAdapter?.enabled)
             bAdapter.discovering = false;
     }
 }
