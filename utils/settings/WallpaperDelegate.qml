@@ -1,21 +1,30 @@
 import QtQuick
 import Quickshell
+import qs.config
 import qs.utils
 
 Item {
     id: fileDelegate
+
     required property var modelData
-    height: 200
-    width: 200
+
+    height: GridView.view.cellHeight
+    width: GridView.view.cellWidth
+    clip: true
+
+    readonly property int margin: 5
 
     Rectangle {
         anchors.fill: parent
-        border.width: 5
+        anchors.margins: fileDelegate.margin
+        color: Style.color.base.base
+        radius: Style.rounding.small
     }
 
     StyledText {
         id: label
         anchors.top: fileDelegate.top
+        anchors.topMargin: fileDelegate.margin * 2
         anchors.horizontalCenter: fileDelegate.horizontalCenter
 
         text: modelData.fileName
@@ -24,6 +33,7 @@ Item {
     Image {
         id: image
         anchors.top: label.bottom
+        anchors.topMargin: fileDelegate.margin
         anchors.horizontalCenter: fileDelegate.horizontalCenter
         height: 70
         width: 120
@@ -32,14 +42,14 @@ Item {
 
         asynchronous: true
         source: modelData.filePath
+    }
 
-        MouseArea {
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
 
-            onClicked: {
-                Quickshell.execDetached(["qs", "ipc", "call", "background", "setWallpaper", modelData.filePath]);
-            }
+        onClicked: {
+            Quickshell.execDetached(["qs", "ipc", "call", "background", "setWallpaper", modelData.filePath]);
         }
     }
 }

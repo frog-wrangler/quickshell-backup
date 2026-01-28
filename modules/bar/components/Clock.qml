@@ -20,13 +20,13 @@ Item {
         }
 
         StyledText {
-            visible: Style.choice.topBarShowDate
+            visible: SettingsConfig.topBarShowDate
             font.pointSize: Style.font.size.large
             text: "•"
         }
 
         StyledText {
-            visible: Style.choice.topBarShowDate
+            visible: SettingsConfig.topBarShowDate
             font.pointSize: Style.font.size.normal
             text: Time.format("ddd, MMM dd")
         }

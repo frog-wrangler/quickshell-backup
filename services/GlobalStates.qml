@@ -13,7 +13,7 @@ Singleton {
     property bool dropdownOpen: false
     property bool dashboardOpen: false
 
-    property bool screenLocked: Style.choice.lockedOnBoot
+    property bool screenLocked: SettingsConfig.lockedOnBoot
 
     property bool wifiActive: false
     property bool bluetoothActive: false

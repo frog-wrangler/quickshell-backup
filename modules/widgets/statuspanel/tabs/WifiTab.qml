@@ -78,7 +78,7 @@ Item {
     Timer {
         running: root.isActive && Network.pinnedSsid == ""
         repeat: true
-        interval: Style.choice.wifiListRefreshInterval
+        interval: SettingsConfig.wifiListRefreshInterval
 
         onTriggered: {
             Network.refresh();

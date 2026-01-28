@@ -7,7 +7,7 @@ Item {
     anchors.margins: DesktopBackground.clockMargins
     implicitWidth: timeText.implicitWidth
     implicitHeight: timeText.implicitHeight
-    opacity: 0.5
+    opacity: DesktopBackground.clockOpacity
 
     Text {
         id: timeText

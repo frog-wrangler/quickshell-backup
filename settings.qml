@@ -8,8 +8,8 @@ import qs.utils
 
 ApplicationWindow {
     id: root
-    minimumWidth: 600
-    minimumHeight: 400
+    minimumWidth: 674
+    minimumHeight: 600
     width: 1100
     height: 750
 

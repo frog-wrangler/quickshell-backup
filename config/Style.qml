@@ -6,29 +6,12 @@ import Quickshell
 Singleton {
     id: root
 
-    readonly property Choice choice: Choice {}
     readonly property Color color: Color {}
     readonly property Rounding rounding: Rounding {}
     readonly property Spacing spacing: Spacing {}
     readonly property Size size: Size {}
     readonly property Font font: Font {}
     readonly property Anim anim: Anim {}
-
-    component Choice: QtObject {
-        readonly property bool showBluetoothInTray: false
-        readonly property bool lockedOnBoot: true
-        readonly property bool hideNoSsid: true
-        readonly property bool topBarShowDate: true
-        readonly property bool wallpaperUnderTopBar: true
-
-        readonly property int wifiListRefreshInterval: 10000
-        readonly property int wifiIconRefreshInterval: 2000
-        readonly property int systemUsageRefreshInterval: 2000
-
-        readonly property string unlockStartMessage: "Unlock Attempt Started"
-        readonly property string fingerprintFailure: "Fingerprint Failed"
-        readonly property string noNotificationText: "No Notifications"
-    }
 
     component Color: QtObject {
         readonly property ColorBase base: ColorBase {}

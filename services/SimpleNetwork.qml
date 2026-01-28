@@ -8,7 +8,7 @@ import qs.config
 Singleton {
     id: root
 
-    property int updateInterval: Style.choice.wifiIconRefreshInterval
+    property int updateInterval: SettingsConfig.wifiIconRefreshInterval
     property string networkName: ""
     property int networkStrength
     property string iconName: (networkName.length > 0 && networkName != "lo") ? Icons.getWifiIcon(networkStrength) : "signal_wifi_off"

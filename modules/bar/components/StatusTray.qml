@@ -70,7 +70,7 @@ Item {
 
             MaterialIcon {
                 id: bluetooth
-                visible: Style.choice.showBluetoothInTray
+                visible: SettingsConfig.showBluetoothInTray
                 anchors.verticalCenter: parent.verticalCenter
                 color: Style.color.base.text
                 size: Style.font.size.normal

@@ -103,7 +103,7 @@ Singleton {
                         bssid: net[4]?.replace(rep2, ":") ?? ""
                     };
                 }).filter(n => {
-                    if (Style.choice.hideNoSsid && n.ssid == "nossid")
+                    if (SettingsConfig.hideNoSsid && n.ssid == "nossid")
                         return false;
                     return true;
                 });

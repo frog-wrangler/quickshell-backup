@@ -28,7 +28,7 @@ Item {
             source: DesktopBackground.wallpaperPath
 
             anchors.fill: parent
-            anchors.topMargin: (Style.choice.wallpaperUnderTopBar ? -Style.size.barSize : 0)
+            anchors.topMargin: (SettingsConfig.wallpaperUnderTopBar ? -Style.size.barSize : 0)
             fillMode: Image.PreserveAspectCrop
         }
     }

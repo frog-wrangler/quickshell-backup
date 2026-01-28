@@ -4,6 +4,7 @@ import QtQuick
 import QtQuick.Layouts
 import Qt.labs.folderlistmodel
 import Quickshell
+import Quickshell.Widgets
 import qs.config
 import qs.services
 import qs.utils
@@ -22,6 +23,9 @@ ContentPage {
             implicitHeight: 300
             clip: true
 
+            cellHeight: 120
+            cellWidth: width / 3
+
             model: FolderListModel {
                 id: folderModel
                 folder: "file://" + Quickshell.shellDir + "/data/wallpapers/"
@@ -29,6 +33,12 @@ ContentPage {
 
             delegate: WallpaperDelegate {}
         }
+
+
+    }
+
+    ContentSection {
+        title: "Decorations & Effects"
 
         ToggleItem {
             Layout.fillWidth: true
@@ -47,19 +57,6 @@ ContentPage {
 
             onClicked: {
                 Quickshell.execDetached(["qs", "ipc", "call", "background", "setClockOnLockscreen", !active]);
-            }
-        }
-    }
-
-    ContentSection {
-        title: "Decorations & Effects"
-
-        ToggleItem {
-            Layout.fillWidth: true
-            text: "Testing"
-
-            onClicked: {
-                console.log("Clicked!");
             }
         }
     }

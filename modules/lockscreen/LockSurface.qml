@@ -96,7 +96,7 @@ MouseArea {
             id: text
             anchors.centerIn: parent
             horizontalAlignment: Text.AlignHCenter
-            text: root.tryPassword ? Style.choice.fingerprintFailure : Style.choice.unlockStartMessage
+            text: root.tryPassword ? SettingsConfig.fingerprintFailure : SettingsConfig.unlockStartMessage
             font.pointSize: Style.font.size.normal
         }
     }

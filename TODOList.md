@@ -1,21 +1,28 @@
 
 # TODO
 
-* FIX SETTINGS
-* Make UI work on external monitors
+* Notification overlay
+* Lockscreen
+    + Add animations to lockscreen instead of explicit words
+    + Make fingerprint optional
+    + Move password prompt to center with username
+        - Clock that slides up to reveal blurred:
+        - On a tile
+        - Image
+        - Right arrow
+        - Power menu in corner
+    + Animations
 * Fix audio dropdown
 * Fix GPU status
-* Add animations to lockscreen instead of explicit words
 
 ## Settings
 
-* Add rectangles per section
 * <https://doc.qt.io/qt-6/qml-qtquick-controls-switchdelegate.html>
++ Unify settings backend!!!
 
-* Improve wallpaper switcher
-    + Big main display
-    + Grid of smaller options
-
++ Make left sidebar an overlap thing not exclusive area
++ Optional "Activate Linux \n Go to settings to activate linux"
++ Analog clock on background
 + Fonts
 + Animations
 + Hide top bar
@@ -34,6 +41,5 @@
 - Improve Animations
 - Add detailing + Color
 - Look over all code
-- Change lockscreen to open on starts
 - Simplify Code!!!
 
