@@ -4,8 +4,11 @@ import QtQuick
 import Quickshell
 
 Singleton {
+    // temp settings
     property bool idleOn: true
 
+    // to be migrated to settings system
+    readonly property bool notificationPopups: true
     readonly property int idleTime: 120
     readonly property bool showBluetoothInTray: false
     readonly property bool lockedOnBoot: false

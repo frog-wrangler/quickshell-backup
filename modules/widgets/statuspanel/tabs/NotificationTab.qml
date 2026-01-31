@@ -12,7 +12,7 @@ ListView {
     clip: true
 
     model: ScriptModel {
-        values: NotificationHandler.appNameList
+        values: NotificationHandler.appNameList ?? []
     }
 
     delegate: NotificationGroup {
@@ -27,7 +27,7 @@ ListView {
 
     headerPositioning: ListView.OverlayHeader
     header: Rectangle {
-        visible: NotificationHandler.appNameList.length == 0
+        visible: root.model.values.length == 0
         anchors.left: parent?.left
         anchors.right: parent?.right
         implicitHeight: visible ? Style.size.noNotificationHeight : 0

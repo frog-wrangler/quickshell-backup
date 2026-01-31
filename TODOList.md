@@ -1,7 +1,9 @@
 
 # TODO
 
+* Change wifi backend to use the built-in Quickshell.Networking
 * Notification overlay
+* Add notification actions
 * Lockscreen
     + Add animations to lockscreen instead of explicit words
     + Make fingerprint optional

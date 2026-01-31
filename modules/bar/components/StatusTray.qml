@@ -30,16 +30,6 @@ Item {
             spacing: Style.spacing.small
 
             MaterialIcon {
-                id: notifications
-                visible: NotificationHandler.list.length > 0
-                anchors.verticalCenter: parent.verticalCenter
-                color: Style.color.base.text
-                size: Style.font.size.normal
-
-                text: "notifications_unread"
-            }
-
-            MaterialIcon {
                 id: batteryIcon
                 visible: UPower.displayDevice.isLaptopBattery
                 anchors.verticalCenter: parent.verticalCenter

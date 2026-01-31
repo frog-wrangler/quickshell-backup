@@ -19,7 +19,11 @@ Rectangle {
         implicitHeight: 25
 
         model: Audio.sinks
-        currentIndex: Audio.sinks.indexOf(Audio.sink)
+
+        Component.onCompleted: {
+            selector.currentIndex = Audio.sinks.indexOf(Audio.sink);
+            console.log(Audio.sinks.indexOf(Audio.sink));
+        }
 
         onCurrentIndexChanged: {
             const sink = selector.model[selector.currentIndex];
@@ -46,7 +50,7 @@ Rectangle {
         }
 
         contentItem: StyledText {
-            text: "Audio Sink: " + selector.model[selector.currentIndex]?.description || "N/a"
+            text: selector.model[selector.currentIndex]?.description || "N/a"
             leftPadding: 10
             elide: Text.ElideRight
         }

@@ -23,7 +23,7 @@ Item {
         id: dateText
         anchors.left: timeText.left
         anchors.top: timeText.bottom
-        text: Time.format("dddd, d/M")
+        text: Time.format("dddd, MMM d")
         color: DesktopBackground.clockColor
         font.family: Style.font.family.clock
         font.pointSize: Style.font.size.extraLarge
