@@ -13,6 +13,10 @@ import qs.modules.widgets.statuspanel.toggles
 Scope {
     id: root
 
+    Component.onCompleted: {
+        NotificationHandler.initialize();
+    }
+
     HyprlandFocusGrab {
         windows: [menu]
         active: GlobalStates.powerPanelOpen

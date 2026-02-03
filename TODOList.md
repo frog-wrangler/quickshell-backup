@@ -40,6 +40,7 @@
 
 ## Finishing Touches
 
+- Add lots of comments
 - Improve Animations
 - Add detailing + Color
 - Look over all code

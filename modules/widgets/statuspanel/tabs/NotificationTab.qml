@@ -11,23 +11,19 @@ ListView {
     spacing: Style.spacing.extraSmall
     clip: true
 
-    model: ScriptModel {
-        values: NotificationHandler.appNameList ?? []
-    }
+    model: NotificationHandler.groupsByAppName
 
     delegate: NotificationGroup {
-        required property int index
         required property var modelData
+        notificationGroup: modelData
 
         anchors.left: parent?.left
         anchors.right: parent?.right
-
-        notificationGroup: NotificationHandler.groupsByAppName[modelData]
     }
 
     headerPositioning: ListView.OverlayHeader
     header: Rectangle {
-        visible: root.model.values.length == 0
+        visible: NotificationHandler.groupsByAppName.count == 0
         anchors.left: parent?.left
         anchors.right: parent?.right
         implicitHeight: visible ? Style.size.noNotificationHeight : 0

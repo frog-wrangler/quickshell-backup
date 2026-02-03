@@ -13,8 +13,8 @@ Item {
 
     required property var notificationGroup
 
-    property var notifications: notificationGroup?.notifications ?? []
-    property int notificationCount: notifications.length
+    property var notifications: notificationGroup.notifications
+    property int notificationCount: notifications.count
     property bool expanded: false
     property real padding: 10
 
@@ -22,7 +22,7 @@ Item {
         expanded = !expanded;
     }
 
-    function remove() {
+    function remove() { // TODO fix
         root.notifications.forEach(notif => {
             Qt.callLater(() => {
                 NotificationHandler.discardNotification(notif.notificationId);
@@ -49,7 +49,7 @@ Item {
         anchors.fill: parent
         color: Style.color.base.surface0
         radius: Style.rounding.normal
-        clip: false
+        clip: false // TODO change this back
 
         implicitHeight: Math.max(80, row.implicitHeight + root.padding * 2)
 
@@ -67,14 +67,14 @@ Item {
             NotificationAppIcon {
                 Layout.alignment: Qt.AlignTop
                 Layout.topMargin: 2
-                appIcon: root.notificationGroup?.appIcon ?? ""
+                appIcon: root.notificationGroup.appIcon
             }
 
             // Content
             ColumnLayout {
                 id: column
                 Layout.fillWidth: true
-                spacing: (root.expanded && root.notificationGroup?.notifications[root.notificationCount - 1].image != "") ? 40 : 10
+                spacing: (root.expanded && root.notificationGroup.notifications.get(0).image != "") ? 40 : 10
 
                 // App name
                 Item {
@@ -93,23 +93,23 @@ Item {
                             id: appName
                             elide: Text.ElideRight
                             Layout.fillWidth: true
-                            text: root.notificationGroup?.appName ?? ""
+                            text: root.notificationGroup.appName
                             font.pointSize: Style.font.size.small
                             color: Style.color.accent.current
                         }
 
-                        StyledText {
-                            id: timestamp
-                            Layout.rightMargin: 10
-                            horizontalAlignment: Text.AlignLeft
-                            text: getTime()
-                            font.pointSize: Style.font.size.small
-                            color: Style.color.base.subtext
-
-                            function getTime() {
-                                return new Date(root.notificationGroup?.time ?? 0).toLocaleTimeString("en-US");
-                            }
-                        }
+                        // StyledText {
+                        //     id: timestamp
+                        //     Layout.rightMargin: 10
+                        //     horizontalAlignment: Text.AlignLeft
+                        //     text: getTime()
+                        //     font.pointSize: Style.font.size.small
+                        //     color: Style.color.base.subtext
+                        //
+                        //     function getTime() {
+                        //         return new Date(root.notificationGroup.time ?? 0).toLocaleTimeString("en-US");
+                        //     }
+                        // }
                     }
 
                     NotificationExpandButton {
@@ -130,9 +130,8 @@ Item {
                     spacing: 5
                     interactive: false
 
-                    model: ScriptModel {
-                        values: root.expanded ? root.notifications.slice().reverse() : root.notifications.slice().reverse().slice(0, 2)
-                    }
+                    model: root.notifications
+
                     delegate: NotificationItem {
                         required property int index
                         required property var modelData

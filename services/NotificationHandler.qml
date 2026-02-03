@@ -13,7 +13,7 @@ Singleton {
     // ******************************
     component NotificationWrapper: QtObject {
         id: wrapper
-        required property string notificationId
+        required property int notificationId
 
         property Notification notification
         property list<var> actions: notification?.actions.map(action => ({
@@ -27,66 +27,84 @@ Singleton {
         property string summary: notification?.summary ?? ""
         property string urgency: notification?.urgency.toString() ?? "normal"
 
-        property Timer timer // TODO
+        // TODO add time here + timestamp in notifTab
+        // property Timer timer // TODO
     }
 
     property list<NotificationWrapper> list: []
     property list<NotificationWrapper> recent: []
 
-    property var groupsByAppName: ({})
-    property var appNameList: []
+    property var groupsByAppName: ListModel {}
 
     property int idOffset
 
     signal initDone
-    signal groupsUpdated // TODO remove if unused
-
+    signal groupsUpdated
 
     // ******************************
     // Update Functions
     // ******************************
+    
+    function initialize() {}
 
     Component.onCompleted: {
         notifFileView.reload();
     }
-    
+
     onListChanged: {
         updateGroups();
     }
 
     function updateGroups() {
+        const groups = root.groupsByAppName;
+
         list.forEach(notif => {
             const name = notif.appName;
-            if (!root.groupsByAppName[name]) {
-                root.groupsByAppName[name] = {
+            let groupIndex = getGroupIndex(name);
+
+            if (groupIndex == -1) {
+                groups.append({
                     appName: name,
                     appIcon: notif.appIcon,
                     notifications: [],
-                };
+                });
+                groupIndex = groups.count - 1;
             }
 
-            const group = root.groupsByAppName[name];
-            if (!group.notifications.includes[notif]) {
-                group.notifications.push(notif);
+            const group = groups.get(groupIndex);
+            const index = getNotifIndex(group, notif);
+            if (index == -1) {
+                group.notifications.append(notif);
             }
         });
 
-        for (const [appName, notifDetails] of Object.entries(root.groupsByAppName)) {
-            if (!root.appNameList.includes(appName)) {
-                root.appNameList.push(appName);
+        for (let i = 0; i < groups.count; i++) {
+            const name = groups.get(i).appName;
+            if (groups.get(i).notifications.count == 0) {
+                groups.remove(i, 1);
+                i--;
             }
         }
+    }
 
-        root.appNameList = root.appNameList.filter(appName => {
-            if (root.groupsByAppName[appName].notifications.length == 0) {
-                delete root.groupsByAppName[appName]
-                root.appNameList.splice(root.appNameList.indexOf(appName), 1);
-                return false;
+    function getGroupIndex(appName) {
+        const groups = root.groupsByAppName;
+        for (let i = 0; i < groups.count; i++) {
+            if (groups.get(i).appName == appName) {
+                return i;
             }
-            return true;
-        });
+        }
+        return -1;
+    }
 
-        root.groupsUpdated();
+    function getNotifIndex(group, notif) {
+        const notifs = group.notifications;
+        for (let i = 0; i < notifs.count; i++) {
+            if (notifs.get(i).notificationId == notif.notificationId) {
+                return i;
+            }
+        }
+        return -1;
     }
 
 
@@ -96,25 +114,33 @@ Singleton {
     function discardNotification(id) {
         console.log("Discarding notification #" + id);
         const index = root.list.findIndex(notif => notif.notificationId === id);
-        console.log("offset = " + root.idOffset);
-        const notifServerIndex = notifServer.trackedNotifications.values.findIndex(notif => notif.id + root.idOffset === id);
-        console.log("index = " + index + ", serverIndex = " + notifServerIndex);
+        const notifServerIndex = notifServer.trackedNotifications.values.findIndex(notif => {
+            const value = ((notif.id + root.idOffset) == id);
+            return value;
+        });
+
+        const group = root.groupsByAppName.get(getGroupIndex(root.list[index].appName));
+        const notificationModel = group.notifications;
+        for (let i = 0; i < notificationModel.count; i++) {
+            if (notificationModel.get(i).notificationId == id) {
+                notificationModel.remove(i, 1);
+                break;
+            }
+        }
+
         if (index >= 0) {
-            console.log("Discarding the list notif...");
-            console.log("#1: " + JSON.stringify(root.list, null, "\t"));
             root.list.splice(index, 1);
             notifFileView.setText(stringifyList(root.list));
-            console.log("#2: " + JSON.stringify(root.list, null, "\t"));
+        } else {
+            root.updateGroups();
         }
-        console.log("Tracked notifications: " + JSON.stringify(notifServer.trackedNotifications, null, "\t"));
         if (notifServerIndex >= 0) {
-            console.log("Discarding the server notif...");
             notifServer.trackedNotifications.values[notifServerIndex].dismiss();
         }
-        root.updateGroups();
     }
 
     function discardAllNotifications() {
+        root.groupsByAppName.clear();
         root.list = [];
         notifFileView.setText(stringifyList(root.list));
         notifServer.trackedNotifications.values.forEach(notif => {
@@ -184,7 +210,6 @@ Singleton {
                 "notification": notification,
             });
 
-            // root.list = [...root.list, newNotifObject];
             root.list.push(newNotifObject);
             console.log("Recieved notification! Total: " + root.list.length);
 
@@ -200,6 +225,7 @@ Singleton {
             const fileContents = notifFileView.text();
             root.list = JSON.parse(fileContents).map(notif => {
                 return root.notifComp.createObject(root, {
+                    "notification": null,
                     "notificationId": notif.notificationId,
                     "actions": [], // TODO
                     "appIcon": notif.appIcon,
