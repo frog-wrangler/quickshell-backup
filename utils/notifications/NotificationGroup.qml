@@ -9,38 +9,23 @@ import qs.utils
 
 Item {
     id: root
-    implicitHeight: background.implicitHeight
+    implicitHeight: expanded ?
+            (appInfo.implicitHeight + notifList.implicitHeight + Style.spacing.extraLarge + notifList.anchors.topMargin)
+            : 90
 
     required property var notificationGroup
 
     property var notifications: notificationGroup.notifications
     property int notificationCount: notifications.count
     property bool expanded: false
-    property real padding: 10
 
     function toggleExpanded() {
         expanded = !expanded;
     }
 
-    function remove() { // TODO fix
-        root.notifications.forEach(notif => {
-            Qt.callLater(() => {
-                NotificationHandler.discardNotification(notif.notificationId);
-            });
-        });
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
-
-        onClicked: click => {
-            if (click.button === Qt.MiddleButton) {
-                root.remove();
-            } else {
-                root.toggleExpanded();
-            }
+    onNotificationCountChanged: {
+        if (notificationCount <= 2) {
+            secondSummary.text = (notifications.get(1)?.summary ?? "");
         }
     }
 
@@ -49,103 +34,129 @@ Item {
         anchors.fill: parent
         color: Style.color.base.surface0
         radius: Style.rounding.normal
-        clip: false // TODO change this back
+        clip: true
+    }
 
-        implicitHeight: Math.max(80, row.implicitHeight + root.padding * 2)
+    // App Information
+    Item {
+        id: appInfo
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: Style.spacing.normal
+        implicitHeight: appIconDisplay.visible ? appIconDisplay.height : expandButton.height
 
-        RowLayout {
-            id: row
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                margins: root.padding
+        NotificationAppIcon {
+            id: appIconDisplay
+            visible: appIcon != ""
+            anchors.top: parent.top
+            anchors.left: parent.left
+
+            size: 90 - 2 * Style.spacing.normal
+            appIcon: root.notificationGroup.appIcon ||
+                    (SettingsConfig.notificationIconPlaceholder ? (Quickshell.shellDir + "/data/sillyguy.png") : "")
+        }
+
+        StyledText {
+            id: appName
+            anchors.left: appIconDisplay.visible ? appIconDisplay.right : parent.left
+            anchors.leftMargin: appIconDisplay.visible ? Style.spacing.normal : undefined
+
+            elide: Text.ElideRight
+            text: root.notificationGroup.appName
+            font.pointSize: Style.font.size.small
+            color: Style.color.accent.current
+        }
+
+        // Summaries when unexpanded
+        StyledText {
+            id: firstSummary
+            visible: !root.expanded
+            anchors.left: appName.left
+            anchors.top: appName.bottom
+            anchors.topMargin: Style.spacing.normal - 3
+
+            elide: Text.ElideRight
+            text: root.notifications.get(0)?.summary
+            font.pointSize: Style.font.size.small
+            color: Style.color.base.text
+        }
+
+        StyledText {
+            id: secondSummary
+            visible: !root.expanded && text != ""
+            anchors.left: appName.left
+            anchors.top: firstSummary.bottom
+            anchors.topMargin: Style.spacing.small
+
+            elide: Text.ElideRight
+            text: root.notifications.get(1)?.summary ?? ""
+            font.pointSize: Style.font.size.small
+            color: Style.color.base.text
+            opacity: 0.6
+        }
+
+        Rectangle {
+            id: expandButton
+            anchors.right: parent.right
+
+            height: 20
+            width: 30 + notifNum.implicitWidth
+            radius: Style.rounding.large
+
+            color: Style.color.base.surface1
+
+            StyledText {
+                id: notifNum
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                text: root.notificationCount
             }
 
-            spacing: 10
+            MaterialIcon {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: 3
 
-            NotificationAppIcon {
-                Layout.alignment: Qt.AlignTop
-                Layout.topMargin: 2
-                appIcon: root.notificationGroup.appIcon
+                text: root.expanded ? "arrow_drop_up" : "arrow_drop_down"
+                size: Style.font.size.large
+                color: Style.color.base.text
             }
+        }
+    }
 
-            // Content
-            ColumnLayout {
-                id: column
-                Layout.fillWidth: true
-                spacing: (root.expanded && root.notificationGroup.notifications.get(0).image != "") ? 40 : 10
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
 
-                // App name
-                Item {
-                    id: topRow
-                    Layout.fillWidth: true
-                    implicitHeight: Math.max(topTextRow.implicitHeight, expandButton.implicitHeight)
+        onClicked: root.toggleExpanded();
+    }
 
-                    RowLayout {
-                        id: topTextRow
-                        anchors.left: parent.left
-                        anchors.right: expandButton.left
-                        anchors.verticalCenter: parent.verticalCenter
-                        spacing: 5
+    // Notification List
+    ListView {
+        id: notifList
+        visible: root.expanded
 
-                        StyledText {
-                            id: appName
-                            elide: Text.ElideRight
-                            Layout.fillWidth: true
-                            text: root.notificationGroup.appName
-                            font.pointSize: Style.font.size.small
-                            color: Style.color.accent.current
-                        }
+        anchors.top: appInfo.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: Style.spacing.normal
+        anchors.topMargin: root.notifications.get(0).image == "" ? -35 : undefined
+        implicitHeight: childrenRect.height
 
-                        // StyledText {
-                        //     id: timestamp
-                        //     Layout.rightMargin: 10
-                        //     horizontalAlignment: Text.AlignLeft
-                        //     text: getTime()
-                        //     font.pointSize: Style.font.size.small
-                        //     color: Style.color.base.subtext
-                        //
-                        //     function getTime() {
-                        //         return new Date(root.notificationGroup.time ?? 0).toLocaleTimeString("en-US");
-                        //     }
-                        // }
-                    }
+        spacing: 5
+        interactive: false
 
-                    NotificationExpandButton {
-                        id: expandButton
-                        anchors.right: parent.right
+        model: root.notifications
 
-                        open: root.expanded
-                        numNotifications: root.notificationCount
-                    }
-                }
+        delegate: NotificationItem {
+            anchors.left: parent?.left
+            anchors.right: parent?.right
 
-                // Expanded notifications
-                ListView {
-                    id: notificationColumn
-                    implicitHeight: childrenRect.height
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    spacing: 5
-                    interactive: false
-
-                    model: root.notifications
-
-                    delegate: NotificationItem {
-                        required property int index
-                        required property var modelData
-
-                        notificationObject: modelData
-                        expanded: root.expanded
-                        onlyNotification: (root.notificationCount === 1)
-                        opacity: (!root.expanded && index == 1 && root.notificationCount > 2) ? 0.5 : 1
-                        visible: root.expanded || (index < 2)
-                        anchors.left: parent?.left
-                        anchors.right: parent?.right
-                    }
-                }
-            }
+            required property var modelData
+            notificationObject: modelData
         }
     }
 }

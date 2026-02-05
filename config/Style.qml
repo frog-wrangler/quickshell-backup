@@ -69,7 +69,7 @@ Singleton {
         readonly property int statusPanelTabBarHeight: 50
         readonly property int systemTrayItem: 30
         readonly property int bluetoothItemMinSize: 40
-        readonly property int notificationAppIcon: 50
+        readonly property int notificationAppIcon: 56
         readonly property int wifiGroupHeight: 60
         readonly property int dockIcon: 48
     }

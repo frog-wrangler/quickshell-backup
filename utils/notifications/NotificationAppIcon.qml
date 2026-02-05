@@ -11,7 +11,7 @@ Rectangle {
     property string image: ""
     property string appIcon: ""
 
-    readonly property int size: Style.size.notificationAppIcon
+    property int size: Style.size.notificationAppIcon
     width: size
     height: size
     radius: size / 2

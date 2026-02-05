@@ -7,102 +7,92 @@ import qs.services
 
 Item {
     id: root
-    Layout.fillWidth: true
-    implicitHeight: background.implicitHeight
+    height: content.childrenRect.height + 2 * Style.spacing.small
 
     required property var notificationObject
-    required property bool expanded
-    required property bool onlyNotification
-
     property var urgency: notificationObject?.urgency
-    readonly property int padding: expanded ? 8 : 0
+
+    readonly property int iconSizeDiff: (90 - 2 * Style.spacing.normal - Style.size.notificationAppIcon) / 2
+    
+    NotificationAppIcon {
+        id: appIcon
+        visible: image != ""
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: root.iconSizeDiff
+        image: root.notificationObject.image
+    }
 
     Rectangle {
         id: background
-        anchors.left: parent.left
-        width: parent.width
-        implicitHeight: root.expanded ? (contentColumn.implicitHeight + root.padding * 2) : summary.implicitHeight
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.left: appIcon.right
+        anchors.leftMargin: Style.spacing.normal + root.iconSizeDiff
 
         radius: Style.rounding.small
 
-        color: {
-            if (!root.expanded) {
-                return "transparent";
-            }
-
-            if (root.urgency == NotificationUrgency.Critical) {
-                return Style.color.accent.red;
-            } else {
-                return Style.color.base.surface1;
-            }
-        }
-
-        ColumnLayout {
-            id: contentColumn
-            anchors.fill: parent
-            anchors.margins: root.padding
-            spacing: 3
-
-            property color textColor: (root.urgency == NotificationUrgency.Critical && root.expanded) ? Style.color.base.surface0 : Style.color.base.text
-
-            RowLayout {
-                id: summaryRow
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignTop
-
-                StyledText {
-                    id: summary
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignTop
-
-                    text: root.notificationObject.summary
-                    color: contentColumn.textColor
-                    elide: Text.ElideRight
-                    font.bold: true
-                }
-
-                MaterialIcon {
-                    Layout.rightMargin: 8
-                    implicitHeight: parent.height
-                    implicitWidth: implicitHeight
-
-                    text: "close"
-                    size: Style.font.size.large
-                    color: contentColumn.textColor
-
-                    MouseArea {
-                        height: summaryRow.height
-                        width: height
-                        anchors.centerIn: parent
-                        cursorShape: Qt.ForbiddenCursor
-
-                        onClicked: {
-                            root.eradicate();
-                        }
-                    }
-                }
-            }
-
-            StyledText {
-                visible: root.expanded && root.notificationObject.body !== ""
-
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                text: root.notificationObject.body
-                color: contentColumn.textColor
-                elide: Text.ElideRight
-                wrapMode: Text.Wrap
-            }
-        }
+        color: (root.urgency == NotificationUrgency.Critical) ?
+                Style.color.accent.red :
+                Style.color.base.surface1
     }
 
-    NotificationAppIcon {
-        id: appIcon
-        visible: (root.expanded && root.notificationObject.image !== "")
-        anchors.right: background.left
-        anchors.top: background.top
-        anchors.rightMargin: 10
-        image: root.notificationObject.image
+    Item {
+        id: content
+        anchors.fill: background
+
+        property color textColor: (root.urgency == NotificationUrgency.Critical) ? Style.color.base.surface0 : Style.color.base.text
+
+        StyledText {
+            id: summary
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: xIcon.left
+            anchors.margins: Style.spacing.small
+
+            text: root.notificationObject.summary
+            color: content.textColor
+            elide: Text.ElideRight
+            font.bold: true
+        }
+
+        MaterialIcon {
+            id: xIcon
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.margins: 2
+            height: 30
+            width: height
+
+            text: "close"
+            size: Style.font.size.large
+            color: content.textColor
+
+            MouseArea {
+                anchors.centerIn: parent
+                height: parent.height
+                width: height
+
+                cursorShape: Qt.ForbiddenCursor
+                onClicked: {
+                    root.eradicate();
+                }
+            }
+        }
+
+        StyledText {
+            visible: root.notificationObject.body !== ""
+            anchors.top: summary.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: Style.spacing.small
+
+            text: root.notificationObject.body
+            color: content.textColor
+            elide: Text.ElideRight
+            wrapMode: Text.Wrap
+        }
     }
 
     function eradicate() {

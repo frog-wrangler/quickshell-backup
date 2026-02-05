@@ -4,11 +4,14 @@ import QtQuick
 import Quickshell
 
 Singleton {
-    // temp settings
+    // runtime settings
     property bool idleOn: true
 
     // to be migrated to settings system
+    readonly property string noNotificationText: "No Notifications"
     readonly property bool notificationPopups: true
+    readonly property bool notificationIconPlaceholder: true
+
     readonly property int idleTime: 120
     readonly property bool showBluetoothInTray: false
     readonly property bool lockedOnBoot: false
@@ -22,5 +25,4 @@ Singleton {
 
     readonly property string unlockStartMessage: "Unlock Attempt Started"
     readonly property string fingerprintFailure: "Fingerprint Failed"
-    readonly property string noNotificationText: "No Notifications"
 }
