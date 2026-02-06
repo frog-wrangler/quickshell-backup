@@ -13,6 +13,7 @@ Singleton {
     readonly property bool notificationIconPlaceholder: true
 
     readonly property int idleTime: 120
+    readonly property int idleLockTime: 900
     readonly property bool showBluetoothInTray: false
     readonly property bool lockedOnBoot: false
     readonly property bool hideNoSsid: true

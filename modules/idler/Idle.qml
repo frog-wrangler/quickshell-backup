@@ -11,8 +11,18 @@ Scope {
     property bool goingToIdle: false
 
     IdleMonitor {
+        id: longMonitor
+        timeout: SettingsConfig.idleLockTime //seconds
+
+        onIsIdleChanged: {
+            if (isIdle && !GlobalStates.screenLocked) {
+                Quickshell.execDetached(["qs", "ipc", "call", "lock", "activate"]);
+            }
+        }
+    }
+
+    IdleMonitor {
         id: shortMonitor
-        // enabled: SettingsConfig.idleOn
         timeout: SettingsConfig.idleTime //seconds
 
         onIsIdleChanged: {

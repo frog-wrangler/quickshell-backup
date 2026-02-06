@@ -1,6 +1,6 @@
 pragma Singleton
 
-import QtQuick // THIS IS NOT UNUSED IT IS NECESSARY
+import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs.config
