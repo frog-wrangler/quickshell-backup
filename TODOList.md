@@ -1,21 +1,21 @@
 
 # TODO
 
+* Add idle lock
 * Change wifi backend to use the built-in Quickshell.Networking
-* Notification overlay
-* Add notification actions
-* Lockscreen
-    + Add animations to lockscreen instead of explicit words
-    + Make fingerprint optional
-    + Move password prompt to center with username
-        - Clock that slides up to reveal blurred:
-        - On a tile
-        - Image
-        - Right arrow
-        - Power menu in corner
-    + Animations
 * Fix audio dropdown
 * Fix GPU status
+
+## Lockscreen
+
++ Add animations instead of explicit words
++ Make fingerprint optional
++ Move password prompt to center with username
+    - Clock that slides up to reveal blurred:
+    - On a tile
+    - Image
+    - Right arrow
+    - Power menu in corner
 
 ## Settings
 
@@ -37,6 +37,12 @@
 + Battery levels for notifs and colors
 + System info
 + Dock items
+
+## Notifications
+
++ `notify-send -a thunderbird -i firefox "What is Lorem Ipsum?" "Lorem Ipsum is simply dummy text of the printing and typesetting industry." --action=cancel="Cancel" --action=open="Open" --action=inline-reply="Reply" &`
+* Add notification actions
+* Notification overlay
 
 ## Finishing Touches
 

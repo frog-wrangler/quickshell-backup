@@ -44,7 +44,7 @@ Singleton {
     // ******************************
     // Update Functions
     // ******************************
-    
+
     function initialize() {}
 
     Component.onCompleted: {
@@ -204,6 +204,7 @@ Singleton {
         persistenceSupported: true
 
         onNotification: notification => {
+            console.log(JSON.stringify(notification.actions, null, "\t"));
             notification.tracked = true;
             const newNotifObject = root.notifComp.createObject(root, {
                 "notificationId": notification.id + root.idOffset,
