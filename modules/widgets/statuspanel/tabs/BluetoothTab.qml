@@ -17,7 +17,7 @@ Item {
         id: bluetoothList
         anchors.fill: parent
 
-        spacing: Style.spacing.small
+        spacing: Style.spacing.extraSmall
 
         model: root.bAdapter?.devices
         delegate: BluetoothItem {
