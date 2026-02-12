@@ -20,14 +20,13 @@ Rectangle {
 
         model: Audio.sinks
 
-        Component.onCompleted: {
-            selector.currentIndex = Audio.sinks.indexOf(Audio.sink);
-            console.log(Audio.sinks.indexOf(Audio.sink));
-        }
+        currentValue: Audio.sink
 
-        onCurrentIndexChanged: {
-            const sink = selector.model[selector.currentIndex];
+        onActivated: index => {
+            // console.log("Activated!");
+            const sink = selector.model[index];
             if (sink != Audio.sink) {
+                // console.log("Sink changing to " + (sink.description || sink.name));
                 Audio.setDefaultSink(sink);
             }
         }
@@ -43,14 +42,15 @@ Rectangle {
                 color: delegate.highlighted ? Style.color.base.surface0 : Style.color.base.surface1
             }
             contentItem: StyledText {
-                text: modelData.description
+                text: modelData.description || modelData.nickname || modelData.name || "N/a"
                 elide: Text.ElideRight
             }
             highlighted: selector.highlightedIndex === index
         }
 
         contentItem: StyledText {
-            text: selector.model[selector.currentIndex]?.description || "N/a"
+            readonly property var current: selector.model[selector.currentIndex]
+            text: current?.description || current?.nickname || current?.name || "N/a"
             leftPadding: 10
             elide: Text.ElideRight
         }

@@ -7,6 +7,7 @@ import Quickshell.Services.Pipewire
 Singleton {
     id: root
 
+    // property bool ready: Pipewire.ready
     property var sinks: Pipewire.nodes.values.filter((node) => node.isSink)
 
     readonly property PwNode sink: Pipewire.defaultAudioSink
@@ -26,6 +27,13 @@ Singleton {
     onVolumeChanged: {
         changed(volume);
     }
+
+    // onReadyChanged: {
+    //     console.log("Ready: " + ready);
+    // }
+    // onSinkChanged: {
+    //     console.log("Sink changed to: " + (sink.description || sink.name));
+    // }
 
     function setDefaultSink(pNode) {
         Pipewire.preferredDefaultAudioSink = pNode;

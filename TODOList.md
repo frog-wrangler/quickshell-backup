@@ -2,8 +2,6 @@
 # TODO
 
 * Audio and brightness OSD's
-* Change wifi backend to use the built-in Quickshell.Networking
-* Fix audio dropdown
 * Fix GPU status
 
 ## Lockscreen
