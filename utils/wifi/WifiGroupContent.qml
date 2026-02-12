@@ -11,8 +11,8 @@ Item {
     implicitHeight: childrenRect.height
 
     required property var network
-    property bool connected: network?.state == NetworkState.Connected
-    property string ssid: network?.name
+    property bool connected
+    property string ssid
 
     property string status: {
         switch (network?.state) {

@@ -51,6 +51,19 @@ Item {
         width: height
     }
 
+    MouseArea {
+        id: mouseArea
+        anchors.fill: background
+        // enabled: !root.expanded
+
+        hoverEnabled: true
+        cursorShape: root.expanded ? Qt.ArrowCursor : Qt.PointingHandCursor
+
+        onClicked: {
+            root.expanded = !root.expanded;
+        }
+    }
+
     Column {
         id: contentColumn
         anchors.left: icon.right
@@ -92,19 +105,8 @@ Item {
             anchors.right: parent.right
 
             network: root.network
-        }
-    }
-
-    MouseArea {
-        id: mouseArea
-        anchors.fill: background
-        enabled: !root.expanded
-
-        hoverEnabled: true
-        cursorShape: root.expanded ? Qt.ArrowCursor : Qt.PointingHandCursor
-
-        onClicked: {
-            root.expanded = true;
+            connected: root.connected
+            ssid: root.ssid
         }
     }
 }
