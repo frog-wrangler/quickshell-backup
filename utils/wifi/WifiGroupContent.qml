@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell.Io
+import Quickshell.Networking
 import qs.config
 import qs.services
 import qs.utils
@@ -9,13 +10,21 @@ Item {
     id: root
     implicitHeight: childrenRect.height
 
-    required property string ssid
-    required property bool expanded
-    required property bool connected
+    required property var network
+    property bool connected: network?.state == NetworkState.Connected
+    property string ssid: network?.name
 
-    property string status: ""
-
-    visible: expanded
+    property string status: {
+        switch (network?.state) {
+            case NetworkState.Unknown:
+                return "Unknown State";
+            case NetworkState.Disconnecting:
+                return "Disconnecting";
+            case NetworkState.Connecting:
+                return "Connecting";
+        }
+        return "";
+    }
 
     Button {
         id: connectionButton
@@ -39,12 +48,12 @@ Item {
 
         onClicked: {
             if (root.connected) {
-                attemptDisconnect.running = true;
+                root.network.disconnect();
                 return;
             }
 
-            if (Network.autoSsidList.includes(root.ssid)) {
-                attemptAutoConnect.running = true;
+            if (root.network.known) {
+                root.network.connect();
             } else {
                 attemptPasswordConnect.running = true;
             }
@@ -53,7 +62,7 @@ Item {
 
     Rectangle {
         id: passwordBackground
-        visible: !root.connected && !Network.autoSsidList.includes(root.ssid)
+        visible: !root.connected && !root.network?.known
 
         anchors.left: parent.left
         anchors.right: connectionButton.left
@@ -64,7 +73,7 @@ Item {
         color: Style.color.base.base
         radius: height
 
-        TextInput { // TODO: fix this ?? maybe ??
+        TextInput {
             id: passwordBox
             anchors.fill: parent
             anchors.leftMargin: 10
@@ -72,7 +81,7 @@ Item {
 
             renderType: Text.NativeRendering
             clip: true
-            focus: root.expanded
+            focus: root.visible
             verticalAlignment: TextInput.AlignVCenter
             font {
                 family: Style.font.family.mono
@@ -104,65 +113,16 @@ Item {
         anchors.topMargin: isUnder ? Style.spacing.normal : (passwordBackground.implicitHeight - implicitHeight) / 2
 
         text: root.status
-        // - Connecting...
-        // - Disconnecting...
-        // - Connection Failed
-        // - Authentication Failed
-    }
-
-    Process {
-        id: attemptDisconnect
-        command: ["nmcli", "c", "down", `${root.ssid}`]
-        onStarted: {
-            root.status = "Disconnecting...";
-        }
-        stderr: StdioCollector {
-            onStreamFinished: {
-                if (text.toLowerCase().includes("error")) {
-                    console.warn("Failed to disconnect from " + root.ssid);
-                    console.warn(text);
-                    root.status = "Disconnection Failed";
-                } else {
-                    root.status = "";
-                }
-            }
-        }
-    }
-
-    Process {
-        id: attemptAutoConnect
-        command: ["nmcli", "device", "wifi", "connect", `${root.ssid}`]
-        onStarted: {
-            root.status = "Connecting...";
-        }
-        stderr: StdioCollector {
-            onStreamFinished: {
-                if (text.toLowerCase().includes("error")) {
-                    console.warn("Failed to connect to " + root.ssid);
-                    console.warn(text);
-                    root.status = "Connection Failed";
-                } else {
-                    root.status = "";
-                }
-            }
-        }
     }
 
     Process {
         id: attemptPasswordConnect
         command: ["nmcli", "device", "wifi", "connect", `${root.ssid}`, "password", `${passwordBox.text}`]
-        onStarted: {
-            root.status = "Connecting...";
-        }
         stderr: StdioCollector {
             onStreamFinished: {
                 if (text.toLowerCase().includes("error")) {
                     console.warn("Failed to connect to " + root.ssid);
                     console.warn(text);
-                    root.status = "Authentication Failed";
-                } else {
-                    root.status = "";
-                    Network.addAuto(root.ssid);
                 }
             }
         }

@@ -5,83 +5,40 @@ import qs.utils
 import qs.services
 import qs.config
 
-Item {
-    id: root
+ListView {
+    id: wifiList
 
-    readonly property bool isActive: SwipeView.isCurrentItem
+    spacing: Style.spacing.extraSmall
 
-    ListView {
-        id: wifiList
-        anchors.fill: parent
+    model: Wifi.networks
+    delegate: WifiGroup {
+        anchors.left: parent?.left
+        anchors.right: parent?.right
 
-        spacing: Style.spacing.extraSmall
-
-        model: Network.ssidList
-        delegate: WifiGroup {
-            anchors.left: parent?.left
-            anchors.right: parent?.right
-
-            required property var modelData
-            ssid: modelData
-        }
-
-        footerPositioning: ListView.OverlayFooter
-        footer: Item {
-            id: wifiFooter
-            anchors.right: parent.right
-            anchors.left: parent.left
-            implicitHeight: Style.size.statusPanelTabFooter
-
-            z: 3
-
-            Rectangle {
-                id: footerBackground
-                anchors.fill: parent
-
-                color: Style.color.base.mantle
-                radius: Style.rounding.normal
-            }
-
-            QuickButton {
-                anchors.left: parent.left
-                anchors.leftMargin: Style.spacing.normal / 2
-                anchors.verticalCenter: parent.verticalCenter
-                height: Style.size.statusPanelTabFooter - Style.spacing.normal
-                width: height
-
-                iconName: "refresh"
-                backgroundColor: "transparent"
-                hoverColor: Style.color.base.surface0
-                size: Style.font.size.normal
-                radius: Style.rounding.small / 2
-
-                onClicked: {
-                    Network.refresh();
-                }
-            }
-
-            StyledText {
-                anchors.centerIn: parent
-                text: `${Network.networks.length} access points | ${Network.ssidList.length} networks`
-            }
-        }
-
-        Component.onDestruction: {
-            Network.pin("");
-        }
+        required property var modelData
+        network: modelData
     }
 
-    onIsActiveChanged: {
-        Network.pin("");
-    }
+    footerPositioning: ListView.OverlayFooter
+    footer: Item {
+        id: wifiFooter
+        anchors.right: parent.right
+        anchors.left: parent.left
+        implicitHeight: Style.size.statusPanelTabFooter
 
-    Timer {
-        running: root.isActive && Network.pinnedSsid == ""
-        repeat: true
-        interval: SettingsConfig.wifiListRefreshInterval
+        z: 3
 
-        onTriggered: {
-            Network.refresh();
+        Rectangle {
+            id: footerBackground
+            anchors.fill: parent
+
+            color: Style.color.base.mantle
+            radius: Style.rounding.normal
+        }
+
+        StyledText {
+            anchors.centerIn: parent
+            text: `${Wifi.networks?.values.length} networks | ${Wifi.nmstateString} | ${Wifi.devModeString}`
         }
     }
 }

@@ -1,6 +1,7 @@
 
 # TODO
 
+* Audio and brightness OSD's
 * Change wifi backend to use the built-in Quickshell.Networking
 * Fix audio dropdown
 * Fix GPU status
@@ -38,6 +39,8 @@
 + Dock items
 
 ## Notifications
+
++ Fix them for Vesktop
 
 + `notify-send -a thunderbird -i firefox "What is Lorem Ipsum?" "Lorem Ipsum is simply dummy text of the printing and typesetting industry." --action=cancel="Cancel" --action=open="Open" --action=inline-reply="Reply" &`
 * Add notification actions

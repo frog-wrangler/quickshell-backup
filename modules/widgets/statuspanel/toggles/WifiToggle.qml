@@ -17,16 +17,4 @@ ToggleButton {
 
     iconNameInactive: "signal_wifi_off"
     iconNameActive: "signal_wifi_4_bar"
-
-    onClicked: {
-        toggleNetwork.running = true;
-    }
-
-    Process {
-        id: toggleNetwork
-        command: ["sh", "-c", "nmcli radio wifi | grep enabled && nmcli radio wifi off || nmcli radio wifi on"]
-        onRunningChanged: {
-            SimpleNetwork.update();
-        }
-    }
 }

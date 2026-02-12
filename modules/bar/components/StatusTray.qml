@@ -55,7 +55,7 @@ Item {
                 color: Style.color.base.text
                 size: Style.font.size.normal
 
-                text: SimpleNetwork.iconName
+                text: GlobalStates.wifiActive ? Icons.getWifiIcon((Wifi.active?.signalStrength ?? 0) * 100) : "signal_wifi_off"
             }
 
             MaterialIcon {

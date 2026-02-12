@@ -4,6 +4,8 @@ import Quickshell.Wayland
 import qs.config
 import qs.modules.bar.components
 
+import qs.services
+
 Variants {
     model: Quickshell.screens
 

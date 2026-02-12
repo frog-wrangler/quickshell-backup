@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell.Networking
 import qs.config
 import qs.services
 import qs.utils
@@ -7,11 +8,11 @@ Item {
     id: root
     implicitHeight: background.implicitHeight
 
-    required property string ssid
-    readonly property var group: Network.groupBySsid[ssid]
-    readonly property bool connected: Network.active?.ssid == ssid
+    required property WifiNetwork network
+    readonly property string ssid: network?.name
+    readonly property bool connected: network?.state == NetworkState.Connected
 
-    property bool expanded: Network.pinnedSsid == ssid
+    property bool expanded: false
 
     Rectangle {
         id: background
@@ -21,94 +22,89 @@ Item {
 
         color: (mouseArea.containsMouse && !root.expanded) ? Style.color.base.surface1 : Style.color.base.surface0
         radius: Style.rounding.small
+    }
 
-        Rectangle {
-            id: indicator
+    Rectangle {
+        id: indicator
+        visible: root.expanded
+        anchors.left: background.left
+        anchors.verticalCenter: background.verticalCenter
+        anchors.leftMargin: 5
+
+        implicitWidth: 3
+        implicitHeight: background.implicitHeight * 2 / 3
+        radius: implicitWidth
+
+        color: Style.color.accent.current
+    }
+
+    MaterialIcon {
+        id: icon
+        anchors.left: background.left
+        anchors.top: background.top
+
+        text: Icons.getWifiIcon((root.network?.signalStrength ?? 0) * 100)
+        color: Style.color.base.text
+        size: Style.font.size.large
+
+        height: Style.size.wifiGroupHeight
+        width: height
+    }
+
+    Column {
+        id: contentColumn
+        anchors.left: icon.right
+        anchors.right: background.right
+        anchors.top: background.top
+        anchors.rightMargin: Style.spacing.large
+
+        topPadding: (Style.size.wifiGroupHeight - title.implicitHeight) / 2
+        bottomPadding: Style.spacing.large
+
+        spacing: Style.spacing.extraLarge
+
+        Item {
+            id: title
+            anchors.left: parent.left
+            anchors.right: parent.right
+            implicitHeight: childrenRect.height
+
+            StyledText {
+                id: networkName
+                anchors.top: parent.top
+                anchors.left: parent.left
+                text: root.ssid
+            }
+
+            StyledText {
+                id: securityType
+                anchors.left: parent.left
+                anchors.top: networkName.bottom
+                color: Style.color.base.subtext
+                text: Wifi.securityTypeToString(root.network) +
+                        (root.network?.connected ? " | Connected" : (root.network?.known ? " | Saved" : ""))
+            }
+        }
+
+        WifiGroupContent {
             visible: root.expanded
             anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.leftMargin: 5
+            anchors.right: parent.right
 
-            implicitWidth: 3
-            implicitHeight: parent.implicitHeight * 2 / 3
-            radius: implicitWidth
-
-            color: Style.color.accent.current
+            network: root.network
         }
+    }
 
-        MaterialIcon {
-            id: icon
-            anchors.left: parent.left
-            anchors.top: parent.top
+    MouseArea {
+        id: mouseArea
+        anchors.fill: background
+        enabled: !root.expanded
 
-            text: Icons.getWifiIcon(root.group?.strength ?? 0) // TODO
-            color: Style.color.base.text
-            size: Style.font.size.large
+        hoverEnabled: true
+        cursorShape: root.expanded ? Qt.ArrowCursor : Qt.PointingHandCursor
 
-            height: Style.size.wifiGroupHeight
-            width: height
-        }
-
-        Column {
-            id: contentColumn
-            anchors.left: icon.right
-            anchors.right: background.right
-            anchors.top: background.top
-            anchors.rightMargin: Style.spacing.large
-
-            topPadding: (Style.size.wifiGroupHeight - title.implicitHeight) / 2
-            bottomPadding: Style.spacing.large
-
-            spacing: Style.spacing.extraLarge
-
-            Column {
-                id: title
-                anchors.left: parent.left
-                anchors.right: parent.right
-
-                spacing: 3
-
-                StyledText {
-                    anchors.left: parent.left
-                    text: root.ssid
-                }
-
-                StyledText {
-                    anchors.left: parent.left
-
-                    text: {
-                        if (root.connected) {
-                            return "Connected";
-                        } else if (Network.autoSsidList.includes(root.ssid)) {
-                            return "Saved";
-                        }
-                        return "";
-                    }
-                    color: Style.color.base.subtext
-                }
-            }
-
-            WifiGroupContent {
-                anchors.left: parent.left
-                anchors.right: parent.right
-
-                ssid: root.ssid
-                expanded: root.expanded
-                connected: root.connected
-            }
-        }
-
-        MouseArea {
-            id: mouseArea
-            anchors.fill: parent
-            enabled: !root.expanded
-
-            hoverEnabled: true
-            cursorShape: root.expanded ? Qt.ArrowCursor : Qt.PointingHandCursor
-
-            onClicked: {
-                Network.pin(root.ssid);
-            }
+        onClicked: {
+            root.expanded = true;
         }
     }
 }
