@@ -1,19 +1,7 @@
 
 # TODO
 
-* Audio and brightness OSD's
-* Fix GPU status
-
-## Lockscreen
-
-+ Add animations instead of explicit words
-+ Make fingerprint optional
-+ Move password prompt to center with username
-    - Clock that slides up to reveal blurred:
-    - On a tile
-    - Image
-    - Right arrow
-    - Power menu in corner
+## Audio and brightness OSD's
 
 ## Settings
 

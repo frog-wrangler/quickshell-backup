@@ -3,34 +3,35 @@ import Quickshell.Services.Pam
 
 Scope {
     id: root
-    signal shouldReFocus
     signal unlocked
     signal failedFingerprint
     signal failedPassword
 
-    property string currentText: ""
-    property bool unlockInProgress: false
+    property bool fingerprintInProgress: false
+    property string tempPasswordAttempt: ""
 
-    function tryPassword(): void {
-        if (currentText == "")
+    function tryPassword(pass): void {
+        if (pass == "")
             return;
+        root.tempPasswordAttempt = pass;
 
-        pam.respond(currentText);
+        pamPassword.start();
     }
 
-    function startAttempt(): void {
-        root.unlockInProgress = true;
-        pam.start();
+    function startFingerprint(): void {
+        root.fingerprintInProgress = true;
+        pamFingerprint.start();
     }
 
     PamContext {
-        id: pam
+        id: pamPassword
         configDirectory: "pam"
         config: "password.conf"
 
-        onPamMessage: {
-            if (this.responseRequired) {
-                root.failedFingerprint();
+        onResponseRequiredChanged: {
+            if (responseRequired) {
+                respond(root.tempPasswordAttempt);
+                root.tempPasswordAttempt = "";
             }
         }
 
@@ -40,9 +41,22 @@ Scope {
             } else {
                 root.failedPassword();
             }
+        }
+    }
 
-            root.currentText = "";
-            root.unlockInProgress = false;
+    PamContext {
+        id: pamFingerprint
+        configDirectory: "pam"
+        config: "fingerprint.conf"
+
+        onCompleted: result => {
+            if (result == PamResult.Success) {
+                root.unlocked();
+            } else {
+                root.failedFingerprint();
+            }
+
+            root.fingerprintInProgress = false;
         }
     }
 }
