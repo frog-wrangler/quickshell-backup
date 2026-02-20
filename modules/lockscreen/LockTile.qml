@@ -124,7 +124,7 @@ Item {
             anchors.rightMargin: Style.spacing.normal
             text: "lock"
             color: Style.color.base.text
-            size: parent.height / 2.5
+            size: 16
         }
     }
 
