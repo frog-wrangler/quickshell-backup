@@ -26,7 +26,7 @@ Singleton {
             });
             settingsList.push(s);
         }
-        jsonFile.setText(JSON.stringify(settingsList));
+        jsonFile.setText(JSON.stringify(settingsList, null, "\t"));
     }
 
     function getValue(id) {

@@ -182,7 +182,7 @@ Singleton {
                 "summary": notif.summary,
                 "urgency": notif.urgency
             };
-        }), null, 2);
+        }), null, "\t");
     }
 
 
