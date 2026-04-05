@@ -1,7 +1,12 @@
 
 # TODO
 
-## Audio and brightness OSD's
++ Random Wallpaper option
++ Lock screen only on one screen
++ "No Bluetooth / Bluetooth disabled" instead of listing known devices
++ Connected network at top of networks tab
++ Audio and brightness OSD's
++ Analog clock
 
 ## Settings
 
@@ -22,14 +27,12 @@
 + All choices
 + Battery levels for notifs and colors
 + System info
-+ Dock items
 
 ## Notifications
 
 + Fix them for Vesktop
 
 + `notify-send -a thunderbird -i firefox "What is Lorem Ipsum?" "Lorem Ipsum is simply dummy text of the printing and typesetting industry." --action=cancel="Cancel" --action=open="Open" --action=inline-reply="Reply" &`
-* Add notification actions
 * Notification overlay
 
 ## Finishing Touches
