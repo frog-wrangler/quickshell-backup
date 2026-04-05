@@ -45,7 +45,7 @@ Item {
 
         Image {
             anchors.fill: parent
-            source: "root:/data/frog_cowboy.jpg"
+            source: "root:/data/graphics/frog_cowboy.jpg"
             fillMode: Image.PreserveAspectCrop
         }
     }

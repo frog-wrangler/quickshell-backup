@@ -95,7 +95,7 @@ Scope {
                     Image {
                         Layout.topMargin: -30
                         Layout.alignment: Qt.AlignHCenter
-                        source: "root:/data/sillyguy.png"
+                        source: "root:/data/graphics/sillyguy.png"
                     }
                 }
             }

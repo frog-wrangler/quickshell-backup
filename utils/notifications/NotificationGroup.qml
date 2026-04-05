@@ -54,7 +54,7 @@ Item {
 
             size: 90 - 2 * Style.spacing.normal
             appIcon: root.notificationGroup.appIcon ||
-                    (SettingsConfig.notificationIconPlaceholder ? (Quickshell.shellDir + "/data/sillyguy.png") : "")
+                    (SettingsConfig.notificationIconPlaceholder ? (Quickshell.shellDir + "/data/graphics/sillyguy.png") : "")
         }
 
         StyledText {
