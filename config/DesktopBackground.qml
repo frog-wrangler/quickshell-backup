@@ -8,7 +8,7 @@ import qs.services
 Singleton {
     id: root
 
-    property string wallpaperPath: "root:/data/wallpapers/ching_yeh1.jpg"
+    property string wallpaperPath: ""
 
     property color clockColor: Style.color.base.text
     property double clockOpacity: 0.6
@@ -40,9 +40,20 @@ Singleton {
     Connections {
         target: Settings
         function onLoaded() {
-            root.wallpaperPath = Settings.getValue("wallpaper");
+            // root.wallpaperPath = Settings.getValue("wallpaper");
             root.showClockOnWallpaper = Settings.getValue("clockOnWallpaper");
             root.showClockOnLockscreen = Settings.getValue("clockOnLockscreen");
+        }
+    }
+
+    Process {
+        id: randomWallpaper
+        running: true
+        command: ["sh", "-c", "find ~/.config/quickshell/data/wallpapers/ -type f | shuf -n 1"]
+        stdout: SplitParser {
+            onRead: path => {
+                root.wallpaperPath = path;
+            }
         }
     }
 }
