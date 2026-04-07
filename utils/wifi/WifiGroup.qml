@@ -10,7 +10,7 @@ Item {
 
     required property WifiNetwork network
     readonly property string ssid: network?.name
-    readonly property bool connected: network?.state == NetworkState.Connected
+    readonly property bool connected: network?.state == ConnectionState.Connected
 
     property bool expanded: false
 

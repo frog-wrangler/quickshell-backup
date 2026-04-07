@@ -7,6 +7,8 @@
 + Connected network at top of networks tab
 + Audio and brightness OSD's
 + Analog clock
++ Weather service? Perhaps on left panel or wallpaper
++ Fix wifi backend
 
 ## Settings
 

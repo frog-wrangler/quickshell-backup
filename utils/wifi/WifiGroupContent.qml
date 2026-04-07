@@ -16,11 +16,11 @@ Item {
 
     property string status: {
         switch (network?.state) {
-            case NetworkState.Unknown:
+            case ConnectionState.Unknown:
                 return "Unknown State";
-            case NetworkState.Disconnecting:
+            case ConnectionState.Disconnecting:
                 return "Disconnecting";
-            case NetworkState.Connecting:
+            case ConnectionState.Connecting:
                 return "Connecting";
         }
         return "";

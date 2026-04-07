@@ -16,7 +16,7 @@ Singleton {
     property var devices: Networking.devices.values
     property var wifiDevice
     readonly property var networks: wifiDevice?.networks
-    readonly property var active: networks?.values.find(network => network.state == NetworkState.Connected)
+    readonly property var active: networks?.values.find(network => network.state == ConnectionState.Connected)
 
     onDevicesChanged: {
         root.wifiDevice = root.devices.find(dev => dev.type == DeviceType.Wifi);
@@ -44,61 +44,11 @@ Singleton {
     property var nmstate: wifiDevice?.nmState ?? -1
     property var devMode: wifiDevice?.mode ?? -1
 
-    property string nmstateString: ""
+    property string nmstateString: "TODO"
     property string devModeString: ""
-
-    onNmstateChanged: {
-        nmstateString = nmStateToString();
-    }
 
     onDevModeChanged: {
         devModeString = deviceModeToString();
-    }
-
-    function nmStateToString() {
-        let state = "";
-        switch (nmstate) {
-            case NMDeviceState.Unknown:
-                state = "Unknown";
-                break;
-            case NMDeviceState.NeedAuth:
-                state = "NeedAuth";
-                break;
-            case NMDeviceState.Activated:
-                state = "Activated";
-                break;
-            case NMDeviceState.Disconnected:
-                state = "Disconnected";
-                break;
-            case NMDeviceState.Secondaries:
-                state = "Secondaries";
-                break;
-            case NMDeviceState.Failed:
-                state = "Failed";
-                break;
-            case NMDeviceState.IPConfig:
-                state = "IPConfig";
-                break;
-            case NMDeviceState.Unmanaged:
-                state = "Unmanaged";
-                break;
-            case NMDeviceState.Prepare:
-                state = "Prepare";
-                break;
-            case NMDeviceState.Config:
-                state = "Config";
-                break;
-            case NMDeviceState.Unavailable:
-                state = "Unavailable";
-                break;
-            case NMDeviceState.IPCheck:
-                state = "IPCheck";
-                break;
-            case NMDeviceState.Deactivating:
-                state = "Deactivating";
-                break;
-        }
-        return state;
     }
 
     function deviceModeToString() {
