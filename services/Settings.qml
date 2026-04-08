@@ -7,70 +7,42 @@ import Quickshell.Io
 Singleton {
     id: root
 
-    readonly property list<Setting> settingsList: []
-    signal loaded
-
-    component Setting: QtObject {
-        property string id
-        property var value
-    }
-
-    function set(id: string, value: var): void {
-        let s = find(id);
-        if (s) {
-            s.value = value;
-        } else {
-            s = settingComp.createObject(root, {
-                "id": id,
-                "value": value
-            });
-            settingsList.push(s);
-        }
-        jsonFile.setText(JSON.stringify(settingsList, null, "\t"));
-    }
-
-    function getValue(id) {
-        for (const setting of settingsList) {
-            if (setting.id === id) return setting.value;
-        }
-        return null;
-    }
-
-    function find(id: string): Setting {
-        for (const setting of settingsList) {
-            if (setting.id === id) return setting;
-        }
-        return null;
-    }
-
-    property Component settingComp: Setting {}
-
-    Component.onCompleted: {
-        jsonFile.reload();
-    }
+    property alias map: adapter
 
     FileView {
         id: jsonFile
         path: ".config/quickshell/data/settings.json"
+        blockLoading: true
 
-        onLoaded: {
-            root.settingsList = JSON.parse(text()).map(setting => {
-                return root.settingComp.createObject(root, {
-                    "id": setting.id,
-                    "value": setting.value
-                });
-            });
-            root.loaded();
+        onAdapterUpdated: writeAdapter()
+        JsonAdapter {
+            id: adapter
+
+            property string wallpaper: "root:/data/wallpapers/astronaut_jellyfish.jpg"
+            property bool clockOnWallpaper: true
+            property bool clockOnLockscreen: true
+
+            readonly property bool notificationPopups: true
+            readonly property bool notificationIconPlaceholder: true
+
+            property bool idleOn: true
+            readonly property int idleTime: 120
+            readonly property int idleLockTime: 900
+            readonly property bool showBluetoothInTray: false
+            readonly property bool lockedOnBoot: false
+            readonly property bool topBarShowDate: true
+            readonly property bool wallpaperUnderTopBar: true
+
+            readonly property int systemUsageRefreshInterval: 2000
+
         }
 
         onLoadFailed: error => {
-            if (error == FileViewError.FileNotFound) {
-                console.warn("Settings file not found, creating new file.");
-                root.settingsList = [];
-                jsonFile.setText(root.stringifyList(root.settingsList));
-            } else {
-                console.error("Error loading settings file: " + error);
-            }
+            console.error(error);
+        }
+
+        onSaveFailed: error => {
+            console.error(error);
         }
     }
 }

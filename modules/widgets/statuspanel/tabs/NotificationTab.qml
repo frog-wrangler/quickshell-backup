@@ -35,7 +35,7 @@ ListView {
             anchors.centerIn: parent
             horizontalAlignment: Text.AlignHCenter
 
-            text: SettingsConfig.noNotificationText
+            text: Style.noNotificationText
             color: Style.color.base.subtext
             font.pointSize: Style.font.size.normal
         }

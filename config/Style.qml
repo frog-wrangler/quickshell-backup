@@ -13,6 +13,10 @@ Singleton {
     readonly property Font font: Font {}
     readonly property Anim anim: Anim {}
 
+    readonly property string unlockStartMessage: "Unlock Attempt Started"
+    readonly property string fingerprintFailure: "Fingerprint Failed"
+    readonly property string noNotificationText: "No Notifications"
+
     component Color: QtObject {
         readonly property ColorBase base: ColorBase {}
         readonly property ColorAccent accent: ColorAccent {}

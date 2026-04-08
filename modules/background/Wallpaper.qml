@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Widgets
 import qs.config
+import qs.services
 
 Item {
     id: root
@@ -25,10 +26,10 @@ Item {
 
         Image {
             id: current
-            source: DesktopBackground.wallpaperPath
+            source: Settings.map.wallpaper
 
             anchors.fill: parent
-            anchors.topMargin: (SettingsConfig.wallpaperUnderTopBar ? -Style.size.barSize : 0)
+            anchors.topMargin: (Settings.map.wallpaperUnderTopBar ? -Style.size.barSize : 0)
             fillMode: Image.PreserveAspectCrop
         }
     }

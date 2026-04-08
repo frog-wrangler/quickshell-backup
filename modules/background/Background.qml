@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 import qs.config
+import qs.services
 
 Variants {
     model: Quickshell.screens
@@ -30,7 +31,7 @@ Variants {
         }
 
         Loader {
-            active: DesktopBackground.showClockOnWallpaper
+            active: Settings.map.clockOnWallpaper
             sourceComponent: DesktopClock {
                 id: clock
                 parent: wallpaper

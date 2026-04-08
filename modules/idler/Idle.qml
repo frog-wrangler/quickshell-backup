@@ -12,7 +12,7 @@ Scope {
 
     IdleMonitor {
         id: longMonitor
-        timeout: SettingsConfig.idleLockTime //seconds
+        timeout: Settings.map.idleLockTime //seconds
 
         onIsIdleChanged: {
             if (isIdle && !GlobalStates.screenLocked) {
@@ -23,7 +23,7 @@ Scope {
 
     IdleMonitor {
         id: shortMonitor
-        timeout: SettingsConfig.idleTime //seconds
+        timeout: Settings.map.idleTime //seconds
 
         onIsIdleChanged: {
             if (!isIdle) {

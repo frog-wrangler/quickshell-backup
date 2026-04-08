@@ -56,7 +56,7 @@ Singleton {
 
     Timer {
         running: root.inUse
-        interval: SettingsConfig.systemUsageRefreshInterval
+        interval: Settings.map.systemUsageRefreshInterval
         repeat: true
         triggeredOnStart: true
         onTriggered: {

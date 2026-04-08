@@ -43,7 +43,7 @@ ContentPage {
         ToggleItem {
             Layout.fillWidth: true
             text: "Clock on Wallpaper"
-            active: Settings.getValue("clockOnWallpaper")
+            active: Settings.map.clockOnWallpaper
 
             onClicked: {
                 Quickshell.execDetached(["qs", "ipc", "call", "background", "setClockOnWallpaper", !active]);
@@ -53,7 +53,7 @@ ContentPage {
         ToggleItem {
             Layout.fillWidth: true
             text: "Clock on Lockscreen"
-            active: Settings.getValue("clockOnLockscreen")
+            active: Settings.map.clockOnLockscreen
 
             onClicked: {
                 Quickshell.execDetached(["qs", "ipc", "call", "background", "setClockOnLockscreen", !active]);

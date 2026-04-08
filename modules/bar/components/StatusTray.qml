@@ -60,7 +60,7 @@ Item {
 
             MaterialIcon {
                 id: bluetooth
-                visible: SettingsConfig.showBluetoothInTray
+                visible: Settings.map.showBluetoothInTray
                 anchors.verticalCenter: parent.verticalCenter
                 color: Style.color.base.text
                 size: Style.font.size.normal

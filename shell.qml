@@ -2,6 +2,7 @@ import Quickshell
 import QtQuick
 
 import qs.config
+import qs.services
 
 import qs.modules.background
 import qs.modules.bar
@@ -20,12 +21,12 @@ ShellRoot {
     StatusPanel {}
 
     Loader {
-        active: SettingsConfig.idleOn
+        active: Settings.map.idleOn
         sourceComponent: Idle {}
     }
 
     Loader {
-        active: SettingsConfig.notificationPopups
+        active: Settings.map.notificationPopups
         sourceComponent: PopupList {}
     }
 }

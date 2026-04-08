@@ -5,9 +5,9 @@ import qs.utils
 
 ToggleButton {
     id: root
-    active: !SettingsConfig.idleOn
+    active: !Settings.map.idleOn
     function swap(): void {
-        SettingsConfig.idleOn = !SettingsConfig.idleOn;
+        Settings.map.idleOn = !Settings.map.idleOn;
     }
 
     inactiveColor: "transparent"
