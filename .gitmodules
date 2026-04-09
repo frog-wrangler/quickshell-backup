@@ -1,0 +1,3 @@
+[submodule "data/wallpapers"]
+	path = data/wallpapers
+	url = git@github.com:frog-wrangler/wallpapers.git
