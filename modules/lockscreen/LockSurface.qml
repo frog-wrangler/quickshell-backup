@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Effects
 import qs.config
+import qs.services
 import qs.utils
 import qs.modules.background
 
@@ -19,12 +20,13 @@ MouseArea {
         id: background
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
-        source: DesktopBackground.wallpaperPath
+        source: Settings.map.wallpaper
     }
 
     MultiEffect {
         source: background
         anchors.fill: background
+        anchors.margins: -20
         blurEnabled: true
         blurMax: 64
         blur: 0.8
@@ -36,11 +38,11 @@ MouseArea {
     }
 
     Loader {
-        active: DesktopBackground.showClockOnLockscreen
+        active: Settings.map.clockOnLockscreen
         sourceComponent: DesktopClock {
             parent: root
 
-            readonly property string pos: DesktopBackground.lockscreenClockPosition
+            readonly property string pos: Settings.map.lockscreenClockPosition
 
             anchors {
                 top: pos == "topLeft" || pos == "topRight" ? parent.top : undefined

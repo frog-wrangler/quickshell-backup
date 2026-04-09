@@ -220,7 +220,7 @@ Singleton {
 
     FileView {
         id: notifFileView
-        path: ".config/quickshell/data/notificationLog.json"
+        path: Quickshell.shellDir + "/data/notificationLog.json"
 
         onLoaded: {
             const fileContents = notifFileView.text();

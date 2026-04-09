@@ -3,6 +3,7 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.config
 
 Singleton {
     id: root
@@ -11,31 +12,37 @@ Singleton {
 
     FileView {
         id: jsonFile
-        path: ".config/quickshell/data/settings.json"
+        path: Quickshell.shellDir + "/data/settings.json"
         blockLoading: true
 
         onAdapterUpdated: writeAdapter()
         JsonAdapter {
             id: adapter
 
+            property color clockColor: Style.color.base.text
+            property double clockOpacity: 0.6
+            property string clockPosition: "bottomLeft"
+            property string lockscreenClockPosition: "bottomLeft"
+            property int clockMargins: 100
+
             property string wallpaper: "root:/data/wallpapers/astronaut_jellyfish.jpg"
             property bool clockOnWallpaper: true
             property bool clockOnLockscreen: true
-            readonly property bool wallpaperUnderTopBar: true
+            property bool wallpaperUnderTopBar: true
 
-            readonly property bool notificationPopups: true
-            readonly property bool notificationIconPlaceholder: true
+            property bool notificationPopups: true
+            property bool notificationIconPlaceholder: true
 
             property bool idleOn: true
-            readonly property int idleTime: 120
-            readonly property int idleLockTime: 900
+            property int idleTime: 120
+            property int idleLockTime: 900
 
-            readonly property bool lockedOnBoot: false
+            property bool lockedOnBoot: false
 
-            readonly property bool showBluetoothInTray: false
-            readonly property bool topBarShowDate: true
+            property bool showBluetoothInTray: false
+            property bool topBarShowDate: true
 
-            readonly property int systemUsageRefreshInterval: 2000
+            property int systemUsageRefreshInterval: 2000
         }
 
         onLoadFailed: error => {
@@ -60,5 +67,16 @@ Singleton {
         function setBool(id: string, value: bool): void     { adapter[id] = value; }
         function setReal(id: string, value: real): void     { adapter[id] = value; }
         function setColor(id: string, value: color): void   { adapter[id] = value; }
+    }
+
+    Process { // TODO
+        id: randomWallpaper
+        running: false
+        command: ["sh", "-c", `find ${Quickshell.shellDir}/data/wallpapers/ -type f | shuf -n 1`]
+        stdout: SplitParser {
+            onRead: path => {
+                root.wallpaperPath = path;
+            }
+        }
     }
 }

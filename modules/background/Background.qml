@@ -36,7 +36,7 @@ Variants {
                 id: clock
                 parent: wallpaper
 
-                property string pos: DesktopBackground.clockPosition
+                property string pos: Settings.map.clockPosition
 
                 anchors {
                     top: pos == "topLeft" || pos == "topRight" ? parent.top : undefined

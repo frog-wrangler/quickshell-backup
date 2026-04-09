@@ -4,17 +4,17 @@ import qs.utils
 import qs.services
 
 Item {
-    anchors.margins: DesktopBackground.clockMargins
+    anchors.margins: Settings.map.clockMargins
     implicitWidth: timeText.implicitWidth
     implicitHeight: timeText.implicitHeight
-    opacity: DesktopBackground.clockOpacity
+    opacity: Settings.map.clockOpacity
 
     Text {
         id: timeText
 
         anchors.centerIn: parent
         text: Time.format("hh:mm")
-        color: DesktopBackground.clockColor
+        color: Settings.map.clockColor
         font.family: Style.font.family.clock
         font.pointSize: Style.font.size.huge
     }
@@ -24,7 +24,7 @@ Item {
         anchors.left: timeText.left
         anchors.top: timeText.bottom
         text: Time.format("dddd, MMM d")
-        color: DesktopBackground.clockColor
+        color: Settings.map.clockColor
         font.family: Style.font.family.clock
         font.pointSize: Style.font.size.extraLarge
     }
