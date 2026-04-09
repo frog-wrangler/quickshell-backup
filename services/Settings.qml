@@ -30,6 +30,8 @@ Singleton {
             property bool clockOnLockscreen: true
             property bool wallpaperUnderTopBar: true
 
+            property bool activateLinux: true
+
             property bool notificationPopups: true
             property bool notificationIconPlaceholder: true
 
@@ -67,16 +69,5 @@ Singleton {
         function setBool(id: string, value: bool): void     { adapter[id] = value; }
         function setReal(id: string, value: real): void     { adapter[id] = value; }
         function setColor(id: string, value: color): void   { adapter[id] = value; }
-    }
-
-    Process { // TODO
-        id: randomWallpaper
-        running: false
-        command: ["sh", "-c", `find ${Quickshell.shellDir}/data/wallpapers/ -type f | shuf -n 1`]
-        stdout: SplitParser {
-            onRead: path => {
-                root.wallpaperPath = path;
-            }
-        }
     }
 }

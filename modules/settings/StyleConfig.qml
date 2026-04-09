@@ -6,7 +6,7 @@ import Qt.labs.folderlistmodel
 import Quickshell
 import Quickshell.Widgets
 import qs.config
-import qs.services
+import "root:/services" // TODO idk why this doesnt work with qs.services
 import qs.utils
 import qs.utils.settings
 
