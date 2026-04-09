@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Quickshell.Io
 import qs.config
 import qs.utils
 
@@ -121,8 +122,19 @@ ApplicationWindow {
             Loader {
                 id: pageLoader
                 anchors.fill: parent
+
+                property var settings: ({})
+
                 source: root.pages[root.currentPage].component
             }
+        }
+    }
+
+    Process {
+        running: true
+        command: ["qs", "ipc", "call", "settings", "getMap"]
+        stdout: StdioCollector {
+            onStreamFinished: pageLoader.settings = JSON.parse(this.text)
         }
     }
 }

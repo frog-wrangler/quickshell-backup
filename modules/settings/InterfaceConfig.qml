@@ -5,6 +5,8 @@ ContentPage {
     baseWidth: 550
     forceWidth: true
 
+    property var settings: parent?.settings
+
     ContentSection {
         title: "Top Bar"
     }

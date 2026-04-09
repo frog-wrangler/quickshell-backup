@@ -49,7 +49,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
 
         onClicked: {
-            Quickshell.execDetached(["qs", "ipc", "call", "background", "setWallpaper", modelData.filePath]);
+            Quickshell.execDetached(["qs", "ipc", "call", "settings", "setString", "wallpaper", modelData.filePath]);
         }
     }
 }

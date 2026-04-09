@@ -46,4 +46,19 @@ Singleton {
             console.error(error);
         }
     }
+
+    IpcHandler {
+        target: "settings"
+
+        /// Returns a stringified map of the current settings
+        function getMap(): string {
+            return JSON.stringify(adapter, null, 4);
+        }
+
+        function setString(id: string, value: string): void { adapter[id] = value; }
+        function setInt(id: string, value: int): void       { adapter[id] = value; }
+        function setBool(id: string, value: bool): void     { adapter[id] = value; }
+        function setReal(id: string, value: real): void     { adapter[id] = value; }
+        function setColor(id: string, value: color): void   { adapter[id] = value; }
+    }
 }

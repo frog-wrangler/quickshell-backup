@@ -15,6 +15,8 @@ ContentPage {
     baseWidth: 550
     forceWidth: true
 
+    property var settings: parent?.settings
+
     ContentSection {
         title: "Background"
 
@@ -33,8 +35,6 @@ ContentPage {
 
             delegate: WallpaperDelegate {}
         }
-
-
     }
 
     ContentSection {
@@ -43,20 +43,20 @@ ContentPage {
         ToggleItem {
             Layout.fillWidth: true
             text: "Clock on Wallpaper"
-            active: Settings.map.clockOnWallpaper
+            active: root.settings.clockOnWallpaper ?? false
 
             onClicked: {
-                Quickshell.execDetached(["qs", "ipc", "call", "background", "setClockOnWallpaper", !active]);
+                Quickshell.execDetached(["qs", "ipc", "call", "settings", "setBool", "clockOnWallpaper", !active]);
             }
         }
 
         ToggleItem {
             Layout.fillWidth: true
             text: "Clock on Lockscreen"
-            active: Settings.map.clockOnLockscreen
+            active: root.settings.clockOnLockscreen ?? false
 
             onClicked: {
-                Quickshell.execDetached(["qs", "ipc", "call", "background", "setClockOnLockscreen", !active]);
+                Quickshell.execDetached(["qs", "ipc", "call", "settings", "setBool", "clockOnLockscreen", !active]);
             }
         }
     }
