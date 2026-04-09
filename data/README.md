@@ -1,8 +1,11 @@
 
-This directory (data) should contain two subdirectories:
-+ graphics/
-+ wallpapers/
+## This directory (data) contains two subdirectories:
 
-'wallpapers' will contain all desktop backgrounds and are detected automatically.
-'graphics' will contain all other, smaller images
++ `graphics/`
++ `wallpapers/`
+
+- 'wallpapers' will contain all desktop backgrounds and are detected automatically.
+- 'graphics' will contain all other, smaller images
+
+### It is necessary to add an image called `user_icon` to `graphics/` to have an icon on the lockscreen
 
