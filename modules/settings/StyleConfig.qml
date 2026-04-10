@@ -6,27 +6,27 @@ import Qt.labs.folderlistmodel
 import Quickshell
 import Quickshell.Widgets
 import qs.config
-import "root:/services" // TODO idk why this doesnt work with qs.services
 import qs.utils
 import qs.utils.settings
 
 ContentPage {
     id: root
-    baseWidth: 550
+    baseWidth: Style.size.settingsContentWidth
     forceWidth: true
 
     property var settings: parent?.settings
 
     ContentSection {
         title: "Background"
+        Layout.topMargin: Style.size.settingsVerticalMargins
 
         GridView {
             Layout.fillWidth: true
-            implicitHeight: 300
+            implicitHeight: 400
             clip: true
 
             cellHeight: 120
-            cellWidth: width / 3
+            cellWidth: width / 4
 
             model: FolderListModel {
                 id: folderModel
@@ -43,25 +43,29 @@ ContentPage {
         ToggleItem {
             Layout.fillWidth: true
             text: "Clock on Wallpaper"
+            settingId: "clockOnWallpaper"
             active: root.settings.clockOnWallpaper ?? false
-
-            onClicked: {
-                Quickshell.execDetached(["qs", "ipc", "call", "settings", "setBool", "clockOnWallpaper", !active]);
-            }
         }
 
         ToggleItem {
             Layout.fillWidth: true
             text: "Clock on Lockscreen"
+            settingId: "clockOnLockscreen"
             active: root.settings.clockOnLockscreen ?? false
-
-            onClicked: {
-                Quickshell.execDetached(["qs", "ipc", "call", "settings", "setBool", "clockOnLockscreen", !active]);
-            }
         }
-    }
 
-    ContentSection {
-        title: "Fake Screen Rounding"
+        ToggleItem {
+            Layout.fillWidth: true
+            text: "Activate Linux Text"
+            settingId: "activateLinux"
+            active: root.settings.activateLinux ?? true
+        }
+
+        ToggleItem {
+            Layout.fillWidth: true
+            text: "Wallpaper Under Top Bar"
+            settingId: "wallpaperUnderTopBar"
+            active: root.settings.wallpaperUnderTopBar ?? false
+        }
     }
 }

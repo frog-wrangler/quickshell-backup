@@ -62,6 +62,8 @@ Singleton {
     }
 
     component Size: QtObject {
+        readonly property int settingsVerticalMargins: 30
+        readonly property int settingsContentWidth: 650
         readonly property int barSize: 40
         readonly property int topBarMargin: 6
         readonly property int statusSize: 450

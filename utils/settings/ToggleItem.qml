@@ -1,11 +1,15 @@
 import QtQuick
+import Quickshell
 import qs.config
+import qs.utils
 
 Item {
     id: root
+
     required property string text
+    required property string settingId
+
     property bool active: false
-    signal clicked
 
     implicitHeight: Math.max(toggleIcon.implicitHeight, label.implicitHeight) + 10
 
@@ -32,7 +36,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
 
         onClicked: {
-            root.clicked();
+            Quickshell.execDetached(["qs", "ipc", "call", "settings", "setBool", root.settingId, !active]);
             root.active = !root.active;
         }
     }

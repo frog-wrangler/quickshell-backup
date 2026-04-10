@@ -2,4 +2,5 @@ module qs.utils.settings
 
 ContentPage 1.0 ContentPage.qml
 ContentSection 1.0 ContentSection.qml
+ToggleItem 1.0 ToggleItem.qml
 WallpaperDelegate 1.0 WallpaperDelegate.qml

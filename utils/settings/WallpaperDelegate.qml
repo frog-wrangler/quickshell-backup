@@ -14,6 +14,13 @@ Item {
 
     readonly property int margin: 5
 
+    onModelDataChanged: {
+        if (!modelData) return;
+
+        const filename = modelData.fileName;
+        label.text = filename.substring(0, filename.lastIndexOf('.')) || filename;
+    }
+
     Rectangle {
         anchors.fill: parent
         anchors.margins: fileDelegate.margin
@@ -25,9 +32,13 @@ Item {
         id: label
         anchors.top: fileDelegate.top
         anchors.topMargin: fileDelegate.margin * 2
-        anchors.horizontalCenter: fileDelegate.horizontalCenter
+        anchors.left: image.left
+        anchors.right: image.right
 
-        text: modelData.fileName
+        elide: Text.ElideRight
+        horizontalAlignment: Text.AlignHCenter
+
+        text: ""
     }
 
     Image {

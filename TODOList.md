@@ -1,22 +1,31 @@
 
 # TODO
 
-+ Random Wallpaper option
 + Lock screen only on one screen
 + "No Bluetooth / Bluetooth disabled" instead of listing known devices
 + Connected network at top of networks tab
 + Audio and brightness OSD's
 + Analog clock
 + Weather service? Perhaps on left panel or wallpaper
++ Move notification backend to json adapter
 + Fix wifi backend
 
 ## Settings
 
-* <https://doc.qt.io/qt-6/qml-qtquick-controls-switchdelegate.html>
-+ Unify settings backend!!!
++ Clock color
++ Clock margins
++ Clock opacity
++ Clock position
++ Lockscreen clock position
+
++ Idle lock time
++ Idle dim time
+
++ System usage refresh time
+
++ Random wallpaper
 
 + Make left sidebar an overlap thing not exclusive area
-+ Optional "Activate Linux \n Go to settings to activate linux"
 + Analog clock on background
 + Fonts
 + Animations

@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.config
 
 Flickable {
     id: root
@@ -8,7 +9,7 @@ Flickable {
     clip: true
     property bool forceWidth: false
     property real baseWidth: 550
-    contentHeight: contentColumn.implicitHeight + 100
+    contentHeight: contentColumn.implicitHeight + Style.spacing.small * 2 + Style.size.settingsVerticalMargins
     implicitWidth: contentColumn.implicitWidth
 
     ColumnLayout {
