@@ -22,7 +22,7 @@ Rectangle {
             Layout.fillWidth: true
 
             percent: SystemUsage.cpuPercent
-            text: `CPU: ${Math.round(SystemUsage.cpuPercent * 100)}%\n${SystemUsage.cpuTemp}°C`
+            text: "CPU: " + (SystemUsage.cpuPercent * 100).toFixed(1) + "%\n" + SystemUsage.cpuTemp.toFixed(1) + "°C"
         }
 
         Resource {
@@ -30,19 +30,18 @@ Rectangle {
             Layout.fillWidth: true
 
             percent: SystemUsage.gpuPercent
-            text: `GPU: ${Math.round(SystemUsage.gpuPercent * 100)}%\n${SystemUsage.gpuTemp}°C`
+            text: "GPU: " + (SystemUsage.gpuPercent * 100).toFixed(1) + "%\n" + SystemUsage.gpuTemp.toFixed(1) + "°C"
         }
 
         Resource {
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            readonly property var usedKib: SystemUsage.formatKib(SystemUsage.memUsed)
-            readonly property var totalKib: SystemUsage.formatKib(SystemUsage.memTotal)
+            readonly property string usedMem: SystemUsage.formatKB(SystemUsage.memUsed)
+            // readonly property string totalMem: SystemUsage.formatKB(SystemUsage.memTotal)
 
             percent: SystemUsage.memPercent
-            text: `RAM: ${Math.round(SystemUsage.memPercent * 100)}%\
-                    \n${Math.round(usedKib.value * 10) / 10} ${totalKib.unit}`
+            text: "RAM: " + (SystemUsage.memPercent * 100).toFixed(1) + "%\n" + usedMem
         }
     }
 

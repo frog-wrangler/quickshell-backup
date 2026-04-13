@@ -1,6 +1,8 @@
 
 # TODO
 
++ Fix dashboard system usage to use all measured stats + measure gpu usage & temp
++ Look into bluetooth sometimes not connecting to earbuds (print errors maybe)
 + Lock screen only on one screen
 + "No Bluetooth / Bluetooth disabled" instead of listing known devices
 + Connected network at top of networks tab
